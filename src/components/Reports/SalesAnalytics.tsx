@@ -223,7 +223,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
       </div>
 
       {/* Period Selector Tabs & Custom Range Picker */}
-      <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-4 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-3">
+      <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-4 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           {/* Quick Filter Segmented Pills */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
@@ -292,7 +292,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
       {/* KPI Cards: Double-Checked Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Realized Revenue */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between text-neutral-400 text-xs font-semibold uppercase tracking-wider">
               <span>Net Paid Revenue</span>
@@ -309,7 +309,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
         </div>
 
         {/* Pending Receivables */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between text-neutral-400 text-xs font-semibold uppercase tracking-wider">
               <span>Unpaid / Counter Bills</span>
@@ -325,7 +325,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
         </div>
 
         {/* Total Orders Handled */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between text-neutral-400 text-xs font-semibold uppercase tracking-wider">
               <span>Total Tickets</span>
@@ -341,7 +341,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
         </div>
 
         {/* Average Ticket Size */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between text-neutral-400 text-xs font-semibold uppercase tracking-wider">
               <span>Avg Ticket Size (AOV)</span>
@@ -360,7 +360,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
       {/* Brother Performance & Channel Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Brother Duty Breakdown */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
               <UserCheck className="w-4 h-4 text-apple-blue" />
@@ -378,7 +378,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
           <div className="space-y-3 pt-1">
             {['Haseeb', 'Aliyan', 'Shaban'].map(brother => {
               const data = calculations.brotherStats[brother] || { count: 0, revenue: 0 };
-              const color = brother === 'Haseeb' ? '#007AFF' : brother === 'Aliyan' ? '#34C759' : '#FF9500';
+              const color = brother === 'Haseeb' ? '#A98BE8' : brother === 'Aliyan' ? '#34C759' : '#F7B58D';
               const percent = calculations.totalPaidRevenue > 0 
                 ? Math.round((data.revenue / calculations.totalPaidRevenue) * 100) 
                 : 0;
@@ -416,7 +416,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
         </div>
 
         {/* Revenue by Channel */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
           <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
             <UtensilsCrossed className="w-4 h-4 text-apple-orange" />
             <span>Revenue by Channel</span>
@@ -489,7 +489,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
         </div>
 
         {/* Best Selling Items */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
           <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100">Top Best-Selling Menu Items</h3>
 
           {calculations.topItems.length === 0 ? (
@@ -516,7 +516,7 @@ export const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({
       </div>
 
       {/* Detailed Financial Calculation Audit Table */}
-      <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm overflow-hidden">
         <div className="p-5 border-b border-black/5 dark:border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <div>
             <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100">

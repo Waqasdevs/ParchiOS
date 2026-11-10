@@ -123,7 +123,7 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
   };
 
   return (
-    <header className="h-16 w-full flex items-center justify-between px-4 lg:px-6 border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#18181b]/70 backdrop-blur-2xl z-20 select-none min-w-0">
+    <header className="h-16 w-full flex items-center justify-between px-4 lg:px-6 border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#231532]/70 backdrop-blur-2xl z-20 select-none min-w-0">
       {/* Left Search / Filter */}
       <div className="flex items-center gap-3 flex-1 max-w-xs sm:max-w-sm lg:max-w-md min-w-0">
         <div className="relative w-full min-w-0">
@@ -279,7 +279,7 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
             onClick={() => setShowErrorModal(null)}
           >
             <div 
-              className="w-full max-w-lg max-h-[88vh] bg-white dark:bg-[#1C1C1E] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
+              className="w-full max-w-lg max-h-[88vh] bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}

@@ -189,7 +189,7 @@ export const RestaurantSettingsModal: React.FC<RestaurantSettingsModalProps> = (
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Section 1: Store Branding */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
           <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
             <Store className="w-4 h-4 text-apple-orange" />
             <span>Store Identity &amp; Contact</span>
@@ -239,7 +239,7 @@ export const RestaurantSettingsModal: React.FC<RestaurantSettingsModalProps> = (
         </div>
 
         {/* Section 2: Currency & Charges */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
           <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
             <span>Billing, Taxes &amp; Delivery Tariffs</span>
           </h3>
@@ -283,7 +283,7 @@ export const RestaurantSettingsModal: React.FC<RestaurantSettingsModalProps> = (
         </div>
 
         {/* Section 3: Supabase Cloud Database & Realtime Sync */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
@@ -493,7 +493,7 @@ export const RestaurantSettingsModal: React.FC<RestaurantSettingsModalProps> = (
         </div>
 
         {/* Section 4: Receipt Footer & Toggles */}
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4">
           <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
             <Printer className="w-4 h-4 text-apple-indigo" />
             <span>Receipt Notes &amp; Audio Feedback</span>

@@ -47,9 +47,9 @@ export const EmployeeManager: React.FC<EmployeeManagerProps> = ({
 
   // The 3 Brothers list
   const brothersList = employees.length > 0 ? employees : [
-    { id: 'emp-haseeb', name: 'Haseeb', role: 'manager' as const, pin: '', phone: '+92 300 1111111', isActive: true, avatarColor: '#007AFF' },
+    { id: 'emp-haseeb', name: 'Haseeb', role: 'manager' as const, pin: '', phone: '+92 300 1111111', isActive: true, avatarColor: '#A98BE8' },
     { id: 'emp-aliyan', name: 'Aliyan', role: 'manager' as const, pin: '', phone: '+92 300 2222222', isActive: true, avatarColor: '#34C759' },
-    { id: 'emp-shaban', name: 'Shaban', role: 'manager' as const, pin: '', phone: '+92 300 3333333', isActive: true, avatarColor: '#FF9500' },
+    { id: 'emp-shaban', name: 'Shaban', role: 'manager' as const, pin: '', phone: '+92 300 3333333', isActive: true, avatarColor: '#F7B58D' },
   ];
 
   // Register calculations for current shift
@@ -102,7 +102,7 @@ export const EmployeeManager: React.FC<EmployeeManagerProps> = ({
       </div>
 
       {/* Cash Drawer & Shift Reconciliation Card */}
-      <div className="bg-gradient-to-br from-white to-neutral-50 dark:from-[#1C1C1E] dark:to-neutral-900 rounded-3xl p-6 border border-black/5 dark:border-white/10 shadow-apple-sm space-y-5">
+      <div className="bg-gradient-to-br from-white to-neutral-50 dark:from-[#2A1A3A] dark:to-neutral-900 rounded-3xl p-6 border border-black/5 dark:border-white/10 shadow-apple-sm space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/5 dark:border-white/5 pb-4">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-2xl bg-apple-green/15 text-apple-green flex items-center justify-center shrink-0">
@@ -231,12 +231,12 @@ export const EmployeeManager: React.FC<EmployeeManagerProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {brothersList.map(brother => {
             const isDuty = currentShift?.employeeId === brother.id || currentShift?.employeeName === brother.name;
-            const color = brother.avatarColor || (brother.name === 'Haseeb' ? '#007AFF' : brother.name === 'Aliyan' ? '#34C759' : '#FF9500');
+            const color = brother.avatarColor || (brother.name === 'Haseeb' ? '#A98BE8' : brother.name === 'Aliyan' ? '#34C759' : '#F7B58D');
 
             return (
               <div
                 key={brother.id}
-                className={`bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border shadow-apple-sm flex flex-col justify-between space-y-4 transition-all ${
+                className={`bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border shadow-apple-sm flex flex-col justify-between space-y-4 transition-all ${
                   isDuty
                     ? 'border-apple-blue ring-2 ring-apple-blue/30 bg-apple-blue/[0.02]'
                     : 'border-black/5 dark:border-white/5'
@@ -289,7 +289,7 @@ export const EmployeeManager: React.FC<EmployeeManagerProps> = ({
       {/* Clock Out / Register Reconciliation Modal */}
       {showClockOutModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full max-w-md bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 shadow-apple-modal border border-black/5 dark:border-white/10 space-y-4">
+          <div className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 shadow-apple-modal border border-black/5 dark:border-white/10 space-y-4">
             <h3 className="font-bold text-base text-neutral-900 dark:text-neutral-100">
               End Shift &amp; Reconcile Cash Drawer
             </h3>

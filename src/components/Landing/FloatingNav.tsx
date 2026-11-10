@@ -22,25 +22,25 @@ export default function FloatingNav() {
       aria-label="Primary Navigation"
     >
       <div
-        className={`max-w-[1160px] mx-auto rounded-2xl px-4 py-3 flex items-center justify-between transition-opacity duration-300 ease-weighted ${
+        className={`max-w-[1160px] mx-auto rounded-full border border-white/10 px-5 py-2.5 flex items-center justify-between backdrop-saturate-150 transition-all duration-300 ease-weighted ${
           scrolled
-            ? 'bg-[#181818]/90 backdrop-blur-md shadow-[0_24px_48px_rgba(0,0,0,0.65)]'
-            : 'bg-[#010102]/75 backdrop-blur-sm'
+            ? 'bg-[#170D21]/80 backdrop-blur-xl shadow-[0_12px_40px_rgba(10,4,18,0.5)]'
+            : 'bg-white/[0.05] backdrop-blur-xl'
         }`}
       >
         <Link
           href="/"
-          className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#AD96F1] rounded-lg"
+          className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9B8F2] rounded-lg"
         >
-          <span className="w-8 h-8 rounded-lg bg-[#181818] flex items-center justify-center relative overflow-hidden">
-            <span className="w-3.5 h-3.5 rounded-sm bg-[#AD96F1] block transition-transform duration-300 ease-weighted group-hover:scale-110" />
-            <span className="w-2 h-2 rounded-full bg-[#58F6B1] absolute bottom-1 right-1" />
+          <span className="w-8 h-8 rounded-lg bg-[#231532] flex items-center justify-center relative overflow-hidden">
+            <span className="w-3.5 h-3.5 rounded-sm bg-[#C9B8F2] block transition-transform duration-300 ease-weighted group-hover:scale-110" />
+            <span className="w-2 h-2 rounded-full bg-[#F7B58D] absolute bottom-1 right-1" />
           </span>
           <span className="flex items-baseline gap-2">
-            <span className="text-[#F5F5F7] font-semibold tracking-tight text-base not-italic">
+            <span className="text-[#F3EEFB] font-semibold tracking-tight text-base not-italic">
               parchiOS
             </span>
-            <span className="hidden sm:inline-block caption-2 font-medium text-[#9B9B9B] not-italic">
+            <span className="hidden sm:inline-block caption-2 font-medium text-[#B3A6C9] not-italic">
               Pakistan
             </span>
           </span>
@@ -49,31 +49,31 @@ export default function FloatingNav() {
         <nav className="hidden md:flex items-center gap-8" aria-label="Main sections">
           <a
             href="#architecture"
-            className="body-5 text-[#9B9B9B] hover:text-[#F5F5F7] transition-opacity duration-200 not-italic"
+            className="body-5 text-[#B3A6C9] hover:text-[#F3EEFB] transition-opacity duration-200 not-italic"
           >
             Architecture
           </a>
           <a
             href="#economics"
-            className="body-5 text-[#9B9B9B] hover:text-[#F5F5F7] transition-opacity duration-200 not-italic"
+            className="body-5 text-[#B3A6C9] hover:text-[#F3EEFB] transition-opacity duration-200 not-italic"
           >
             Margin Math
           </a>
           <a
             href="#workflow"
-            className="body-5 text-[#9B9B9B] hover:text-[#F5F5F7] transition-opacity duration-200 not-italic"
+            className="body-5 text-[#B3A6C9] hover:text-[#F3EEFB] transition-opacity duration-200 not-italic"
           >
             Shift Flow
           </a>
           <a
             href="#pricing"
-            className="body-5 text-[#9B9B9B] hover:text-[#F5F5F7] transition-opacity duration-200 not-italic"
+            className="body-5 text-[#B3A6C9] hover:text-[#F3EEFB] transition-opacity duration-200 not-italic"
           >
             Pricing
           </a>
           <a
             href="#faq"
-            className="body-5 text-[#9B9B9B] hover:text-[#F5F5F7] transition-opacity duration-200 not-italic"
+            className="body-5 text-[#B3A6C9] hover:text-[#F3EEFB] transition-opacity duration-200 not-italic"
           >
             FAQ
           </a>
@@ -82,15 +82,15 @@ export default function FloatingNav() {
         <div className="flex items-center gap-2">
           <Link
             href="/demo"
-            className="hidden sm:inline-flex items-center gap-2 py-2 px-3 rounded-lg bg-[#1F1F1F] hover:bg-[#272727] text-[#F5F5F7] caption-1 transition-transform duration-200 ease-weighted active:scale-[0.97] not-italic"
+            className="hidden sm:inline-flex items-center gap-2 py-2 px-4 rounded-full bg-white/[0.07] hover:bg-white/[0.12] text-[#F3EEFB] caption-1 transition-transform duration-200 ease-weighted active:scale-[0.97] not-italic"
           >
-            <span className="w-2 h-2 rounded-full bg-[#58F6B1]" />
+            <span className="w-2 h-2 rounded-full bg-[#E4DAF9]" />
             Open Demo Terminal
           </Link>
 
           <a
             href="#launch-form"
-            className="inline-flex items-center gap-2 py-2 px-3 rounded-lg bg-[#AD96F1] hover:opacity-95 text-[#010102] caption-1 transition-transform duration-200 ease-weighted active:scale-[0.97] not-italic"
+            className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-[#C9B8F2] hover:opacity-95 text-[#170D21] caption-1 transition-transform duration-200 ease-weighted active:scale-[0.97] not-italic"
           >
             <span>Start Free Counter</span>
             <SolarArrowRightBold className="w-4 h-4" />
@@ -99,7 +99,7 @@ export default function FloatingNav() {
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#181818] text-[#F5F5F7]"
+            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#231532] text-[#F3EEFB]"
             aria-expanded={menuOpen}
             aria-controls="mobile-full-menu"
             aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -119,7 +119,7 @@ export default function FloatingNav() {
       <div
         id="mobile-full-menu"
         aria-hidden={!menuOpen}
-        className={`md:hidden fixed inset-0 top-[76px] bg-[#010102]/95 backdrop-blur-xl px-6 py-8 transition-opacity duration-300 ease-weighted ${
+        className={`md:hidden fixed inset-0 top-[76px] bg-[#170D21]/95 backdrop-blur-xl px-6 py-8 transition-opacity duration-300 ease-weighted ${
           menuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
         }`}
       >
@@ -127,35 +127,35 @@ export default function FloatingNav() {
           <a
             href="#architecture"
             onClick={() => setMenuOpen(false)}
-            className="heading-4 text-[#F5F5F7] not-italic"
+            className="heading-4 text-[#F3EEFB] not-italic"
           >
             Counter Architecture
           </a>
           <a
             href="#economics"
             onClick={() => setMenuOpen(false)}
-            className="heading-4 text-[#F5F5F7] not-italic"
+            className="heading-4 text-[#F3EEFB] not-italic"
           >
             Zero Commission Math
           </a>
           <a
             href="#workflow"
             onClick={() => setMenuOpen(false)}
-            className="heading-4 text-[#F5F5F7] not-italic"
+            className="heading-4 text-[#F3EEFB] not-italic"
           >
             Four Tap Shift Flow
           </a>
           <a
             href="#pricing"
             onClick={() => setMenuOpen(false)}
-            className="heading-4 text-[#F5F5F7] not-italic"
+            className="heading-4 text-[#F3EEFB] not-italic"
           >
             Flat PKR Pricing
           </a>
           <a
             href="#faq"
             onClick={() => setMenuOpen(false)}
-            className="heading-4 text-[#F5F5F7] not-italic"
+            className="heading-4 text-[#F3EEFB] not-italic"
           >
             Operator Questions
           </a>
@@ -163,14 +163,14 @@ export default function FloatingNav() {
             <Link
               href="/demo"
               onClick={() => setMenuOpen(false)}
-              className="w-full py-2 px-3 rounded-lg bg-[#181818] text-[#58F6B1] caption-1 text-center not-italic"
+              className="w-full py-2 px-3 rounded-lg bg-[#231532] text-[#E4DAF9] caption-1 text-center not-italic"
             >
               Launch Live POS Demo
             </Link>
             <a
               href="#launch-form"
               onClick={() => setMenuOpen(false)}
-              className="w-full py-2 px-3 rounded-lg bg-[#AD96F1] text-[#010102] caption-1 text-center not-italic"
+              className="w-full py-2 px-4 rounded-full bg-[#C9B8F2] text-[#170D21] caption-1 text-center not-italic"
             >
               Configure Your Branch
             </a>

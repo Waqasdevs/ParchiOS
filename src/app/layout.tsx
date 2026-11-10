@@ -5,7 +5,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#010102',
+  themeColor: '#170D21',
 };
 
 export const metadata: Metadata = {
@@ -72,7 +72,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen antialiased selection:bg-[#AD96F1] selection:text-[#010102]">
+      <body className="min-h-screen antialiased selection:bg-[#C9B8F2] selection:text-[#170D21]">
         {children}
         <script
           dangerouslySetInnerHTML={{

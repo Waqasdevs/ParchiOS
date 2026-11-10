@@ -101,7 +101,7 @@ export const KitchenDisplay: React.FC<KitchenDisplayProps> = ({
             return (
               <div
                 key={order.id}
-                className={`bg-white dark:bg-[#1C1C1E] rounded-3xl border shadow-apple-sm flex flex-col justify-between overflow-hidden transition-all ${
+                className={`bg-white dark:bg-[#2A1A3A] rounded-3xl border shadow-apple-sm flex flex-col justify-between overflow-hidden transition-all ${
                   isLate 
                     ? 'border-apple-red shadow-apple-md ring-2 ring-apple-red/20' 
                     : 'border-black/10 dark:border-white/10'

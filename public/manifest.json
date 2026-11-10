@@ -1,14 +1,14 @@
 {
   "id": "/",
-  "name": "HFC Order Management System",
-  "short_name": "HFC POS",
-  "description": "Offline-First Restaurant POS & Operations Suite for HFC",
+  "name": "parchiOS",
+  "short_name": "parchiOS",
+  "description": "Offline-First Restaurant POS & Operations Suite for Pakistani kitchens",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#F5F5F7",
-  "theme_color": "#007AFF",
+  "background_color": "#170D21",
+  "theme_color": "#170D21",
   "icons": [
     {
       "src": "/icon-192.png",

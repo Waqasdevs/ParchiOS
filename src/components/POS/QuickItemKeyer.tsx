@@ -188,7 +188,7 @@ export const QuickItemKeyer: React.FC<QuickItemKeyerProps> = ({
   }, [groupedCategories, codeSheetSearch]);
 
   return (
-    <div className="relative bg-white dark:bg-[#1C1C1E] rounded-2xl p-3 border border-black/5 dark:border-white/5 shadow-apple-sm transition-all">
+    <div className="relative bg-white dark:bg-[#2A1A3A] rounded-2xl p-3 border border-black/5 dark:border-white/5 shadow-apple-sm transition-all">
       {/* Top Main Fast Bar */}
       <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
         {/* Fast Input Field */}
@@ -373,7 +373,7 @@ export const QuickItemKeyer: React.FC<QuickItemKeyerProps> = ({
           onClick={() => setShowCodeSheet(false)}
         >
           <div 
-            className="w-full max-w-4xl max-h-[90vh] bg-white dark:bg-[#1C1C1E] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
+            className="w-full max-w-4xl max-h-[90vh] bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

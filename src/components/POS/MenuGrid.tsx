@@ -45,7 +45,7 @@ export const MenuGrid: React.FC<MenuGridProps> = ({
               sound.playTap();
               onItemClick(item);
             }}
-            className={`group relative bg-white dark:bg-[#1C1C1E] rounded-3xl p-4 border border-black/5 dark:border-white/5 shadow-apple-sm hover:shadow-apple-md transition-all duration-200 flex flex-col justify-between cursor-pointer select-none ${
+            className={`group relative bg-white dark:bg-[#2A1A3A] rounded-3xl p-4 border border-black/5 dark:border-white/5 shadow-apple-sm hover:shadow-apple-md transition-all duration-200 flex flex-col justify-between cursor-pointer select-none ${
               isOutOfStock 
                 ? 'opacity-50 grayscale cursor-not-allowed' 
                 : 'hover:-translate-y-0.5 active:scale-[0.98]'

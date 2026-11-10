@@ -92,7 +92,7 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
             pendingDispatch.map(order => (
               <div
                 key={order.id}
-                className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4"
+                className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm space-y-4"
               >
                 <div className="flex items-start justify-between">
                   <div>
@@ -191,7 +191,7 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
             outOnRoad.map(order => (
               <div
                 key={order.id}
-                className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-apple-indigo/30 shadow-apple-md space-y-4 ring-1 ring-apple-indigo/20"
+                className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-apple-indigo/30 shadow-apple-md space-y-4 ring-1 ring-apple-indigo/20"
               >
                 <div className="flex items-start justify-between">
                   <div>

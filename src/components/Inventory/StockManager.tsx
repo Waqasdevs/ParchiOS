@@ -100,7 +100,7 @@ export const StockManager: React.FC<StockManagerProps> = ({
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm">
           <span className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Total Stock Value</span>
           <div className="text-2xl font-black text-neutral-900 dark:text-neutral-100 mt-1">
             {currency} {totalValuation.toLocaleString()}
@@ -108,7 +108,7 @@ export const StockManager: React.FC<StockManagerProps> = ({
           <p className="text-[11px] text-neutral-500 mt-1">{stockItems.length} active tracked items</p>
         </div>
 
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm">
           <span className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Low Stock Warnings</span>
           <div className="text-2xl font-black text-apple-red mt-1">
             {lowStockItems.length} Items
@@ -116,7 +116,7 @@ export const StockManager: React.FC<StockManagerProps> = ({
           <p className="text-[11px] text-neutral-500 mt-1">Below minimum reorder threshold</p>
         </div>
 
-        <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm">
+        <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm">
           <span className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Order Auto-Deduction</span>
           <div className="text-2xl font-black text-apple-green mt-1">
             Active
@@ -126,7 +126,7 @@ export const StockManager: React.FC<StockManagerProps> = ({
       </div>
 
       {/* Stock Items Table */}
-      <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#2A1A3A] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm overflow-hidden">
         <div className="p-4 border-b border-black/5 dark:border-white/5 flex items-center justify-between">
           <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100">Stock Inventory List</h3>
         </div>
@@ -204,7 +204,7 @@ export const StockManager: React.FC<StockManagerProps> = ({
       {/* Restock Modal */}
       {restockModalItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full max-w-sm bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 shadow-apple-modal border border-black/5 dark:border-white/10 space-y-4">
+          <div className="w-full max-w-sm bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 shadow-apple-modal border border-black/5 dark:border-white/10 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-bold text-base text-neutral-900 dark:text-neutral-100">
                 Restock {restockModalItem.name}
@@ -250,7 +250,7 @@ export const StockManager: React.FC<StockManagerProps> = ({
       {/* Add New Stock Item Modal */}
       {showNewItemModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full max-w-md bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 shadow-apple-modal border border-black/5 dark:border-white/10 space-y-4">
+          <div className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 shadow-apple-modal border border-black/5 dark:border-white/10 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-bold text-base text-neutral-900 dark:text-neutral-100">
                 Add New Inventory Item

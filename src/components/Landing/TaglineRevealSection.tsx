@@ -54,7 +54,7 @@ export default function TaglineRevealSection() {
     <section
       ref={sectionRef}
       aria-label="Core Philosophy"
-      className="py-20 sm:py-24 px-4 sm:px-6 bg-[#010102]"
+      className="py-20 sm:py-24 px-4 sm:px-6 bg-[#170D21]"
     >
       <div className="max-w-[960px] mx-auto">
         <p className="text-xl sm:text-2xl lg:text-4xl font-semibold tracking-tight leading-[1.3] balance-heading not-italic">
@@ -74,9 +74,9 @@ export default function TaglineRevealSection() {
                   opacity: isActivated ? 1 : 0.28,
                   color: isActivated
                     ? isHighlight
-                      ? '#AD96F1'
-                      : '#F5F5F7'
-                    : '#9B9B9B',
+                      ? '#C9B8F2'
+                      : '#F3EEFB'
+                    : '#B3A6C9',
                 }}
               >
                 {word}

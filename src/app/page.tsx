@@ -62,7 +62,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#010102] text-[#F5F5F7] font-sans antialiased overflow-x-hidden selection:bg-[#AD96F1] selection:text-[#010102]">
+    <div className="relative min-h-screen bg-[#170D21] text-[#F3EEFB] font-sans antialiased overflow-x-hidden selection:bg-[#C9B8F2] selection:text-[#170D21]">
       {/* Floating navigation bar */}
       <FloatingNav />
 
@@ -78,7 +78,7 @@ export default function LandingPage() {
           <div
             ref={heroBgRef}
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -top-16 -bottom-16 bg-cover bg-center bg-no-repeat opacity-40 will-change-transform"
+            className="pointer-events-none absolute inset-0 -top-16 -bottom-16 bg-cover bg-center bg-no-repeat opacity-30 mix-blend-luminosity will-change-transform"
             style={{
               backgroundImage: 'url(/images/landing/kitchen-fire-pass.jpg)',
               transform: 'scale(1.06)',
@@ -89,10 +89,10 @@ export default function LandingPage() {
           <div
             ref={heroMidRef}
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#010102]/80 via-[#010102]/60 to-[#010102] will-change-transform"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#170D21]/80 via-[#170D21]/60 to-[#170D21] will-change-transform"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_25%,rgba(173,150,241,0.18),transparent_70%)]" />
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[360px] bg-[radial-gradient(circle,rgba(88,246,177,0.12),transparent_70%)] blur-3xl pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_25%,rgba(201,184,242,0.20),transparent_70%)]" />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[360px] bg-[radial-gradient(circle,rgba(247,181,141,0.10),transparent_70%)] blur-3xl pointer-events-none" />
           </div>
 
           {/* Layer 3: Foreground Hero Narrative Typography & Interactive Actions */}
@@ -101,23 +101,23 @@ export default function LandingPage() {
             className="relative z-20 max-w-5xl mx-auto text-center space-y-6 sm:space-y-8 will-change-transform"
           >
             {/* Live Kitchen Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#181818]/90 border border-[#272727] backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-xl">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#58F6B1] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#58F6B1]" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F7B58D] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F7B58D]" />
               </span>
-              <span className="caption-1 text-[#F5F5F7]">
+              <span className="caption-1 text-[#F3EEFB]">
                 Proven in production at Haseeb&apos;s Foods Café (Samahni, AJK)
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="display text-[#F5F5F7] tracking-tight max-w-4xl mx-auto">
+            <h1 className="display text-[#F3EEFB] tracking-tight max-w-4xl mx-auto">
               The Offline-First Restaurant OS Built for Pakistani Kitchens.
             </h1>
 
             {/* Sub-Headline */}
-            <p className="body-1 text-[#9B9B9B] max-w-2xl mx-auto">
+            <p className="body-1 text-[#B3A6C9] max-w-2xl mx-auto">
               When PTCL cuts out, power flickers, and Friday rush floods your counter,
               parchiOS keeps printing 80mm thermal KOTs, flashing kitchen screens, and ringing bills without zero-point cloud delay.
             </p>
@@ -126,7 +126,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <a
                 href="#interactive-demo"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-[#AD96F1] hover:opacity-95 text-[#010102] font-semibold text-sm transition-transform duration-200 ease-weighted active:scale-[0.98] shadow-apple-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-7 rounded-full bg-[#C9B8F2] hover:opacity-95 text-[#170D21] font-semibold text-sm transition-transform duration-200 ease-weighted active:scale-[0.98] shadow-apple-md"
               >
                 <span>Interactive Live Demo</span>
                 <SolarArrowRightBold className="w-4 h-4" />
@@ -134,49 +134,49 @@ export default function LandingPage() {
 
               <Link
                 href="/demo"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-[#181818] hover:bg-[#1F1F1F] border border-[#272727] text-[#F5F5F7] font-semibold text-sm transition-transform duration-200 ease-weighted active:scale-[0.98]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-7 rounded-full bg-white/[0.06] hover:bg-white/10 border border-white/10 text-[#F3EEFB] font-semibold text-sm transition-transform duration-200 ease-weighted active:scale-[0.98]"
               >
-                <SolarBoltBoldDuotone className="w-4 h-4 text-[#58F6B1]" />
+                <SolarBoltBoldDuotone className="w-4 h-4 text-[#E4DAF9]" />
                 <span>Launch POS Demo Terminal</span>
               </Link>
             </div>
 
             {/* Core Proof Numbers Strip */}
             <div className="pt-8 sm:pt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#010102]/70 border border-[#1F1F1F] backdrop-blur-md">
-                <div className="flex items-center gap-2 text-[#58F6B1] mb-1">
+              <div className="p-3.5 sm:p-4 rounded-3xl bg-white/[0.05] border border-white/10 backdrop-blur-xl">
+                <div className="flex items-center gap-2 text-[#E4DAF9] mb-1">
                   <SolarShieldCheckBoldDuotone className="w-4 h-4" />
-                  <span className="caption-2 font-mono uppercase tracking-wider text-[#9B9B9B]">Architecture</span>
+                  <span className="caption-2 font-mono uppercase tracking-wider text-[#B3A6C9]">Architecture</span>
                 </div>
-                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F5F5F7]">100% Offline</div>
-                <p className="caption-2 text-[#9B9B9B] mt-1">IndexedDB stores every order locally</p>
+                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F3EEFB]">100% Offline</div>
+                <p className="caption-2 text-[#B3A6C9] mt-1">IndexedDB stores every order locally</p>
               </div>
 
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#010102]/70 border border-[#1F1F1F] backdrop-blur-md">
-                <div className="flex items-center gap-2 text-[#AD96F1] mb-1">
+              <div className="p-3.5 sm:p-4 rounded-3xl bg-white/[0.05] border border-white/10 backdrop-blur-xl">
+                <div className="flex items-center gap-2 text-[#C9B8F2] mb-1">
                   <SolarPrinterBoldDuotone className="w-4 h-4" />
-                  <span className="caption-2 font-mono uppercase tracking-wider text-[#9B9B9B]">KOT Printing</span>
+                  <span className="caption-2 font-mono uppercase tracking-wider text-[#B3A6C9]">KOT Printing</span>
                 </div>
-                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F5F5F7]">80mm Thermal</div>
-                <p className="caption-2 text-[#9B9B9B] mt-1">ESC/POS USB & Network ready</p>
+                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F3EEFB]">80mm Thermal</div>
+                <p className="caption-2 text-[#B3A6C9] mt-1">ESC/POS USB & Network ready</p>
               </div>
 
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#010102]/70 border border-[#1F1F1F] backdrop-blur-md">
-                <div className="flex items-center gap-2 text-[#58F6B1] mb-1">
+              <div className="p-3.5 sm:p-4 rounded-3xl bg-white/[0.05] border border-white/10 backdrop-blur-xl">
+                <div className="flex items-center gap-2 text-[#E4DAF9] mb-1">
                   <SolarBoltBoldDuotone className="w-4 h-4" />
-                  <span className="caption-2 font-mono uppercase tracking-wider text-[#9B9B9B]">Hardware</span>
+                  <span className="caption-2 font-mono uppercase tracking-wider text-[#B3A6C9]">Hardware</span>
                 </div>
-                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F5F5F7]">Rs. 0 Upfront</div>
-                <p className="caption-2 text-[#9B9B9B] mt-1">Runs on existing laptop, tablet or PC</p>
+                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F3EEFB]">Rs. 0 Upfront</div>
+                <p className="caption-2 text-[#B3A6C9] mt-1">Runs on existing laptop, tablet or PC</p>
               </div>
 
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#010102]/70 border border-[#1F1F1F] backdrop-blur-md">
-                <div className="flex items-center gap-2 text-[#AD96F1] mb-1">
-                  <span className="w-2 h-2 rounded-full bg-[#AD96F1]" />
-                  <span className="caption-2 font-mono uppercase tracking-wider text-[#9B9B9B]">Commission</span>
+              <div className="p-3.5 sm:p-4 rounded-3xl bg-white/[0.05] border border-white/10 backdrop-blur-xl">
+                <div className="flex items-center gap-2 text-[#C9B8F2] mb-1">
+                  <span className="w-2 h-2 rounded-full bg-[#C9B8F2]" />
+                  <span className="caption-2 font-mono uppercase tracking-wider text-[#B3A6C9]">Commission</span>
                 </div>
-                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F5F5F7]">0% Aggregator</div>
-                <p className="caption-2 text-[#9B9B9B] mt-1">Direct home delivery fleet manager</p>
+                <div className="text-xl sm:text-2xl font-bold font-mono text-[#F3EEFB]">0% Aggregator</div>
+                <p className="caption-2 text-[#B3A6C9] mt-1">Direct home delivery fleet manager</p>
               </div>
             </div>
           </div>
@@ -206,51 +206,51 @@ export default function LandingPage() {
         {/* ============================================================ */}
         <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto" aria-label="Kitchen Hardware Reality">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="caption-1 text-[#AD96F1] uppercase tracking-wider font-mono">Counter Realities</span>
-            <h2 className="title-1 text-[#F5F5F7] mt-2">Built for the Way Pakistani Food is Actually Made.</h2>
-            <p className="body-4 text-[#9B9B9B] mt-2">
+            <span className="caption-1 text-[#C9B8F2] uppercase tracking-wider font-mono">Counter Realities</span>
+            <h2 className="title-1 text-[#F3EEFB] mt-2">Built for the Way Pakistani Food is Actually Made.</h2>
+            <p className="body-4 text-[#B3A6C9] mt-2">
               From open-flame charcoal tandoor fires to humid fryer stations and late-night dine-in rush, parchiOS is designed for dirty fingers, loud kitchens, and unstable connections.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="group rounded-3xl overflow-hidden border border-[#272727] bg-[#181818]">
+            <div className="group rounded-[28px] overflow-hidden border border-white/10 bg-white/[0.04]">
               <div
                 className="h-56 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                 style={{ backgroundImage: 'url(/images/landing/counter-hardware-dark.jpg)' }}
               />
               <div className="p-6">
-                <span className="caption-2 font-mono text-[#58F6B1]">COUNTER DISPATCH</span>
-                <h3 className="title-3 text-[#F5F5F7] mt-1">High-Speed Order Taker</h3>
-                <p className="body-5 text-[#9B9B9B] mt-2">
+                <span className="caption-2 font-mono text-[#E4DAF9]">COUNTER DISPATCH</span>
+                <h3 className="title-3 text-[#F3EEFB] mt-1">High-Speed Order Taker</h3>
+                <p className="body-5 text-[#B3A6C9] mt-2">
                   Touch-optimized keyboard hotkeys and large item tiles allow cashiers to key in a 7-item dine-in feast in under 8 seconds.
                 </p>
               </div>
             </div>
 
-            <div className="group rounded-3xl overflow-hidden border border-[#272727] bg-[#181818]">
+            <div className="group rounded-[28px] overflow-hidden border border-white/10 bg-white/[0.04]">
               <div
                 className="h-56 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                 style={{ backgroundImage: 'url(/images/landing/dining-hall-night.jpg)' }}
               />
               <div className="p-6">
-                <span className="caption-2 font-mono text-[#AD96F1]">FLOOR & FAMILY SEATING</span>
-                <h3 className="title-3 text-[#F5F5F7] mt-1">Visual Floor Layout</h3>
-                <p className="body-5 text-[#9B9B9B] mt-2">
+                <span className="caption-2 font-mono text-[#C9B8F2]">FLOOR & FAMILY SEATING</span>
+                <h3 className="title-3 text-[#F3EEFB] mt-1">Visual Floor Layout</h3>
+                <p className="body-5 text-[#B3A6C9] mt-2">
                   Real-time color-coded table occupancy map with privacy hall separation. See guest timers and pending bills at a glance.
                 </p>
               </div>
             </div>
 
-            <div className="group rounded-3xl overflow-hidden border border-[#272727] bg-[#181818]">
+            <div className="group rounded-[28px] overflow-hidden border border-white/10 bg-white/[0.04]">
               <div
                 className="h-56 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                 style={{ backgroundImage: 'url(/images/landing/kitchen-fire-pass.jpg)' }}
               />
               <div className="p-6">
-                <span className="caption-2 font-mono text-[#58F6B1]">KITCHEN PASS</span>
-                <h3 className="title-3 text-[#F5F5F7] mt-1">Instant Station KOTs</h3>
-                <p className="body-5 text-[#9B9B9B] mt-2">
+                <span className="caption-2 font-mono text-[#E4DAF9]">KITCHEN PASS</span>
+                <h3 className="title-3 text-[#F3EEFB] mt-1">Instant Station KOTs</h3>
+                <p className="body-5 text-[#B3A6C9] mt-2">
                   Direct routing sends Karahi orders to the burner pass and Burgers to the fry station instantly without mix-ups or lost slips.
                 </p>
               </div>

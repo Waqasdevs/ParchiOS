@@ -126,9 +126,9 @@ export async function seedInitialData() {
 
   // 6. Employees
   const demoStaff: Employee[] = [
-    { id: 'emp-manager', name: 'Hamza (Manager)', role: 'manager', pin: '1234', phone: '+92 300 1234567', isActive: true, avatarColor: '#007AFF' },
+    { id: 'emp-manager', name: 'Hamza (Manager)', role: 'manager', pin: '1234', phone: '+92 300 1234567', isActive: true, avatarColor: '#A98BE8' },
     { id: 'emp-cashier', name: 'Bilal (Cashier)', role: 'cashier', pin: '0000', phone: '+92 300 7654321', isActive: true, avatarColor: '#34C759' },
-    { id: 'emp-rider', name: 'Usman (Rider)', role: 'rider', pin: '', phone: '+92 321 9876543', isActive: true, avatarColor: '#FF9500' },
+    { id: 'emp-rider', name: 'Usman (Rider)', role: 'rider', pin: '', phone: '+92 321 9876543', isActive: true, avatarColor: '#F7B58D' },
   ];
   await db.employees.bulkPut(demoStaff);
 

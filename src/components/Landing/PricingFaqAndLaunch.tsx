@@ -98,38 +98,38 @@ export default function PricingFaqAndLaunch() {
       {/* Proof & Production Origin Section */}
       <section
         aria-labelledby="proof-heading"
-        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#181818]"
+        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#231532]"
       >
         <div className="max-w-[1160px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 flex flex-col gap-6">
               <h2
                 id="proof-heading"
-                className="heading-2 text-[#F5F5F7] balance-heading not-italic"
+                className="heading-2 text-[#F3EEFB] balance-heading not-italic"
               >
                 Forged on our counter.
               </h2>
-              <p className="body-4 text-[#9B9B9B] pretty-body not-italic">
+              <p className="body-4 text-[#B3A6C9] pretty-body not-italic">
                 We did not build parchiOS in a detached software agency. We built it to run demanding high-volume Pakistani kitchens and grill counters after watching fragile cloud POS tabs crash every Friday night.
               </p>
 
               {/* Verified Production Benchmarks */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                <div className="rounded-xl bg-[#010102] p-4">
-                  <div className="heading-4 text-[#58F6B1] not-italic">100%</div>
-                  <div className="caption-2 text-[#9B9B9B] mt-1 not-italic">
+                <div className="rounded-xl bg-[#170D21] p-4">
+                  <div className="heading-4 text-[#E4DAF9] not-italic">100%</div>
+                  <div className="caption-2 text-[#B3A6C9] mt-1 not-italic">
                     Offline Uptime
                   </div>
                 </div>
-                <div className="rounded-xl bg-[#010102] p-4">
-                  <div className="heading-4 text-[#AD96F1] not-italic">4 Taps</div>
-                  <div className="caption-2 text-[#9B9B9B] mt-1 not-italic">
+                <div className="rounded-xl bg-[#170D21] p-4">
+                  <div className="heading-4 text-[#C9B8F2] not-italic">4 Taps</div>
+                  <div className="caption-2 text-[#B3A6C9] mt-1 not-italic">
                     Order to KOT Print
                   </div>
                 </div>
-                <div className="rounded-xl bg-[#010102] p-4 col-span-2 sm:col-span-1">
-                  <div className="heading-4 text-[#F5F5F7] not-italic">Rs. 0</div>
-                  <div className="caption-2 text-[#9B9B9B] mt-1 not-italic">
+                <div className="rounded-xl bg-[#170D21] p-4 col-span-2 sm:col-span-1">
+                  <div className="heading-4 text-[#F3EEFB] not-italic">Rs. 0</div>
+                  <div className="caption-2 text-[#B3A6C9] mt-1 not-italic">
                     Per Order Commission
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function PricingFaqAndLaunch() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="rounded-2xl bg-[#010102] p-2">
+              <div className="rounded-2xl bg-[#170D21] p-2">
                 <div className="rounded-lg overflow-hidden relative aspect-[16/10]">
                   <img
                     src="/images/landing/dining-hall-night.jpg"
@@ -156,43 +156,43 @@ export default function PricingFaqAndLaunch() {
       <section
         id="pricing"
         aria-labelledby="pricing-heading"
-        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#010102]"
+        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#170D21]"
       >
         <div className="max-w-[1160px] mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <div>
               <h2
                 id="pricing-heading"
-                className="heading-2 text-[#F5F5F7] max-w-[540px] balance-heading not-italic"
+                className="heading-2 text-[#F3EEFB] max-w-[540px] balance-heading not-italic"
               >
                 Flat PKR pricing.
               </h2>
             </div>
-            <p className="body-4 text-[#9B9B9B] max-w-[420px] pretty-body not-italic">
+            <p className="body-4 text-[#B3A6C9] max-w-[420px] pretty-body not-italic">
               Start on your existing counter computer today at zero cost. Upgrade to unlimited multi printer station routing for less than the commission on fifteen aggregator orders.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Field 1: Single Counter Starter */}
-            <div className="rounded-2xl bg-[#181818] p-2 flex flex-col justify-between">
-              <div className="rounded-lg bg-[#1F1F1F] p-6 sm:p-8 h-full flex flex-col justify-between">
+            <div className="rounded-2xl bg-[#231532] p-2 flex flex-col justify-between">
+              <div className="rounded-lg bg-[#2E1D40] p-6 sm:p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between gap-4">
-                    <h3 className="heading-3 text-[#F5F5F7] not-italic">Single Counter</h3>
-                    <span className="py-1 px-2.5 rounded bg-[#181818] caption-2 text-[#F5F5F7] not-italic">
+                    <h3 className="heading-3 text-[#F3EEFB] not-italic">Single Counter</h3>
+                    <span className="py-1 px-3 rounded-full bg-[#C9B8F2]/15 border border-[#C9B8F2]/30 caption-2 text-[#E4DAF9] not-italic">
                       Express Cafés
                     </span>
                   </div>
 
                   <div className="mt-6 flex items-baseline gap-2">
-                    <span className="heading-1 text-[#F5F5F7] not-italic">Rs. 0</span>
-                    <span className="body-4 text-[#9B9B9B] not-italic">
+                    <span className="heading-1 text-[#F3EEFB] not-italic">Rs. 0</span>
+                    <span className="body-4 text-[#B3A6C9] not-italic">
                       / first 30 days
                     </span>
                   </div>
 
-                  <p className="body-4 text-[#9B9B9B] mt-4 pretty-body not-italic">
+                  <p className="body-4 text-[#B3A6C9] mt-4 pretty-body not-italic">
                     Full offline POS, 80mm receipt printing, customer CRM, and daily shift closing reports running locally in your browser.
                   </p>
 
@@ -203,8 +203,8 @@ export default function PricingFaqAndLaunch() {
                       'Offline first IndexedDB storage with JSON backup export',
                       'Preloaded Pakistani burger, pizza, and desi karahi menu',
                     ].map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 body-5 text-[#F5F5F7]">
-                        <SolarCheckCircleBold className="w-5 h-5 text-[#58F6B1] shrink-0 mt-0.5" />
+                      <li key={feature} className="flex items-start gap-2.5 body-5 text-[#F3EEFB]">
+                        <SolarCheckCircleBold className="w-5 h-5 text-[#E4DAF9] shrink-0 mt-0.5" />
                         <span className="not-italic">{feature}</span>
                       </li>
                     ))}
@@ -214,7 +214,7 @@ export default function PricingFaqAndLaunch() {
                 <div className="mt-8 pt-4">
                   <Link
                     href="/pos"
-                    className="w-full py-2 px-3 rounded-lg bg-[#272727] hover:bg-[#313131] text-[#F5F5F7] caption-1 inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-weighted active:scale-[0.98] not-italic"
+                    className="w-full py-2 px-3 rounded-lg bg-[#3A2850] hover:bg-[#4A3563] text-[#F3EEFB] caption-1 inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-weighted active:scale-[0.98] not-italic"
                   >
                     <span>Open Instant Counter Now</span>
                     <SolarArrowRightBold className="w-4 h-4" />
@@ -224,24 +224,24 @@ export default function PricingFaqAndLaunch() {
             </div>
 
             {/* Field 2: Full Branch License */}
-            <div className="rounded-2xl bg-[#AD96F1] p-2 flex flex-col justify-between">
-              <div className="rounded-lg bg-[#181818] p-6 sm:p-8 h-full flex flex-col justify-between">
+            <div className="rounded-2xl bg-[#C9B8F2] p-2 flex flex-col justify-between">
+              <div className="rounded-lg bg-[#231532] p-6 sm:p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between gap-4">
-                    <h3 className="heading-3 text-[#F5F5F7] not-italic">Full Branch</h3>
-                    <span className="py-1 px-2.5 rounded bg-[#AD96F1] caption-2 text-[#010102] font-semibold not-italic">
+                    <h3 className="heading-3 text-[#F3EEFB] not-italic">Full Branch</h3>
+                    <span className="py-1 px-2.5 rounded bg-[#C9B8F2] caption-2 text-[#170D21] font-semibold not-italic">
                       Most Popular
                     </span>
                   </div>
 
                   <div className="mt-6 flex items-baseline gap-2">
-                    <span className="heading-1 text-[#58F6B1] not-italic">Rs. 4,500</span>
-                    <span className="body-4 text-[#9B9B9B] not-italic">
+                    <span className="heading-1 text-[#F7B58D] not-italic">Rs. 4,500</span>
+                    <span className="body-4 text-[#B3A6C9] not-italic">
                       / month per branch
                     </span>
                   </div>
 
-                  <p className="body-4 text-[#9B9B9B] mt-4 pretty-body not-italic">
+                  <p className="body-4 text-[#B3A6C9] mt-4 pretty-body not-italic">
                     Complete multi station kitchen display routing, family hall floor management, rider cash reconciliation, and priority WhatsApp engineering support.
                   </p>
 
@@ -253,8 +253,8 @@ export default function PricingFaqAndLaunch() {
                       'PIN locked Cashier, Kitchen, and Manager audit logs',
                       'Dedicated onboarding for your menu and thermal printers',
                     ].map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 body-5 text-[#F5F5F7]">
-                        <SolarCheckCircleBold className="w-5 h-5 text-[#AD96F1] shrink-0 mt-0.5" />
+                      <li key={feature} className="flex items-start gap-2.5 body-5 text-[#F3EEFB]">
+                        <SolarCheckCircleBold className="w-5 h-5 text-[#C9B8F2] shrink-0 mt-0.5" />
                         <span className="not-italic">{feature}</span>
                       </li>
                     ))}
@@ -264,7 +264,7 @@ export default function PricingFaqAndLaunch() {
                 <div className="mt-8 pt-4">
                   <a
                     href="#launch-form"
-                    className="w-full py-2 px-3 rounded-lg bg-[#AD96F1] hover:opacity-95 text-[#010102] caption-1 inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-weighted active:scale-[0.98] not-italic"
+                    className="w-full py-2 px-3 rounded-lg bg-[#C9B8F2] hover:opacity-95 text-[#170D21] caption-1 inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-weighted active:scale-[0.98] not-italic"
                   >
                     <span>Configure Branch Workspace</span>
                     <SolarArrowRightBold className="w-4 h-4" />
@@ -275,14 +275,14 @@ export default function PricingFaqAndLaunch() {
           </div>
 
           {/* Risk Reversal Guarantee Strip */}
-          <div className="mt-8 rounded-2xl bg-[#181818] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="mt-8 rounded-2xl bg-[#231532] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-start sm:items-center gap-3">
-              <SolarShieldCheckBoldDuotone className="w-6 h-6 text-[#58F6B1] shrink-0" />
-              <p className="body-5 text-[#F5F5F7] pretty-body not-italic">
+              <SolarShieldCheckBoldDuotone className="w-6 h-6 text-[#E4DAF9] shrink-0" />
+              <p className="body-5 text-[#F3EEFB] pretty-body not-italic">
                 Zero lock in guarantee: Export your entire menu, customer phone book, and sales history as clean JSON or CSV at any second. No hardware lease traps.
               </p>
             </div>
-            <span className="caption-2 text-[#58F6B1] font-medium shrink-0 not-italic">
+            <span className="caption-2 text-[#E4DAF9] font-medium shrink-0 not-italic">
               30 Day Risk Free Trial
             </span>
           </div>
@@ -293,21 +293,21 @@ export default function PricingFaqAndLaunch() {
       <section
         id="faq"
         aria-labelledby="faq-heading"
-        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#181818]"
+        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#231532]"
       >
         <div className="max-w-[960px] mx-auto">
           <h2
             id="faq-heading"
-            className="heading-2 text-[#F5F5F7] max-w-[540px] balance-heading not-italic"
+            className="heading-2 text-[#F3EEFB] max-w-[540px] balance-heading not-italic"
           >
             Frequently asked questions.
           </h2>
 
           <div className="mt-12 space-y-6">
             {LANDING_FAQ_ITEMS.map((item) => (
-              <div key={item.q} className="rounded-xl bg-[#010102] p-6">
-                <h3 className="heading-5 text-[#F5F5F7] not-italic">{item.q}</h3>
-                <p className="body-4 text-[#9B9B9B] mt-3 pretty-body not-italic">
+              <div key={item.q} className="rounded-xl bg-[#170D21] p-6">
+                <h3 className="heading-5 text-[#F3EEFB] not-italic">{item.q}</h3>
+                <p className="body-4 text-[#B3A6C9] mt-3 pretty-body not-italic">
                   {item.a}
                 </p>
               </div>
@@ -320,33 +320,33 @@ export default function PricingFaqAndLaunch() {
       <section
         id="launch-form"
         aria-labelledby="launch-heading"
-        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#010102]"
+        className="py-20 sm:py-24 px-4 sm:px-6 bg-[#170D21]"
       >
         <div className="max-w-[1160px] mx-auto">
-          <div className="rounded-2xl bg-[#181818] p-2">
-            <div className="rounded-lg bg-[#1F1F1F] p-6 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="rounded-2xl bg-[#231532] p-2">
+            <div className="rounded-lg bg-[#2E1D40] p-6 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               <div className="lg:col-span-6 flex flex-col gap-6">
                 <h2
                   id="launch-heading"
-                  className="heading-2 text-[#F5F5F7] balance-heading not-italic"
+                  className="heading-2 text-[#F3EEFB] balance-heading not-italic"
                 >
                   Launch your counter.
                 </h2>
-                <p className="body-4 text-[#9B9B9B] pretty-body not-italic">
+                <p className="body-4 text-[#B3A6C9] pretty-body not-italic">
                   Enter your restaurant name and city below. We will configure your local parchiOS branch workspace with PKR currency, tax settings, and kitchen stations, then open your live POS immediately.
                 </p>
 
                 <div className="space-y-3 pt-2">
-                  <div className="flex items-center gap-2.5 body-5 text-[#F5F5F7]">
-                    <SolarCheckCircleBold className="w-5 h-5 text-[#58F6B1]" />
+                  <div className="flex items-center gap-2.5 body-5 text-[#F3EEFB]">
+                    <SolarCheckCircleBold className="w-5 h-5 text-[#E4DAF9]" />
                     <span className="not-italic">No credit card or cloud signup wait</span>
                   </div>
-                  <div className="flex items-center gap-2.5 body-5 text-[#F5F5F7]">
-                    <SolarCheckCircleBold className="w-5 h-5 text-[#58F6B1]" />
+                  <div className="flex items-center gap-2.5 body-5 text-[#F3EEFB]">
+                    <SolarCheckCircleBold className="w-5 h-5 text-[#E4DAF9]" />
                     <span className="not-italic">Preloaded with 26 authentic Pakistani menu items</span>
                   </div>
-                  <div className="flex items-center gap-2.5 body-5 text-[#F5F5F7]">
-                    <SolarCheckCircleBold className="w-5 h-5 text-[#58F6B1]" />
+                  <div className="flex items-center gap-2.5 body-5 text-[#F3EEFB]">
+                    <SolarCheckCircleBold className="w-5 h-5 text-[#E4DAF9]" />
                     <span className="not-italic">Test 80mm KOT slip printing and KDS right now</span>
                   </div>
                 </div>
@@ -356,13 +356,13 @@ export default function PricingFaqAndLaunch() {
                 <form
                   onSubmit={handleProvisionWorkspace}
                   noValidate
-                  className="rounded-xl bg-[#010102] p-6 sm:p-8 space-y-5"
+                  className="rounded-xl bg-[#170D21] p-6 sm:p-8 space-y-5"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="heading-5 text-[#F5F5F7] not-italic">
+                    <span className="heading-5 text-[#F3EEFB] not-italic">
                       Instant Branch Setup
                     </span>
-                    <span className="caption-2 text-[#58F6B1] font-medium not-italic">
+                    <span className="caption-2 text-[#E4DAF9] font-medium not-italic">
                       Local Dexie Engine Ready
                     </span>
                   </div>
@@ -370,7 +370,7 @@ export default function PricingFaqAndLaunch() {
                   <div>
                     <label
                       htmlFor="branch-restaurant-name"
-                      className="block caption-1 text-[#F5F5F7] mb-2 not-italic"
+                      className="block caption-1 text-[#F3EEFB] mb-2 not-italic"
                     >
                       Restaurant or Café Name
                     </label>
@@ -381,7 +381,7 @@ export default function PricingFaqAndLaunch() {
                       placeholder="e.g. Salt & Crave Grill"
                       value={restaurantName}
                       onChange={(e) => setRestaurantName(e.target.value)}
-                      className="w-full rounded-lg bg-[#181818] px-3.5 py-2.5 text-[#F5F5F7] placeholder-[#9B9B9B]/50 body-5 focus:outline-none focus:ring-2 focus:ring-[#AD96F1]"
+                      className="w-full rounded-lg bg-[#231532] px-3.5 py-2.5 text-[#F3EEFB] placeholder-[#B3A6C9]/50 body-5 focus:outline-none focus:ring-2 focus:ring-[#C9B8F2]"
                     />
                   </div>
 
@@ -389,7 +389,7 @@ export default function PricingFaqAndLaunch() {
                     <div>
                       <label
                         htmlFor="branch-city"
-                        className="block caption-1 text-[#F5F5F7] mb-2 not-italic"
+                        className="block caption-1 text-[#F3EEFB] mb-2 not-italic"
                       >
                         City
                       </label>
@@ -397,7 +397,7 @@ export default function PricingFaqAndLaunch() {
                         id="branch-city"
                         value={cityName}
                         onChange={(e) => setCityName(e.target.value)}
-                        className="w-full rounded-lg bg-[#181818] px-3.5 py-2.5 text-[#F5F5F7] body-5 focus:outline-none focus:ring-2 focus:ring-[#AD96F1]"
+                        className="w-full rounded-lg bg-[#231532] px-3.5 py-2.5 text-[#F3EEFB] body-5 focus:outline-none focus:ring-2 focus:ring-[#C9B8F2]"
                       >
                         <option value="Lahore">Lahore</option>
                         <option value="Karachi">Karachi</option>
@@ -414,7 +414,7 @@ export default function PricingFaqAndLaunch() {
                     <div>
                       <label
                         htmlFor="branch-tax"
-                        className="block caption-1 text-[#F5F5F7] mb-2 not-italic"
+                        className="block caption-1 text-[#F3EEFB] mb-2 not-italic"
                       >
                         Default GST %
                       </label>
@@ -422,7 +422,7 @@ export default function PricingFaqAndLaunch() {
                         id="branch-tax"
                         value={taxRateInput}
                         onChange={(e) => setTaxRateInput(e.target.value)}
-                        className="w-full rounded-lg bg-[#181818] px-3.5 py-2.5 text-[#F5F5F7] body-5 focus:outline-none focus:ring-2 focus:ring-[#AD96F1]"
+                        className="w-full rounded-lg bg-[#231532] px-3.5 py-2.5 text-[#F3EEFB] body-5 focus:outline-none focus:ring-2 focus:ring-[#C9B8F2]"
                       >
                         <option value="0">0% (Unregistered)</option>
                         <option value="5">5% (Card / FBR Tier)</option>
@@ -435,7 +435,7 @@ export default function PricingFaqAndLaunch() {
                   <div>
                     <label
                       htmlFor="branch-phone"
-                      className="block caption-1 text-[#F5F5F7] mb-2 not-italic"
+                      className="block caption-1 text-[#F3EEFB] mb-2 not-italic"
                     >
                       Branch WhatsApp or Phone Number
                     </label>
@@ -446,14 +446,14 @@ export default function PricingFaqAndLaunch() {
                       placeholder="0300 1234567"
                       value={phoneInput}
                       onChange={(e) => setPhoneInput(e.target.value)}
-                      className="w-full rounded-lg bg-[#181818] px-3.5 py-2.5 text-[#F5F5F7] placeholder-[#9B9B9B]/50 body-5 focus:outline-none focus:ring-2 focus:ring-[#AD96F1]"
+                      className="w-full rounded-lg bg-[#231532] px-3.5 py-2.5 text-[#F3EEFB] placeholder-[#B3A6C9]/50 body-5 focus:outline-none focus:ring-2 focus:ring-[#C9B8F2]"
                     />
                   </div>
 
                   {formError && (
                     <div
                       role="alert"
-                      className="rounded-lg bg-[#272727] p-3 caption-2 text-[#58F6B1] not-italic"
+                      className="rounded-lg bg-[#3A2850] p-3 caption-2 text-[#E4DAF9] not-italic"
                     >
                       {formError}
                     </div>
@@ -462,7 +462,7 @@ export default function PricingFaqAndLaunch() {
                   <button
                     type="submit"
                     disabled={isProvisioning}
-                    className="w-full py-2 px-3 rounded-lg bg-[#AD96F1] hover:opacity-95 text-[#010102] caption-1 inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-weighted active:scale-[0.98] disabled:opacity-50 not-italic"
+                    className="w-full py-2 px-3 rounded-lg bg-[#C9B8F2] hover:opacity-95 text-[#170D21] caption-1 inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-weighted active:scale-[0.98] disabled:opacity-50 not-italic"
                   >
                     <span>
                       {isProvisioning
@@ -475,7 +475,7 @@ export default function PricingFaqAndLaunch() {
                   <div className="text-center pt-1">
                     <Link
                       href="/demo"
-                      className="caption-2 text-[#9B9B9B] hover:text-[#F5F5F7] underline underline-offset-4 not-italic"
+                      className="caption-2 text-[#B3A6C9] hover:text-[#F3EEFB] underline underline-offset-4 not-italic"
                     >
                       Or skip setup and open default parchiOS demo counter
                     </Link>
@@ -488,35 +488,35 @@ export default function PricingFaqAndLaunch() {
       </section>
 
       {/* Footer with Privacy & Terms anchors per Part B10 */}
-      <footer className="py-12 px-4 sm:px-6 bg-[#010102]">
+      <footer className="py-12 px-4 sm:px-6 bg-[#170D21]">
         <div className="max-w-[1160px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <span className="w-7 h-7 rounded-lg bg-[#181818] flex items-center justify-center relative">
-              <span className="w-3 h-3 rounded-sm bg-[#AD96F1] block" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#58F6B1] absolute bottom-1 right-1" />
+            <span className="w-7 h-7 rounded-lg bg-[#231532] flex items-center justify-center relative">
+              <span className="w-3 h-3 rounded-sm bg-[#C9B8F2] block" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4DAF9] absolute bottom-1 right-1" />
             </span>
             <div>
-              <span className="caption-1 text-[#F5F5F7] not-italic">parchiOS Pakistan</span>
-              <span className="caption-3 text-[#9B9B9B] block not-italic">
+              <span className="caption-1 text-[#F3EEFB] not-italic">parchiOS Pakistan</span>
+              <span className="caption-3 text-[#B3A6C9] block not-italic">
                 Offline-First Restaurant Operating System • Lahore, Pakistan
               </span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 caption-2 text-[#9B9B9B]">
-            <Link href="/demo" className="hover:text-[#F5F5F7] not-italic">
+          <div className="flex flex-wrap items-center gap-6 caption-2 text-[#B3A6C9]">
+            <Link href="/demo" className="hover:text-[#F3EEFB] not-italic">
               Live POS Demo Terminal
             </Link>
-            <a href="#architecture" className="hover:text-[#F5F5F7] not-italic">
+            <a href="#architecture" className="hover:text-[#F3EEFB] not-italic">
               80mm KOT Spec
             </a>
-            <a href="#pricing" className="hover:text-[#F5F5F7] not-italic">
+            <a href="#pricing" className="hover:text-[#F3EEFB] not-italic">
               PKR Pricing
             </a>
-            <a href="#privacy" id="privacy" className="hover:text-[#F5F5F7] not-italic">
+            <a href="#privacy" id="privacy" className="hover:text-[#F3EEFB] not-italic">
               Privacy Policy (100% Local Data)
             </a>
-            <a href="#terms" id="terms" className="hover:text-[#F5F5F7] not-italic">
+            <a href="#terms" id="terms" className="hover:text-[#F3EEFB] not-italic">
               Terms of Service
             </a>
           </div>
