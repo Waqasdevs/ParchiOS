@@ -182,7 +182,7 @@ export const TableGrid: React.FC<TableGridProps> = ({
         particleCount: 50,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#34C759', '#A98BE8', '#F7B58D']
+        colors: ['#34C759', '#D92B1F', '#C9A978']
       });
     } catch {}
 
@@ -277,7 +277,7 @@ export const TableGrid: React.FC<TableGridProps> = ({
           return (
             <div
               key={table.id}
-              className={`bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border shadow-apple-sm flex flex-col justify-between space-y-4 hover:shadow-apple-md transition-all ${
+              className={`bg-white dark:bg-[#27231D] rounded-3xl p-5 border shadow-apple-sm flex flex-col justify-between space-y-4 hover:shadow-apple-md transition-all ${
                 isOccupied 
                   ? 'border-apple-orange/30 ring-1 ring-apple-orange/10' 
                   : 'border-black/5 dark:border-white/5'
@@ -436,7 +436,7 @@ export const TableGrid: React.FC<TableGridProps> = ({
       {isTableModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
           <div 
-            className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
+            className="w-full max-w-md bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-4 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
@@ -520,7 +520,7 @@ export const TableGrid: React.FC<TableGridProps> = ({
       {settleModalData && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
           <div 
-            className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
+            className="w-full max-w-md bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

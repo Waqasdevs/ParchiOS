@@ -99,7 +99,7 @@ export const ItemModifierModal: React.FC<ItemModifierModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-lg bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/5 dark:border-white/10 overflow-hidden flex flex-col max-h-[90vh]"
+        className="w-full max-w-lg bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/5 dark:border-white/10 overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

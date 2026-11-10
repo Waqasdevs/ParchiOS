@@ -35,7 +35,7 @@ export const ThermalReceiptModal: React.FC<ThermalReceiptModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-[92vh]"
+        className="w-full max-w-md bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Action Header */}
@@ -199,7 +199,7 @@ export const ThermalReceiptModal: React.FC<ThermalReceiptModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 border-t border-black/5 dark:border-white/10 bg-white dark:bg-[#2A1A3A] flex items-center gap-3">
+        <div className="p-4 border-t border-black/5 dark:border-white/10 bg-white dark:bg-[#27231D] flex items-center gap-3">
           <button
             onClick={handleCopyTextReceipt}
             className="apple-button px-4 py-2.5 rounded-2xl border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"

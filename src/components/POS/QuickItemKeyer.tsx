@@ -188,9 +188,9 @@ export const QuickItemKeyer: React.FC<QuickItemKeyerProps> = ({
   }, [groupedCategories, codeSheetSearch]);
 
   return (
-    <div className="relative bg-white dark:bg-[#2A1A3A] rounded-2xl p-3 border border-black/5 dark:border-white/5 shadow-apple-sm transition-all">
+    <div className="relative bg-white dark:bg-[#27231D] rounded-2xl p-3 border border-black/5 dark:border-white/5 shadow-apple-sm transition-all">
       {/* Top Main Fast Bar */}
-      <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {/* Fast Input Field */}
         <div className="relative flex-1 min-w-[200px]">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-apple-blue font-mono font-bold text-sm pointer-events-none">
@@ -208,7 +208,7 @@ export const QuickItemKeyer: React.FC<QuickItemKeyerProps> = ({
                 handleExecuteAdd();
               }
             }}
-            placeholder="Quick Add by # (e.g. 1, 14, 2*35)..."
+            placeholder="Add by # (e.g. 1, 14)..."
             className="w-full pl-8 pr-8 py-2.5 bg-neutral-100 dark:bg-neutral-800/80 rounded-xl font-mono text-sm font-semibold placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-neutral-100 border border-transparent focus:border-apple-blue focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-apple-blue/20 transition-all"
           />
 
@@ -373,7 +373,7 @@ export const QuickItemKeyer: React.FC<QuickItemKeyerProps> = ({
           onClick={() => setShowCodeSheet(false)}
         >
           <div 
-            className="w-full max-w-4xl max-h-[90vh] bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
+            className="w-full max-w-4xl max-h-[90vh] bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

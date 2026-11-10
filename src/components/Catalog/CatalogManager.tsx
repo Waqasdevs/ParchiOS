@@ -304,7 +304,7 @@ export const CatalogManager: React.FC<CatalogManagerProps> = ({
 
       {/* Overview Stat Badges */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 bg-white dark:bg-[#2A1A3A] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm flex items-center justify-between">
+        <div className="p-4 bg-white dark:bg-[#27231D] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm flex items-center justify-between">
           <div>
             <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
               Total Menu Items
@@ -318,7 +318,7 @@ export const CatalogManager: React.FC<CatalogManagerProps> = ({
           </span>
         </div>
 
-        <div className="p-4 bg-white dark:bg-[#2A1A3A] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm flex items-center justify-between">
+        <div className="p-4 bg-white dark:bg-[#27231D] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm flex items-center justify-between">
           <div>
             <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
               Available For Ordering
@@ -330,7 +330,7 @@ export const CatalogManager: React.FC<CatalogManagerProps> = ({
           <span className="w-3 h-3 rounded-full bg-apple-green"></span>
         </div>
 
-        <div className="p-4 bg-white dark:bg-[#2A1A3A] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm flex items-center justify-between">
+        <div className="p-4 bg-white dark:bg-[#27231D] rounded-3xl border border-black/5 dark:border-white/5 shadow-apple-sm flex items-center justify-between">
           <div>
             <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
               Sold Out / Inactive
@@ -411,7 +411,7 @@ export const CatalogManager: React.FC<CatalogManagerProps> = ({
       </div>
 
       {/* Search & Filter Toolbar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white/60 dark:bg-[#2A1A3A]/60 p-3 rounded-2xl border border-black/5 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white/60 dark:bg-[#27231D]/60 p-3 rounded-2xl border border-black/5 dark:border-white/5">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
           <input
@@ -471,7 +471,7 @@ export const CatalogManager: React.FC<CatalogManagerProps> = ({
             return (
               <div
                 key={item.id}
-                className="bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between space-y-4 hover:shadow-apple-md transition-all group"
+                className="bg-white dark:bg-[#27231D] rounded-3xl p-5 border border-black/5 dark:border-white/5 shadow-apple-sm flex flex-col justify-between space-y-4 hover:shadow-apple-md transition-all group"
               >
                 {/* Top Badge & Availability Toggle */}
                 <div>
@@ -587,7 +587,7 @@ export const CatalogManager: React.FC<CatalogManagerProps> = ({
       {itemModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
           <div
-            className="w-full max-w-2xl bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-[90vh]"
+            className="w-full max-w-2xl bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -889,7 +889,7 @@ export const CatalogManager: React.FC<CatalogManagerProps> = ({
       {categoryModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
           <div
-            className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 shadow-apple-modal border border-black/10 dark:border-white/10 space-y-4"
+            className="w-full max-w-md bg-white dark:bg-[#27231D] rounded-3xl p-6 shadow-apple-modal border border-black/10 dark:border-white/10 space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">

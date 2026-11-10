@@ -20,9 +20,9 @@ export const PinQuickSwitchModal: React.FC<PinQuickSwitchModalProps> = ({
 }) => {
   // Ensure we display Haseeb, Aliyan, Shaban
   const brothers = employees.length > 0 ? employees : [
-    { id: 'emp-haseeb', name: 'Haseeb', role: 'manager' as const, pin: '', phone: '', isActive: true, avatarColor: '#A98BE8' },
-    { id: 'emp-aliyan', name: 'Aliyan', role: 'manager' as const, pin: '', phone: '', isActive: true, avatarColor: '#34C759' },
-    { id: 'emp-shaban', name: 'Shaban', role: 'manager' as const, pin: '', phone: '', isActive: true, avatarColor: '#F7B58D' },
+    { id: 'emp-haseeb', name: 'Haseeb', role: 'manager' as const, pin: '', phone: '', isActive: true, avatarColor: '#D92B1F' },
+    { id: 'emp-aliyan', name: 'Aliyan', role: 'manager' as const, pin: '', phone: '', isActive: true, avatarColor: '#463F35' },
+    { id: 'emp-shaban', name: 'Shaban', role: 'manager' as const, pin: '', phone: '', isActive: true, avatarColor: '#C9A978' },
   ];
 
   const [handoverCash, setHandoverCash] = useState<string>('');
@@ -37,7 +37,7 @@ export const PinQuickSwitchModal: React.FC<PinQuickSwitchModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 shadow-apple-modal border border-black/10 dark:border-white/10 space-y-5"
+        className="w-full max-w-md bg-white dark:bg-[#27231D] rounded-3xl p-6 shadow-apple-modal border border-black/10 dark:border-white/10 space-y-5"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -83,7 +83,7 @@ export const PinQuickSwitchModal: React.FC<PinQuickSwitchModalProps> = ({
 
           {brothers.map(brother => {
             const isCurrent = currentStaff?.id === brother.id || currentStaff?.name === brother.name;
-            const color = brother.avatarColor || (brother.name === 'Haseeb' ? '#A98BE8' : brother.name === 'Aliyan' ? '#34C759' : '#F7B58D');
+            const color = brother.avatarColor || (brother.name === 'Haseeb' ? '#D92B1F' : brother.name === 'Aliyan' ? '#463F35' : '#C9A978');
 
             return (
               <button

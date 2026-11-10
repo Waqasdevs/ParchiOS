@@ -64,17 +64,18 @@ export const AppleSidebar: React.FC<AppleSidebarProps> = ({
   ];
 
   return (
-    <aside className="w-56 lg:w-60 xl:w-64 h-screen flex flex-col justify-between border-r border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#231532]/70 backdrop-blur-2xl select-none z-30 transition-all shrink-0">
+    <aside className="w-56 lg:w-60 xl:w-64 h-screen flex flex-col justify-between border-r border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#201D18]/70 backdrop-blur-2xl select-none z-30 transition-all shrink-0">
       {/* Brand Header */}
       <div className="p-5 pb-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center shadow-apple-md shadow-purple-500/20 text-white font-extrabold text-xl tracking-tight">
-            P
+          <div className="w-10 h-10 rounded-2xl bg-ink text-ivory flex items-center justify-center shadow-apple-sm font-bold text-xl tracking-tight relative overflow-hidden">
+            <span>P</span>
+            <span className="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-rush" />
           </div>
           <div>
             <h1 className="font-bold text-base tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
               parchiOS
-              <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded-full bg-apple-blue/10 text-apple-blue">
+              <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded-full bg-rush/10 text-rush">
                 Demo
               </span>
             </h1>
@@ -97,20 +98,20 @@ export const AppleSidebar: React.FC<AppleSidebarProps> = ({
               onClick={() => onSelectTab(item.id)}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-[14px] transition-all duration-150 ${
                 isActive
-                  ? 'bg-apple-blue text-white shadow-apple-sm font-semibold'
+                  ? 'bg-ink text-ivory dark:bg-ivory dark:text-ink shadow-apple-sm font-semibold'
                   : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 active:scale-[0.98]'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-neutral-500 dark:text-neutral-400'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-ivory dark:text-ink' : 'text-neutral-500 dark:text-neutral-400'}`} />
                 <span>{item.label}</span>
               </div>
               {item.badge > 0 && (
                 <span
                   className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
                     isActive 
-                      ? 'bg-white/25 text-white' 
-                      : `${item.badgeColor || 'bg-apple-blue'} text-white shadow-sm`
+                      ? 'bg-rush text-white' 
+                      : 'bg-rush text-white shadow-sm'
                   }`}
                 >
                   {item.badge}
@@ -144,7 +145,7 @@ export const AppleSidebar: React.FC<AppleSidebarProps> = ({
           <div className="flex items-center gap-2.5">
             <div 
               className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs text-white shadow-sm"
-              style={{ backgroundColor: currentStaff?.avatarColor || '#A98BE8' }}
+              style={{ backgroundColor: currentStaff?.avatarColor || '#D92B1F' }}
             >
               {currentStaff ? currentStaff.name.slice(0, 2).toUpperCase() : 'HA'}
             </div>

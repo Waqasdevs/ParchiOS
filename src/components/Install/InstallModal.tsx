@@ -27,7 +27,7 @@ export const InstallModal: React.FC<InstallModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-lg bg-white dark:bg-[#2A1A3A] rounded-3xl p-6 shadow-apple-modal border border-black/10 dark:border-white/10 space-y-6"
+        className="w-full max-w-lg bg-white dark:bg-[#27231D] rounded-3xl p-6 shadow-apple-modal border border-black/10 dark:border-white/10 space-y-6"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

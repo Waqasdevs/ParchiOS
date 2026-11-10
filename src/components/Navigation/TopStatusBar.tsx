@@ -123,7 +123,7 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
   };
 
   return (
-    <header className="h-16 w-full flex items-center justify-between px-4 lg:px-6 border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#231532]/70 backdrop-blur-2xl z-20 select-none min-w-0">
+    <header className="h-16 w-full flex items-center justify-between px-4 lg:px-6 border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#201D18]/70 backdrop-blur-2xl z-20 select-none min-w-0">
       {/* Left Search / Filter */}
       <div className="flex items-center gap-3 flex-1 max-w-xs sm:max-w-sm lg:max-w-md min-w-0">
         <div className="relative w-full min-w-0">
@@ -153,14 +153,14 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
             !syncStatus.isOnline
               ? 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900/50'
               : !syncStatus.hasCloudConfig
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800 hover:border-emerald-400'
+              ? 'bg-neutral-100 text-neutral-800 border-neutral-200 dark:bg-neutral-800 dark:text-neutral-200 dark:border-neutral-700 hover:border-neutral-400'
               : syncStatus.cloudSyncError
               ? 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900/50'
               : syncStatus.isSyncing
               ? 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50'
               : syncStatus.pendingCount > 0
               ? 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50'
-              : 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/50'
+              : 'bg-neutral-100 text-neutral-700 border-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-700'
           }`}
           title={!syncStatus.hasCloudConfig ? 'parchiOS Demo Sandbox: Operating locally in browser IndexedDB.' : 'Click to force cloud sync'}
         >
@@ -169,7 +169,7 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
             {!syncStatus.isOnline || syncStatus.cloudSyncError ? (
               <span className="h-2 w-2 rounded-full bg-apple-red"></span>
             ) : !syncStatus.hasCloudConfig ? (
-              <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+              <span className="h-2 w-2 rounded-full bg-neutral-900 dark:bg-ivory"></span>
             ) : syncStatus.isSyncing || syncStatus.pendingCount > 0 ? (
               <>
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-apple-orange opacity-75"></span>
@@ -177,8 +177,7 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
               </>
             ) : (
               <>
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-apple-green opacity-50"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-apple-green"></span>
+                <span className="h-2 w-2 rounded-full bg-neutral-900 dark:bg-ivory"></span>
               </>
             )}
           </span>
@@ -279,7 +278,7 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
             onClick={() => setShowErrorModal(null)}
           >
             <div 
-              className="w-full max-w-lg max-h-[88vh] bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
+              className="w-full max-w-lg max-h-[88vh] bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}

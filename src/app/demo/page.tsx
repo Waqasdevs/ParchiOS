@@ -630,7 +630,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-neutral-100 dark:bg-[#170D21] text-neutral-900 dark:text-neutral-100 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-neutral-100 dark:bg-[#15130F] text-neutral-900 dark:text-neutral-100 font-sans">
       {/* 1. Apple macOS / iPadOS Frosted Sidebar */}
       <AppleSidebar
         currentTab={currentTab}
@@ -649,15 +649,15 @@ export default function Home() {
       {/* 2. Main Central Work Area */}
       <main className="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
         {/* parchiOS Interactive Demo Top Banner */}
-        <div className="bg-[#231532] text-neutral-200 px-4 py-2 border-b border-white/10 flex items-center justify-between text-xs font-medium z-30 shrink-0">
+        <div className="bg-[#201D18] text-neutral-200 px-4 py-2 border-b border-white/10 flex items-center justify-between text-xs font-medium z-30 shrink-0">
           <div className="flex items-center gap-2">
             <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rush opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-rush" />
             </span>
             <span className="text-white font-semibold tracking-tight">parchiOS Live Demo Sandbox</span>
             <span className="text-neutral-400 hidden sm:inline">• Local Browser DB</span>
-            <span className="hidden md:inline px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[11px]">
+            <span className="hidden md:inline px-2 py-0.5 rounded bg-white/10 text-neutral-200 font-mono text-[11px]">
               Item Numbers [#1]–[#135] Enabled
             </span>
           </div>

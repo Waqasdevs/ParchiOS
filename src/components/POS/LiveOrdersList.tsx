@@ -123,7 +123,7 @@ export const LiveOrdersList: React.FC<LiveOrdersListProps> = ({
         particleCount: 50,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#34C759', '#A98BE8', '#F7B58D']
+        colors: ['#34C759', '#D92B1F', '#C9A978']
       });
     } catch {}
 
@@ -323,7 +323,7 @@ export const LiveOrdersList: React.FC<LiveOrdersListProps> = ({
             return (
               <div
                 key={order.id}
-                className={`bg-white dark:bg-[#2A1A3A] rounded-3xl p-5 border shadow-apple-sm flex flex-col justify-between space-y-4 hover:shadow-apple-md transition-all ${
+                className={`bg-white dark:bg-[#27231D] rounded-3xl p-5 border shadow-apple-sm flex flex-col justify-between space-y-4 hover:shadow-apple-md transition-all ${
                   isOverdue 
                     ? 'border-apple-red/50 ring-2 ring-apple-red/20 dark:ring-apple-red/30' 
                     : isWarning 
@@ -578,7 +578,7 @@ export const LiveOrdersList: React.FC<LiveOrdersListProps> = ({
       {settleModalOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
           <div 
-            className="w-full max-w-md bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
+            className="w-full max-w-md bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -737,7 +737,7 @@ export const LiveOrdersList: React.FC<LiveOrdersListProps> = ({
       {kotModalOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
           <div 
-            className="w-full max-w-sm bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
+            className="w-full max-w-sm bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-4 border-b border-black/5 dark:border-white/10 flex items-center justify-between bg-neutral-50 dark:bg-neutral-900">
@@ -821,7 +821,7 @@ export const LiveOrdersList: React.FC<LiveOrdersListProps> = ({
       {editingOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-md animate-in fade-in duration-200">
           <div 
-            className="w-full max-w-2xl max-h-[90vh] bg-white dark:bg-[#2A1A3A] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
+            className="w-full max-w-2xl max-h-[90vh] bg-white dark:bg-[#27231D] rounded-3xl shadow-apple-modal border border-black/10 dark:border-white/10 flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

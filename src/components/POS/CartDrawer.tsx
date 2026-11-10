@@ -111,7 +111,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         particleCount: 60,
         spread: 55,
         origin: { y: 0.8 },
-        colors: ['#A98BE8', '#34C759', '#F7B58D']
+        colors: ['#D92B1F', '#34C759', '#C9A978']
       });
     } catch {}
 
@@ -131,7 +131,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   return (
-    <div className="w-80 lg:w-84 xl:w-96 h-screen flex flex-col justify-between border-l border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#231532]/70 backdrop-blur-2xl select-none z-20 shrink-0">
+    <div className="w-80 lg:w-84 xl:w-96 h-screen flex flex-col justify-between border-l border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#201D18]/70 backdrop-blur-2xl select-none z-20 shrink-0">
       {/* Header & Order Type Segmented Control */}
       <div className="p-4 border-b border-black/5 dark:border-white/10 space-y-3">
         <div className="flex items-center justify-between">
@@ -477,7 +477,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         <button
           onClick={handleCheckout}
           disabled={cart.length === 0 || isSubmitting}
-          className={`w-full apple-button py-3.5 rounded-2xl text-white font-bold text-sm shadow-apple-md transition-all active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 ${
+          className={`w-full apple-button py-3.5 rounded-2xl text-white font-bold text-sm shadow-apple-md transition-all active:scale-[0.98] disabled:opacity-50 disabled:bg-neutral-200 dark:disabled:bg-neutral-800 disabled:text-neutral-400 dark:disabled:text-neutral-500 disabled:shadow-none disabled:pointer-events-none flex items-center justify-center gap-2 ${
             orderType === 'dine_in'
               ? 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700'
               : orderType === 'takeaway'

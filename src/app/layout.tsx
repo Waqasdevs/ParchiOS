@@ -5,7 +5,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#170D21',
+  themeColor: '#F6F0E4',
 };
 
 export const metadata: Metadata = {
@@ -68,11 +68,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen antialiased selection:bg-[#C9B8F2] selection:text-[#170D21]">
+      <body className="min-h-screen antialiased selection:bg-[#15130F] selection:text-[#F6F0E4]">
         {children}
         <script
           dangerouslySetInnerHTML={{
