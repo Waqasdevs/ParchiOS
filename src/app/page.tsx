@@ -16,60 +16,69 @@ import {
 const PROBLEMS = [
   {
     num: '01',
+    category: 'CASH CONTROL',
     title: '"Raat Ko Cash Match Nahi Hota" (Stop Daily Cash Leakage)',
     description:
       'Paper parchis get lost, overwritten, or miscalculated during the 9 PM dinner rush. ParchiOS tracks every single burger, deal, and drink automatically so your drawer cash matches 100% at closing time.',
     icon: Banknote,
-    badge: 'CASH LEAKAGE FIX',
   },
   {
     num: '02',
+    category: 'KITCHEN WORKFLOW',
     title: 'Kitchen Confusion & Late Orders (Instant Counter-to-Kitchen Sync)',
     description:
       'No more shouting orders into the kitchen or lost paper slips. The moment your cashier punches an order, the kitchen screen/printer gets a clean digital KOT slip with exact deal items and table/delivery numbers.',
     icon: ChefHat,
-    badge: 'ZERO LOST SLIPS',
   },
   {
     num: '03',
+    category: 'COMMISSION FREEDOM',
     title: 'Zero Foodpanda-Style Commissions (100% Yours Forever)',
     description:
       "Don't pay 25% to 30% commission or heavy monthly software fees. Pay a one-time setup fee and own your restaurant's complete order, delivery, and customer database forever.",
     icon: ShieldCheck,
-    badge: '0% COMMISSION',
   },
 ];
 
 const FEATURES = [
   {
+    num: '01',
+    tag: 'HIGH-SPEED POS',
     title: '5-Second Fast-Food Counter Screen',
     description:
       'Designed for high-rush burger, broast, pizza, and shawarma counters. Even a non-technical cashier can learn it in 10 minutes.',
     img: '/images/landing/counter-hardware-dark.jpg',
-    tag: 'HIGH-SPEED POS',
+    benefit: 'Trained and ready in 10 minutes',
     icon: Zap,
   },
   {
+    num: '02',
+    tag: 'MOBILE CONTROL',
     title: 'Owner’s Live Phone Dashboard',
     description:
       'Sitting at home? Open ParchiOS on your mobile to see live running orders, top-selling deals, and total cash collected today in real time.',
     img: '/images/landing/dining-hall-night.jpg',
-    tag: 'MOBILE CONTROL',
+    benefit: 'Real-time sales on your phone',
     icon: Smartphone,
   },
   {
+    num: '03',
+    tag: '24-HOUR LAUNCH',
     title: 'Custom Branded for Your Restaurant',
     description:
       'Your logo, your menu deals, and your colors. Deployed and live within 24 Hours.',
-    img: '/images/landing/kitchen-fire-pass.jpg',
-    tag: '24-HOUR LAUNCH',
+    img: '/images/landing/branding-showcase.jpg',
+    benefit: 'Deployed and live in 24 hours',
     icon: Sparkles,
   },
   {
+    num: '04',
+    tag: 'HARDWARE FREEDOM',
     title: 'Works on Any Device',
     description:
       'No need to buy a 150,000 PKR POS machine. Runs smoothly on any old laptop, tablet, cheap Android phone, or existing counter PC.',
-    tag: 'HARDWARE FREEDOM',
+    img: '/images/landing/multidevice-pos.jpg',
+    benefit: 'Saves 150,000 PKR in hardware costs',
     icon: Laptop,
   },
 ];
@@ -108,17 +117,19 @@ export default function LandingPage() {
   return (
     <div
       id="top"
-      className="bg-ivory text-ink font-jakarta antialiased selection:bg-ink selection:text-ivory w-full overflow-x-hidden"
+      className="bg-ivory text-ink font-jakarta antialiased selection:bg-ink selection:text-ivory w-full overflow-x-hidden min-h-screen"
     >
+      {/* 1. Runway-style Edge-to-Edge Navbar */}
       <Nav />
 
-      <main className="p-2 sm:p-4 space-y-3 sm:space-y-4 max-w-[1440px] mx-auto">
+      {/* Main Container */}
+      <main className="px-3 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-6 sm:space-y-8 max-w-[1440px] mx-auto">
         {/* ============================================================ */}
-        {/* 1. HERO SECTION                                              */}
+        {/* 1. HERO SECTION (Runway Card Style)                          */}
         {/* ============================================================ */}
         <section
           aria-label="ParchiOS Restaurant Operating System"
-          className="relative isolate overflow-hidden rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] min-h-[92svh] sm:min-h-[96svh] flex items-end border border-black/5"
+          className="relative isolate overflow-hidden rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] min-h-[82vh] sm:min-h-[86vh] lg:min-h-[90vh] flex items-end border border-ink/10 shadow-[0_20px_60px_-15px_rgba(21,19,15,0.25)]"
         >
           {/* Single-hue cinematic landscape photo */}
           <div
@@ -130,36 +141,36 @@ export default function LandingPage() {
           {/* Deep ink gradient overlay for high contrast text readability */}
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(21,19,15,0.94)_0%,rgba(21,19,15,0.78)_55%,rgba(21,19,15,0.25)_100%),linear-gradient(0deg,rgba(21,19,15,0.85)_0%,transparent_50%)]"
+            className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(21,19,15,0.95)_0%,rgba(21,19,15,0.78)_50%,rgba(21,19,15,0.2)_100%),linear-gradient(0deg,rgba(21,19,15,0.85)_0%,transparent_55%)]"
           />
 
-          <div className="w-full max-w-[1280px] mx-auto px-5 sm:px-10 lg:px-14 pb-12 sm:pb-20 pt-36 sm:pt-44">
-            {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-ivory text-xs sm:text-sm font-normal mb-6">
-              <span className="w-2 h-2 rounded-full bg-rush animate-pulse" />
+          <div className="w-full max-w-[1280px] mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16 lg:pb-20 pt-32 sm:pt-40">
+            {/* Top Eyebrow - Clean editorial typography, NO AI-slop rounded pill bubbles */}
+            <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono tracking-widest uppercase text-ivory/70 mb-5 sm:mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-rush" />
               <span>Built for Pakistani Fast-Food, Cafes &amp; Cloud Kitchens 🇵🇰</span>
             </div>
 
             {/* Main Headline (H1): 56px at reference laptop screen, weight 400, no dash between sentences */}
-            <h1 className="text-ivory fluid-heading max-w-[26ch]">
+            <h1 className="text-ivory fluid-heading max-w-[24ch]">
               Kagaz Aur Register Ko Chhorein. Apne Restaurant Ko 5-Second Digital Parchi System Pe Shift Karein.
             </h1>
 
             {/* Sub-headline: 16px at reference laptop screen, weight 400 */}
-            <p className="mt-6 sm:mt-8 max-w-[42rem] text-ivory/85 fluid-hero-sub">
+            <p className="mt-5 sm:mt-6 max-w-[42rem] text-ivory/80 fluid-hero-sub">
               ParchiOS replaces messy register books and expensive monthly POS software. Punch counter orders in 5 seconds, send instant Kitchen Order Tickets (KOT), and get 100% accurate daily cash sales on your phone with Zero Monthly Commission.
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons (Runway style: White pill primary, translucent secondary) */}
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3.5">
               {/* Primary CTA (WhatsApp) */}
               <a
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-7 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-medium shadow-lg shadow-emerald-900/40 transition-all active:scale-[0.98]"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-white text-ink hover:bg-ivory px-7 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-medium shadow-xl transition-all active:scale-[0.98]"
               >
-                <MessageCircle className="w-4 h-4 fill-current shrink-0" />
+                <MessageCircle className="w-4 h-4 fill-emerald-600 text-emerald-600 shrink-0" />
                 <span>Get a Free Live Preview With Your Menu (WhatsApp Us)</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </a>
@@ -178,15 +189,16 @@ export default function LandingPage() {
 
         {/* ============================================================ */}
         {/* 2. THE "3 BIG PROBLEMS WE SOLVE" SECTION                      */}
+        {/* Reduced red, clean layout, removed prompt sentence           */}
         {/* ============================================================ */}
         <section
           id="problems"
           aria-labelledby="problems-heading"
-          className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 py-20 sm:py-32"
+          className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 py-20 sm:py-28"
         >
           <div className="max-w-[1280px] mx-auto">
-            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-rush">
-              [01] THE 3 BIG PROBLEMS WE SOLVE
+            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ivory/50">
+              <span className="text-rush mr-1.5">•</span> [01] THE 3 BIG PROBLEMS WE SOLVE
             </p>
 
             {/* Section Heading: 56px at reference laptop screen, weight 400 */}
@@ -194,7 +206,7 @@ export default function LandingPage() {
               id="problems-heading"
               className="mt-4 sm:mt-6 max-w-[26ch] text-ivory fluid-heading"
             >
-              Restaurant owners buy software when they feel the pain of their current setup.
+              The 3 Big Problems We Solve
             </h2>
 
             {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
@@ -202,22 +214,23 @@ export default function LandingPage() {
               Messy paper notes, shouting at the kitchen, and losing cash at closing time. Here is how ParchiOS eliminates the daily headache:
             </p>
 
-            {/* 3 Problem Cards Grid */}
+            {/* 3 Problem Cards Grid - Clean, no AI-slop rounded pill badges, reduced red */}
             <div className="mt-12 sm:mt-16 grid gap-6 grid-cols-1 md:grid-cols-3">
               {PROBLEMS.map((prob) => {
                 const Icon = prob.icon;
                 return (
                   <div
                     key={prob.num}
-                    className="rounded-[24px] sm:rounded-[32px] bg-white/5 border border-white/10 p-7 sm:p-9 flex flex-col justify-between hover:bg-white/[0.08] transition-all"
+                    className="rounded-[24px] sm:rounded-[32px] bg-white/[0.04] border border-white/10 p-7 sm:p-9 flex flex-col justify-between hover:bg-white/[0.07] transition-all"
                   >
                     <div>
+                      {/* Clean header: category text + monochrome icon, no pill bubble */}
                       <div className="flex items-center justify-between gap-3 mb-6">
-                        <span className="text-[11px] font-mono font-medium tracking-wider px-2.5 py-1 rounded-full bg-rush/20 text-rush border border-rush/30">
-                          {prob.badge}
+                        <span className="text-[11px] font-mono tracking-wider uppercase text-ivory/45">
+                          {prob.num} / {prob.category}
                         </span>
-                        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-ivory shrink-0">
-                          <Icon className="w-5 h-5 text-rush" />
+                        <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-ivory/80 shrink-0">
+                          <Icon className="w-5 h-5" />
                         </div>
                       </div>
 
@@ -233,7 +246,7 @@ export default function LandingPage() {
 
                     <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-ivory/40">
                       <span>PROBLEM #{prob.num}</span>
-                      <span className="text-rush font-medium">100% SOLVED</span>
+                      <span className="text-ivory/65 font-medium">Solved with ParchiOS</span>
                     </div>
                   </div>
                 );
@@ -243,12 +256,12 @@ export default function LandingPage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 3. CORE FEATURES SECTION (KEEP IT PRACTICAL)                 */}
+        {/* 3. CORE FEATURES SECTION (All 4 Features with Images)        */}
         {/* ============================================================ */}
-        <section id="features" aria-labelledby="features-heading" className="px-3 sm:px-8 py-20 sm:py-32">
+        <section id="features" aria-labelledby="features-heading" className="px-3 sm:px-6 lg:px-8 py-20 sm:py-28">
           <div className="max-w-[1280px] mx-auto">
             <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
-              [02] CORE FEATURES (PRACTICAL &amp; NO-NONSENSE)
+              <span className="text-rush mr-1.5">•</span> [02] CORE FEATURES
             </p>
 
             {/* Section Heading: 56px at reference laptop screen, weight 400 */}
@@ -264,128 +277,68 @@ export default function LandingPage() {
               No confusing IT terminology. Straightforward tools that let you punch fast, control kitchen passes, and watch your daily sales from your phone.
             </p>
 
-            {/* Features Display Cards */}
-            <div className="mt-14 sm:mt-20 space-y-12 sm:space-y-16">
-              {/* Feature 1: 5-Second Counter Screen */}
-              <div className="grid gap-8 lg:gap-14 lg:grid-cols-2 items-center">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[24px] sm:rounded-[36px] bg-ink shadow-md">
+            {/* 4 Features Grid (2x2 with rich visual photography for all 4) */}
+            <div className="mt-14 sm:mt-18 grid gap-8 sm:gap-10 grid-cols-1 md:grid-cols-2">
+              {FEATURES.map((feature) => {
+                const Icon = feature.icon;
+                return (
                   <div
-                    aria-hidden
-                    className="absolute inset-0 bg-cover bg-center filter contrast-105"
-                    style={{ backgroundImage: `url(${FEATURES[0].img})` }}
-                  />
-                  <div className="absolute top-4 left-4 bg-ink/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono font-medium text-ivory border border-white/10">
-                    {FEATURES[0].tag}
-                  </div>
-                </div>
-                <div className="max-w-[32rem]">
-                  <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-4">
-                    <Zap className="w-5 h-5 text-rush" />
-                  </div>
-                  <h3 className="text-[clamp(1.5rem,2.2vw,2rem)] font-medium leading-[1.15] tracking-[-0.02em] text-ink">
-                    {FEATURES[0].title}
-                  </h3>
-                  {/* Paragraph: 14px at reference laptop screen, weight 400 */}
-                  <p className="mt-4 text-ink/75 fluid-paragraph">
-                    {FEATURES[0].description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 2: Owner’s Live Phone Dashboard */}
-              <div className="grid gap-8 lg:gap-14 lg:grid-cols-2 items-center">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[24px] sm:rounded-[36px] bg-ink shadow-md lg:order-2">
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 bg-cover bg-center filter contrast-105"
-                    style={{ backgroundImage: `url(${FEATURES[1].img})` }}
-                  />
-                  <div className="absolute top-4 left-4 bg-ink/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono font-medium text-ivory border border-white/10">
-                    {FEATURES[1].tag}
-                  </div>
-                </div>
-                <div className="max-w-[32rem] lg:order-1">
-                  <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-4">
-                    <Smartphone className="w-5 h-5 text-rush" />
-                  </div>
-                  <h3 className="text-[clamp(1.5rem,2.2vw,2rem)] font-medium leading-[1.15] tracking-[-0.02em] text-ink">
-                    {FEATURES[1].title}
-                  </h3>
-                  {/* Paragraph: 14px at reference laptop screen, weight 400 */}
-                  <p className="mt-4 text-ink/75 fluid-paragraph">
-                    {FEATURES[1].description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 3 & 4 (Bento Pair): Custom Branded + Works on Any Device */}
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
-                {/* Feature 3: Custom Branded */}
-                <div className="rounded-[24px] sm:rounded-[32px] bg-white/80 border border-ink/10 p-7 sm:p-9 flex flex-col justify-between shadow-sm">
-                  <div>
-                    <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-5">
-                      <Sparkles className="w-5 h-5 text-rush" />
+                    key={feature.num}
+                    className="rounded-[28px] sm:rounded-[36px] bg-white border border-ink/10 overflow-hidden shadow-sm flex flex-col justify-between hover:border-ink/20 transition-all group"
+                  >
+                    {/* Visual Feature Image */}
+                    <div className="relative aspect-[16/10] overflow-hidden bg-ink/5">
+                      <div
+                        aria-hidden
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+                        style={{ backgroundImage: `url(${feature.img})` }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                     </div>
-                    <span className="text-xs font-mono font-medium tracking-wider uppercase text-ink/50">
-                      {FEATURES[2].tag}
-                    </span>
-                    <h3 className="mt-3 text-[20px] sm:text-[22px] font-medium tracking-tight text-ink">
-                      {FEATURES[2].title}
-                    </h3>
-                    {/* Paragraph: 14px at reference laptop screen, weight 400 */}
-                    <p className="mt-3 text-ink/75 fluid-paragraph">
-                      {FEATURES[2].description}
-                    </p>
-                  </div>
-                  <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-medium text-rush">
-                    ✓ Deployed &amp; Live In 24 Hours
-                  </div>
-                </div>
 
-                {/* Feature 4: Works on Any Device */}
-                <div className="rounded-[24px] sm:rounded-[32px] bg-white/80 border border-ink/10 p-7 sm:p-9 flex flex-col justify-between shadow-sm">
-                  <div>
-                    <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-5">
-                      <Laptop className="w-5 h-5 text-rush" />
+                    {/* Feature Copy */}
+                    <div className="p-7 sm:p-9 flex flex-col justify-between flex-1">
+                      <div>
+                        <div className="flex items-center gap-2.5 text-xs font-mono tracking-wider text-ink/50 uppercase mb-3">
+                          <Icon className="w-4 h-4 text-ink" />
+                          <span>{feature.num} / {feature.tag}</span>
+                        </div>
+
+                        <h3 className="text-[21px] sm:text-[23px] font-medium leading-snug tracking-[-0.015em] text-ink">
+                          {feature.title}
+                        </h3>
+
+                        {/* Paragraph: 14px at reference laptop screen, weight 400 */}
+                        <p className="mt-3 text-ink/75 fluid-paragraph leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+
+                      <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-medium text-emerald-700 flex items-center gap-1.5">
+                        <CheckCircle2 className="w-4 h-4 shrink-0" />
+                        <span>{feature.benefit}</span>
+                      </div>
                     </div>
-                    <span className="text-xs font-mono font-medium tracking-wider uppercase text-ink/50">
-                      {FEATURES[3].tag}
-                    </span>
-                    <h3 className="mt-3 text-[20px] sm:text-[22px] font-medium tracking-tight text-ink">
-                      {FEATURES[3].title}
-                    </h3>
-                    {/* Paragraph: 14px at reference laptop screen, weight 400 */}
-                    <p className="mt-3 text-ink/75 fluid-paragraph">
-                      {FEATURES[3].description}
-                    </p>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-medium text-emerald-700">
-                    ✓ Saves 150,000 PKR Hardware Cost
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* ============================================================ */}
         {/* 4. SOCIAL PROOF / LIVE CASE STUDY SECTION                    */}
-        {/* HFC (Haseeb Food Cafe) Star Showcase                         */}
+        {/* HFC Showcase - Removed cafe location, clean layout           */}
         {/* ============================================================ */}
         <section
           id="case-study"
           aria-labelledby="case-study-heading"
-          className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 py-20 sm:py-32"
+          className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 py-20 sm:py-28"
         >
           <div className="max-w-[1280px] mx-auto">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-rush">
-                [03] LIVE CASE STUDY &amp; SOCIAL PROOF
-              </p>
-              <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/10 text-ivory border border-white/15">
-                ACTIVE DAILY IN SAMAHNI, AJK
-              </span>
-            </div>
+            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ivory/50">
+              <span className="text-rush mr-1.5">•</span> [03] LIVE CASE STUDY &amp; SOCIAL PROOF
+            </p>
 
             {/* Section Heading: 56px at reference laptop screen, weight 400 */}
             <h2
@@ -396,25 +349,25 @@ export default function LandingPage() {
             </h2>
 
             {/* Testimonial Quote Box: 24px at reference laptop screen, weight 400 */}
-            <div className="mt-10 sm:mt-14 rounded-[24px] sm:rounded-[36px] bg-white/[0.06] border border-white/15 p-8 sm:p-12 backdrop-blur-md">
-              <div className="text-rush text-4xl sm:text-5xl font-serif leading-none mb-4">“</div>
+            <div className="mt-10 sm:mt-14 rounded-[24px] sm:rounded-[36px] bg-white/[0.04] border border-white/10 p-8 sm:p-12 backdrop-blur-md">
+              <div className="text-ivory/30 text-4xl sm:text-5xl font-serif leading-none mb-4">“</div>
               <p className="fluid-section-sub text-ivory max-w-[48ch]">
                 Before ParchiOS, our counter staff used manual register books during peak rush hours, leading to missed orders and 45 minutes of daily calculation at night. ParchiOS put our entire menu, kitchen slips, and daily sales report on autopilot in 24 hours.
               </p>
 
-              <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
+              <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <div className="text-base sm:text-lg font-medium text-white">
                     Haseeb &amp; Team
                   </div>
                   <div className="text-xs sm:text-sm text-ivory/60 fluid-paragraph">
-                    Owner &amp; Operator, Haseeb Food Cafe (Samahni, AJK)
+                    Owner &amp; Operator, Haseeb Food Cafe (HFC)
                   </div>
                 </div>
 
                 <div className="flex items-center gap-6 text-xs sm:text-sm font-mono text-ivory/70">
                   <div>
-                    <span className="text-rush font-medium">0</span> Missed Orders
+                    <span className="text-ivory font-medium">0</span> Missed Orders
                   </div>
                   <div className="hidden sm:block">•</div>
                   <div>
@@ -454,11 +407,11 @@ export default function LandingPage() {
         {/* ============================================================ */}
         {/* 5. SIMPLE "NO-HEADACHE" PRICING SECTION                      */}
         {/* ============================================================ */}
-        <section id="pricing" aria-labelledby="pricing-heading" className="px-3 sm:px-8 py-20 sm:py-32">
+        <section id="pricing" aria-labelledby="pricing-heading" className="px-3 sm:px-6 lg:px-8 py-20 sm:py-28">
           <div className="max-w-[1280px] mx-auto">
             <div className="text-center max-w-2xl mx-auto">
-              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-rush">
-                [04] SIMPLE &quot;NO-HEADACHE&quot; PRICING
+              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
+                <span className="text-rush mr-1.5">•</span> [04] SIMPLE &quot;NO-HEADACHE&quot; PRICING
               </p>
               {/* Section Heading: 56px at reference laptop screen, weight 400 */}
               <h2
@@ -473,11 +426,11 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* Big Pricing Card */}
+            {/* Big Pricing Card - Clean typography, no rounded pill badges */}
             <div className="mt-12 sm:mt-16 max-w-3xl mx-auto rounded-[28px] sm:rounded-[40px] bg-white border-2 border-ink p-8 sm:p-14 shadow-xl">
               <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-ink/10">
                 <div>
-                  <span className="text-xs font-mono font-medium tracking-wider uppercase text-rush bg-rush/10 px-2.5 py-1 rounded-full">
+                  <span className="text-xs font-mono font-medium tracking-wider uppercase text-rush">
                     ALL-IN-ONE PACKAGE
                   </span>
                   <h3 className="mt-2 text-xl sm:text-2xl font-medium text-ink tracking-tight">
@@ -549,11 +502,11 @@ export default function LandingPage() {
         {/* ============================================================ */}
         {/* 6. FAQ SECTION                                               */}
         {/* ============================================================ */}
-        <section id="faq" aria-labelledby="faq-heading" className="px-3 sm:px-8 py-20 sm:py-32">
+        <section id="faq" aria-labelledby="faq-heading" className="px-3 sm:px-6 lg:px-8 py-20 sm:py-28">
           <div className="max-w-[1280px] mx-auto grid gap-12 lg:grid-cols-[1fr_1.6fr]">
             <div>
               <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
-                [05] FREQUENTLY ASKED QUESTIONS
+                <span className="text-rush mr-1.5">•</span> [05] FREQUENTLY ASKED QUESTIONS
               </p>
               {/* Section Heading: 56px at reference laptop screen, weight 400 */}
               <h2
@@ -603,13 +556,13 @@ export default function LandingPage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 7. FINAL CTA & EXHAUSTIVE FOOTER                             */}
+        {/* 7. FINAL CTA & FOOTER (Removed Direct Contact Column)        */}
         {/* ============================================================ */}
         <footer className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 pt-18 sm:pt-28 pb-10">
           <div className="max-w-[1280px] mx-auto">
             <div>
-              <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-rush">
-                24-HOUR TURNAROUND GUARANTEE
+              <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-ivory/50">
+                <span className="text-rush mr-1.5">•</span> 24-HOUR TURNAROUND GUARANTEE
               </p>
               {/* Section Heading: 56px at reference laptop screen, weight 400 */}
               <h2 className="mt-4 max-w-[22ch] text-ivory fluid-heading">
@@ -642,8 +595,8 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Sitemap Footer Grid */}
-            <div className="mt-20 sm:mt-28 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Sitemap Footer Grid - 3 Columns (Direct Contact removed) */}
+            <div className="mt-20 sm:mt-28 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-3">
               <div>
                 <p className="flex items-center gap-2 text-[20px] font-medium tracking-tight text-white">
                   parchiOS <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush" />
@@ -680,15 +633,6 @@ export default function LandingPage() {
                   ['45,000 PKR Pricing', '#pricing'],
                   ['Risk-Reversal Guarantee', '#pricing'],
                   ['Operator FAQ', '#faq'],
-                ]}
-              />
-
-              <FooterCol
-                title="Direct Contact"
-                links={[
-                  ['WhatsApp Consultation', WHATSAPP_LINK],
-                  ['GitHub Codebase', 'https://github.com/Waqasdevs/ParchiOS'],
-                  ['System Health Check', '/api/health'],
                 ]}
               />
             </div>
