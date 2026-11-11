@@ -122,63 +122,68 @@ export default function LandingPage() {
       {/* 1. Runway-style Edge-to-Edge Navbar */}
       <Nav />
 
-      {/* Main Container */}
-      <main className="px-3 sm:px-6 lg:px-8 pt-3 sm:pt-4 space-y-6 sm:space-y-8 max-w-[1440px] mx-auto">
+      {/* Main Container - Narrow side margins, centralized content like Runway */}
+      <main className="px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 space-y-6 sm:space-y-8 max-w-[1536px] mx-auto">
         {/* ============================================================ */}
-        {/* 1. HERO SECTION (Runway Card Style)                          */}
+        {/* 1. HERO SECTION (Runway Centered Card with Slight Edges & Video Loop) */}
         {/* ============================================================ */}
         <section
           aria-label="ParchiOS Restaurant Operating System"
-          className="relative isolate overflow-hidden rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] min-h-[82vh] sm:min-h-[86vh] lg:min-h-[90vh] flex items-end border border-ink/10 shadow-[0_20px_60px_-15px_rgba(21,19,15,0.25)]"
+          className="relative isolate overflow-hidden rounded-[16px] sm:rounded-[20px] min-h-[68vh] sm:min-h-[72vh] lg:min-h-[76vh] max-h-[820px] flex items-end border border-ink/10 shadow-[0_20px_50px_-15px_rgba(21,19,15,0.22)]"
         >
-          {/* Single-hue cinematic landscape photo */}
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-20 bg-cover bg-[60%_center] filter contrast-[1.08] brightness-[0.88]"
-            style={{ backgroundImage: 'url(/images/landing/hero-restaurant.jpg)' }}
-          />
+          {/* Looping Restaurant Kitchen Video Background */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/images/landing/hero-restaurant.jpg"
+            className="absolute inset-0 -z-20 h-full w-full object-cover filter contrast-[1.08] brightness-[0.80]"
+          >
+            <source src="/videos/hero-restaurant-loop.mp4" type="video/mp4" />
+          </video>
 
           {/* Deep ink gradient overlay for high contrast text readability */}
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(21,19,15,0.95)_0%,rgba(21,19,15,0.78)_50%,rgba(21,19,15,0.2)_100%),linear-gradient(0deg,rgba(21,19,15,0.85)_0%,transparent_55%)]"
+            className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(21,19,15,0.92)_0%,rgba(21,19,15,0.72)_48%,rgba(21,19,15,0.22)_100%),linear-gradient(0deg,rgba(21,19,15,0.85)_0%,transparent_50%)]"
           />
 
-          <div className="w-full max-w-[1280px] mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16 lg:pb-20 pt-32 sm:pt-40">
-            {/* Top Eyebrow - Clean editorial typography, NO AI-slop rounded pill bubbles */}
-            <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono tracking-widest uppercase text-ivory/70 mb-5 sm:mb-6">
+          <div className="w-full max-w-[1360px] mx-auto px-5 sm:px-10 lg:px-14 pb-10 sm:pb-14 lg:pb-16 pt-24 sm:pt-32">
+            {/* Top Eyebrow - Clean editorial typography, no AI-slop rounded pill bubbles */}
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-mono tracking-widest uppercase text-ivory/70 mb-4 sm:mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-rush" />
               <span>Built for Pakistani Fast-Food, Cafes &amp; Cloud Kitchens 🇵🇰</span>
             </div>
 
-            {/* Main Headline (H1): 56px at reference laptop screen, weight 400, no dash between sentences */}
-            <h1 className="text-ivory fluid-heading max-w-[24ch]">
-              Kagaz Aur Register Ko Chhorein. Apne Restaurant Ko 5-Second Digital Parchi System Pe Shift Karein.
+            {/* Main Headline (H1): Minimal, punchy, 2 clean lines, 56px at reference laptop screen, weight 400 */}
+            <h1 className="text-ivory fluid-heading max-w-[20ch] leading-[1.12]">
+              Kagaz Chhorein. Apne Restaurant Ko 5-Second Digital Parchi Pe Shift Karein.
             </h1>
 
-            {/* Sub-headline: 16px at reference laptop screen, weight 400 */}
-            <p className="mt-5 sm:mt-6 max-w-[42rem] text-ivory/80 fluid-hero-sub">
-              ParchiOS replaces messy register books and expensive monthly POS software. Punch counter orders in 5 seconds, send instant Kitchen Order Tickets (KOT), and get 100% accurate daily cash sales on your phone with Zero Monthly Commission.
+            {/* Sub-headline: Minimal text (2 lines), 16px at reference laptop screen, weight 400 */}
+            <p className="mt-4 sm:mt-5 max-w-[38rem] text-ivory/80 fluid-hero-sub leading-relaxed">
+              Punch counter orders in 5 seconds, send instant kitchen KOT slips, and track 100% accurate daily cash sales on your phone with zero commission.
             </p>
 
-            {/* CTA Buttons (Runway style: White pill primary, translucent secondary) */}
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3.5">
-              {/* Primary CTA (WhatsApp) */}
+            {/* CTA Buttons - Slightly edged rectangles matching Runway reference design */}
+            <div className="mt-7 sm:mt-9 flex flex-wrap items-center gap-3">
+              {/* Primary CTA (WhatsApp) - Crisp white rectangle, slightly rounded corners */}
               <a
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-white text-ink hover:bg-ivory px-7 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-medium shadow-xl transition-all active:scale-[0.98]"
+                className="group inline-flex items-center gap-2 rounded-[6px] bg-white hover:bg-neutral-100 text-ink px-5 sm:px-6 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
               >
                 <MessageCircle className="w-4 h-4 fill-emerald-600 text-emerald-600 shrink-0" />
                 <span>Get a Free Live Preview With Your Menu (WhatsApp Us)</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </a>
 
-              {/* Secondary CTA (Live Demo Dashboard) */}
+              {/* Secondary CTA (Live Demo Dashboard) - Translucent dark rectangle, slightly rounded corners */}
               <Link
                 href="/demo"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-md text-ivory px-6 sm:px-7 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-medium hover:bg-white/20 transition-all active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/10 backdrop-blur-md text-ivory px-5 sm:px-6 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-medium hover:bg-white/20 transition-all active:scale-[0.98]"
               >
                 <span>Try Live Counter Demo</span>
                 <span aria-hidden className="text-[12px]">↗</span>
@@ -189,12 +194,11 @@ export default function LandingPage() {
 
         {/* ============================================================ */}
         {/* 2. THE "3 BIG PROBLEMS WE SOLVE" SECTION                      */}
-        {/* Reduced red, clean layout, removed prompt sentence           */}
         {/* ============================================================ */}
         <section
           id="problems"
           aria-labelledby="problems-heading"
-          className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 py-20 sm:py-28"
+          className="rounded-[18px] sm:rounded-[22px] bg-ink text-ivory px-6 sm:px-10 lg:px-14 py-18 sm:py-24"
         >
           <div className="max-w-[1280px] mx-auto">
             <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ivory/50">
@@ -204,33 +208,33 @@ export default function LandingPage() {
             {/* Section Heading: 56px at reference laptop screen, weight 400 */}
             <h2
               id="problems-heading"
-              className="mt-4 sm:mt-6 max-w-[26ch] text-ivory fluid-heading"
+              className="mt-4 sm:mt-5 max-w-[26ch] text-ivory fluid-heading"
             >
               The 3 Big Problems We Solve
             </h2>
 
             {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
-            <p className="mt-4 text-ivory/75 max-w-[42rem] fluid-section-sub">
+            <p className="mt-3.5 text-ivory/75 max-w-[42rem] fluid-section-sub">
               Messy paper notes, shouting at the kitchen, and losing cash at closing time. Here is how ParchiOS eliminates the daily headache:
             </p>
 
-            {/* 3 Problem Cards Grid - Clean, no AI-slop rounded pill badges, reduced red */}
-            <div className="mt-12 sm:mt-16 grid gap-6 grid-cols-1 md:grid-cols-3">
+            {/* 3 Problem Cards Grid */}
+            <div className="mt-12 sm:mt-14 grid gap-6 grid-cols-1 md:grid-cols-3">
               {PROBLEMS.map((prob) => {
                 const Icon = prob.icon;
                 return (
                   <div
                     key={prob.num}
-                    className="rounded-[24px] sm:rounded-[32px] bg-white/[0.04] border border-white/10 p-7 sm:p-9 flex flex-col justify-between hover:bg-white/[0.07] transition-all"
+                    className="rounded-[14px] sm:rounded-[18px] bg-white/[0.04] border border-white/10 p-7 sm:p-8 flex flex-col justify-between hover:bg-white/[0.07] transition-all"
                   >
                     <div>
-                      {/* Clean header: category text + monochrome icon, no pill bubble */}
-                      <div className="flex items-center justify-between gap-3 mb-6">
+                      {/* Clean header: category text + monochrome icon */}
+                      <div className="flex items-center justify-between gap-3 mb-5">
                         <span className="text-[11px] font-mono tracking-wider uppercase text-ivory/45">
                           {prob.num} / {prob.category}
                         </span>
-                        <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-ivory/80 shrink-0">
-                          <Icon className="w-5 h-5" />
+                        <div className="w-9 h-9 rounded-[6px] bg-white/[0.06] border border-white/10 flex items-center justify-center text-ivory/80 shrink-0">
+                          <Icon className="w-4 h-4" />
                         </div>
                       </div>
 
@@ -239,12 +243,12 @@ export default function LandingPage() {
                       </h3>
 
                       {/* Paragraph: 14px at reference laptop screen, weight 400 */}
-                      <p className="mt-4 text-ivory/70 fluid-paragraph">
+                      <p className="mt-3.5 text-ivory/70 fluid-paragraph">
                         {prob.description}
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-ivory/40">
+                    <div className="mt-7 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-ivory/40">
                       <span>PROBLEM #{prob.num}</span>
                       <span className="text-ivory/65 font-medium">Solved with ParchiOS</span>
                     </div>
@@ -258,7 +262,7 @@ export default function LandingPage() {
         {/* ============================================================ */}
         {/* 3. CORE FEATURES SECTION (All 4 Features with Images)        */}
         {/* ============================================================ */}
-        <section id="features" aria-labelledby="features-heading" className="px-3 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <section id="features" aria-labelledby="features-heading" className="px-3 sm:px-6 lg:px-8 py-18 sm:py-24">
           <div className="max-w-[1280px] mx-auto">
             <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
               <span className="text-rush mr-1.5">•</span> [02] CORE FEATURES
@@ -267,24 +271,24 @@ export default function LandingPage() {
             {/* Section Heading: 56px at reference laptop screen, weight 400 */}
             <h2
               id="features-heading"
-              className="mt-4 sm:mt-6 max-w-[28ch] text-ink fluid-heading"
+              className="mt-4 sm:mt-5 max-w-[28ch] text-ink fluid-heading"
             >
               Engineered specifically for busy Pakistani food counters.
             </h2>
 
             {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
-            <p className="mt-4 text-ink/75 max-w-[42rem] fluid-section-sub">
+            <p className="mt-3.5 text-ink/75 max-w-[42rem] fluid-section-sub">
               No confusing IT terminology. Straightforward tools that let you punch fast, control kitchen passes, and watch your daily sales from your phone.
             </p>
 
             {/* 4 Features Grid (2x2 with rich visual photography for all 4) */}
-            <div className="mt-14 sm:mt-18 grid gap-8 sm:gap-10 grid-cols-1 md:grid-cols-2">
+            <div className="mt-12 sm:mt-16 grid gap-7 sm:gap-9 grid-cols-1 md:grid-cols-2">
               {FEATURES.map((feature) => {
                 const Icon = feature.icon;
                 return (
                   <div
                     key={feature.num}
-                    className="rounded-[28px] sm:rounded-[36px] bg-white border border-ink/10 overflow-hidden shadow-sm flex flex-col justify-between hover:border-ink/20 transition-all group"
+                    className="rounded-[16px] sm:rounded-[20px] bg-white border border-ink/10 overflow-hidden shadow-sm flex flex-col justify-between hover:border-ink/20 transition-all group"
                   >
                     {/* Visual Feature Image */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-ink/5">
@@ -297,24 +301,24 @@ export default function LandingPage() {
                     </div>
 
                     {/* Feature Copy */}
-                    <div className="p-7 sm:p-9 flex flex-col justify-between flex-1">
+                    <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
                       <div>
-                        <div className="flex items-center gap-2.5 text-xs font-mono tracking-wider text-ink/50 uppercase mb-3">
+                        <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-ink/50 uppercase mb-2.5">
                           <Icon className="w-4 h-4 text-ink" />
                           <span>{feature.num} / {feature.tag}</span>
                         </div>
 
-                        <h3 className="text-[21px] sm:text-[23px] font-medium leading-snug tracking-[-0.015em] text-ink">
+                        <h3 className="text-[20px] sm:text-[22px] font-medium leading-snug tracking-[-0.015em] text-ink">
                           {feature.title}
                         </h3>
 
                         {/* Paragraph: 14px at reference laptop screen, weight 400 */}
-                        <p className="mt-3 text-ink/75 fluid-paragraph leading-relaxed">
+                        <p className="mt-2.5 text-ink/75 fluid-paragraph leading-relaxed">
                           {feature.description}
                         </p>
                       </div>
 
-                      <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-medium text-emerald-700 flex items-center gap-1.5">
+                      <div className="mt-7 pt-4 border-t border-ink/10 text-xs font-medium text-emerald-700 flex items-center gap-1.5">
                         <CheckCircle2 className="w-4 h-4 shrink-0" />
                         <span>{feature.benefit}</span>
                       </div>
@@ -328,12 +332,11 @@ export default function LandingPage() {
 
         {/* ============================================================ */}
         {/* 4. SOCIAL PROOF / LIVE CASE STUDY SECTION                    */}
-        {/* HFC Showcase - Removed cafe location, clean layout           */}
         {/* ============================================================ */}
         <section
           id="case-study"
           aria-labelledby="case-study-heading"
-          className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 py-20 sm:py-28"
+          className="rounded-[18px] sm:rounded-[22px] bg-ink text-ivory px-6 sm:px-10 lg:px-14 py-18 sm:py-24"
         >
           <div className="max-w-[1280px] mx-auto">
             <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ivory/50">
@@ -343,19 +346,19 @@ export default function LandingPage() {
             {/* Section Heading: 56px at reference laptop screen, weight 400 */}
             <h2
               id="case-study-heading"
-              className="mt-4 sm:mt-6 text-ivory fluid-heading"
+              className="mt-4 sm:mt-5 text-ivory fluid-heading"
             >
               Live in Action: HFC (Haseeb Food Cafe)
             </h2>
 
             {/* Testimonial Quote Box: 24px at reference laptop screen, weight 400 */}
-            <div className="mt-10 sm:mt-14 rounded-[24px] sm:rounded-[36px] bg-white/[0.04] border border-white/10 p-8 sm:p-12 backdrop-blur-md">
-              <div className="text-ivory/30 text-4xl sm:text-5xl font-serif leading-none mb-4">“</div>
+            <div className="mt-9 sm:mt-12 rounded-[14px] sm:rounded-[18px] bg-white/[0.04] border border-white/10 p-7 sm:p-10 backdrop-blur-md">
+              <div className="text-ivory/30 text-4xl sm:text-5xl font-serif leading-none mb-3">“</div>
               <p className="fluid-section-sub text-ivory max-w-[48ch]">
                 Before ParchiOS, our counter staff used manual register books during peak rush hours, leading to missed orders and 45 minutes of daily calculation at night. ParchiOS put our entire menu, kitchen slips, and daily sales report on autopilot in 24 hours.
               </p>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+              <div className="mt-7 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <div className="text-base sm:text-lg font-medium text-white">
                     Haseeb &amp; Team
@@ -381,14 +384,14 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Case Study Live Test Button */}
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            {/* Case Study Live Test Button (Slightly edged rectangle) */}
+            <div className="mt-9 flex flex-wrap items-center gap-4">
               <Link
                 href="/demo"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-ivory hover:bg-white text-ink px-8 py-4 text-[15px] font-medium shadow-lg transition-all active:scale-[0.98]"
+                className="group inline-flex items-center gap-2 rounded-[6px] bg-ivory hover:bg-white text-ink px-6 sm:px-7 py-3 text-[14px] sm:text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
               >
                 <span>Click Here to Test the Live HFC System</span>
-                <span aria-hidden className="text-[13px]">↗</span>
+                <span aria-hidden className="text-[12px]">↗</span>
               </Link>
 
               <a
@@ -407,7 +410,7 @@ export default function LandingPage() {
         {/* ============================================================ */}
         {/* 5. SIMPLE "NO-HEADACHE" PRICING SECTION                      */}
         {/* ============================================================ */}
-        <section id="pricing" aria-labelledby="pricing-heading" className="px-3 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <section id="pricing" aria-labelledby="pricing-heading" className="px-3 sm:px-6 lg:px-8 py-18 sm:py-24">
           <div className="max-w-[1280px] mx-auto">
             <div className="text-center max-w-2xl mx-auto">
               <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
@@ -426,8 +429,8 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* Big Pricing Card - Clean typography, no rounded pill badges */}
-            <div className="mt-12 sm:mt-16 max-w-3xl mx-auto rounded-[28px] sm:rounded-[40px] bg-white border-2 border-ink p-8 sm:p-14 shadow-xl">
+            {/* Big Pricing Card */}
+            <div className="mt-12 sm:mt-14 max-w-3xl mx-auto rounded-[18px] sm:rounded-[24px] bg-white border-2 border-ink p-7 sm:p-12 shadow-xl">
               <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-ink/10">
                 <div>
                   <span className="text-xs font-mono font-medium tracking-wider uppercase text-rush">
@@ -453,7 +456,7 @@ export default function LandingPage() {
                 <p className="text-xs font-mono uppercase tracking-wider text-ink/50 font-medium mb-4">
                   WHAT&apos;S INCLUDED:
                 </p>
-                <ul className="space-y-4">
+                <ul className="space-y-3.5">
                   {[
                     'Full system branded with your Restaurant Name & Logo',
                     'Complete Menu, Deals & Pricing uploaded by our team (Just WhatsApp us a photo of your menu!)',
@@ -468,8 +471,8 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              {/* Risk-Reversal Guarantee Box: no dash between sentences */}
-              <div className="mt-10 rounded-2xl bg-amber-500/10 border border-amber-600/20 p-5 sm:p-6">
+              {/* Risk-Reversal Guarantee Box */}
+              <div className="mt-9 rounded-[10px] bg-amber-500/10 border border-amber-600/20 p-5 sm:p-6">
                 <div className="flex items-center gap-2 text-xs font-mono font-medium text-amber-900 uppercase tracking-wider mb-2">
                   <ShieldCheck className="w-4 h-4 text-amber-800" />
                   <span>100% Risk-Reversal Guarantee</span>
@@ -479,17 +482,17 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* WhatsApp Action Button */}
+              {/* WhatsApp Action Button (Slightly edged rectangle) */}
               <div className="mt-8">
                 <a
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full group inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 text-[15px] sm:text-[16px] font-medium shadow-lg shadow-emerald-800/20 transition-all active:scale-[0.98]"
+                  className="w-full group inline-flex items-center justify-center gap-2 rounded-[6px] bg-emerald-600 hover:bg-emerald-500 text-white px-7 py-3.5 text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
                   <span>Send Your Menu on WhatsApp (+92 345 4159835)</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
                 <p className="text-center text-xs text-ink/50 mt-3 font-normal">
                   We reply within 15 minutes • No payment required to see your demo
@@ -502,7 +505,7 @@ export default function LandingPage() {
         {/* ============================================================ */}
         {/* 6. FAQ SECTION                                               */}
         {/* ============================================================ */}
-        <section id="faq" aria-labelledby="faq-heading" className="px-3 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <section id="faq" aria-labelledby="faq-heading" className="px-3 sm:px-6 lg:px-8 py-18 sm:py-24">
           <div className="max-w-[1280px] mx-auto grid gap-12 lg:grid-cols-[1fr_1.6fr]">
             <div>
               <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
@@ -516,15 +519,15 @@ export default function LandingPage() {
                 Clear answers before you shift from paper registers.
               </h2>
               {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
-              <p className="mt-4 text-ink/75 fluid-section-sub">
+              <p className="mt-3.5 text-ink/75 fluid-section-sub">
                 Have questions about your thermal printer model, menu deals, or counter staff? Reach out directly on WhatsApp anytime.
               </p>
-              <div className="mt-8">
+              <div className="mt-7">
                 <a
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-ink text-ivory px-6 py-3 text-sm font-medium hover:bg-neutral-800 transition-all"
+                  className="inline-flex items-center gap-2 rounded-[6px] bg-ink text-ivory px-5 py-2.5 text-sm font-medium hover:bg-neutral-800 transition-all"
                 >
                   <MessageCircle className="w-4 h-4 fill-current text-emerald-400" />
                   <span>Chat With Us on WhatsApp</span>
@@ -539,7 +542,7 @@ export default function LandingPage() {
                     <span>{f.q}</span>
                     <span
                       aria-hidden
-                      className="relative h-8 w-8 shrink-0 rounded-full border border-ink/20 flex items-center justify-center transition-colors group-open:bg-ink group-open:border-ink group-open:text-ivory"
+                      className="relative h-8 w-8 shrink-0 rounded-[6px] border border-ink/20 flex items-center justify-center transition-colors group-open:bg-ink group-open:border-ink group-open:text-ivory"
                     >
                       <span className="text-xs font-mono group-open:hidden">+</span>
                       <span className="text-xs font-mono hidden group-open:inline">−</span>
@@ -556,9 +559,9 @@ export default function LandingPage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 7. FINAL CTA & FOOTER (Removed Direct Contact Column)        */}
+        {/* 7. FINAL CTA & FOOTER                                        */}
         {/* ============================================================ */}
-        <footer className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 pt-18 sm:pt-28 pb-10">
+        <footer className="rounded-[18px] sm:rounded-[22px] bg-ink text-ivory px-6 sm:px-10 lg:px-14 pt-16 sm:pt-24 pb-10">
           <div className="max-w-[1280px] mx-auto">
             <div>
               <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-ivory/50">
@@ -569,25 +572,25 @@ export default function LandingPage() {
                 Kagaz aur register se azaadi lein. Apne restaurant ko automate karein.
               </h2>
               {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
-              <p className="mt-6 max-w-[38rem] text-ivory/75 fluid-section-sub">
+              <p className="mt-5 max-w-[38rem] text-ivory/75 fluid-section-sub">
                 WhatsApp us a photo of your paper menu right now. We will configure a live preview with your restaurant deals and prices before you pay a single rupee.
               </p>
 
-              <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3.5">
+              <div className="mt-7 sm:mt-9 flex flex-wrap items-center gap-3">
                 <a
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 text-[15px] font-medium shadow-lg shadow-emerald-950/40 transition-all active:scale-[0.98]"
+                  className="group inline-flex items-center gap-2 rounded-[6px] bg-emerald-600 hover:bg-emerald-500 text-white px-7 py-3.5 text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
                   <span>Get Free Preview on WhatsApp (+92 345 4159835)</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
 
                 <Link
                   href="/demo"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-7 py-4 text-[15px] font-medium hover:bg-white/10 transition-all active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/5 backdrop-blur-md px-6 py-3.5 text-[15px] font-medium hover:bg-white/10 transition-all active:scale-[0.98]"
                 >
                   <span>Try Live Counter Demo</span>
                   <span aria-hidden className="text-[12px]">↗</span>
@@ -595,8 +598,8 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Sitemap Footer Grid - 3 Columns (Direct Contact removed) */}
-            <div className="mt-20 sm:mt-28 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Sitemap Footer Grid - 3 Columns */}
+            <div className="mt-18 sm:mt-24 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-3">
               <div>
                 <p className="flex items-center gap-2 text-[20px] font-medium tracking-tight text-white">
                   parchiOS <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush" />

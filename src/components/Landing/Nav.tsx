@@ -16,8 +16,8 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-ivory/90 backdrop-blur-md border-b border-ink/5 transition-all">
-      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-8 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-50 w-full bg-ivory/95 backdrop-blur-md border-b border-ink/5 transition-all">
+      <div className="mx-auto w-full max-w-[1536px] px-3 sm:px-5 lg:px-6 h-16 sm:h-20 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2 font-bold tracking-tight text-[18px] sm:text-[20px] text-ink">
           parchiOS
@@ -37,13 +37,13 @@ export default function Nav() {
           ))}
         </nav>
 
-        {/* Right Action Buttons */}
-        <div className="flex items-center gap-3 sm:gap-4">
+        {/* Right Action Buttons (Slightly rounded rectangles like Runway) */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <a
             href="https://wa.me/923454159835?text=Assalam-o-Alaikum%2C%20I%20want%20a%20free%20live%20preview%20of%20ParchiOS%20with%20my%20restaurant%20menu."
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 text-[14px] font-medium text-ink/80 hover:text-ink transition-colors px-2 py-1.5"
+            className="hidden sm:inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-medium text-ink/80 hover:text-ink transition-colors px-3 py-2 rounded-[6px] hover:bg-ink/5"
           >
             <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
             <span>WhatsApp Us</span>
@@ -51,7 +51,7 @@ export default function Nav() {
 
           <Link
             href="/demo"
-            className="inline-flex items-center gap-1.5 rounded-full bg-ink hover:bg-black text-ivory px-5 sm:px-6 py-2 sm:py-2.5 text-[13px] sm:text-[14px] font-medium transition-all active:scale-[0.98] shadow-sm"
+            className="inline-flex items-center gap-1.5 rounded-[6px] bg-ink hover:bg-black text-ivory px-4 sm:px-5 py-2 sm:py-2.5 text-[13px] sm:text-[14px] font-medium transition-all active:scale-[0.98] shadow-sm"
           >
             Try Live Demo
           </Link>
@@ -60,7 +60,7 @@ export default function Nav() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-full border border-ink/15 text-ink hover:bg-ink/5 ml-1"
+            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[6px] border border-ink/15 text-ink hover:bg-ink/5 ml-1"
             aria-label="Toggle navigation menu"
           >
             <span className="text-sm font-mono">{mobileOpen ? '✕' : '☰'}</span>
@@ -77,7 +77,7 @@ export default function Nav() {
                 <a
                   href={l.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block py-2 px-3 rounded-xl hover:bg-ink/5 hover:text-ink transition-colors"
+                  className="block py-2 px-3 rounded-[6px] hover:bg-ink/5 hover:text-ink transition-colors"
                 >
                   {l.label}
                 </a>
@@ -89,7 +89,7 @@ export default function Nav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 text-center py-3 px-4 rounded-full bg-emerald-600 text-white font-medium text-sm"
+                className="flex items-center justify-center gap-2 text-center py-2.5 px-4 rounded-[6px] bg-emerald-600 text-white font-medium text-sm"
               >
                 <MessageCircle className="w-4 h-4 fill-current" />
                 <span>WhatsApp Us (+92 345 4159835)</span>
@@ -97,7 +97,7 @@ export default function Nav() {
               <Link
                 href="/demo"
                 onClick={() => setMobileOpen(false)}
-                className="block text-center py-3 px-4 rounded-full bg-ink text-ivory font-medium text-sm"
+                className="block text-center py-2.5 px-4 rounded-[6px] bg-ink text-ivory font-medium text-sm"
               >
                 Try Live Counter Demo
               </Link>
