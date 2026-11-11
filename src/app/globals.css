@@ -53,7 +53,7 @@
     font-size: clamp(1.875rem, 2.33vw + 1.3rem, 3.5rem); /* ~30px on 390px, 56px on 1504px+ */
     line-height: 1.12;
     letter-spacing: -0.025em;
-    font-weight: 400 !important;
+    font-weight: 500 !important;
     text-wrap: balance;
   }
   .fluid-hero-sub {

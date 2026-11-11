@@ -117,9 +117,9 @@ export default function LandingPage() {
   return (
     <div
       id="top"
-      className="bg-ivory text-ink font-jakarta antialiased selection:bg-ink selection:text-ivory w-full overflow-x-hidden min-h-screen"
+      className="bg-ivory text-ink font-jakarta antialiased selection:bg-ink selection:text-ivory w-full overflow-x-clip min-h-screen"
     >
-      {/* 1. Runway-style Edge-to-Edge Navbar */}
+      {/* 1. Runway-style Edge-to-Edge Sticky Navbar */}
       <Nav />
 
       {/* Main Container - Narrow side margins, centralized content like Runway */}
@@ -151,18 +151,18 @@ export default function LandingPage() {
 
           <div className="w-full max-w-[1360px] mx-auto px-5 sm:px-10 lg:px-14 pb-10 sm:pb-14 lg:pb-16 pt-24 sm:pt-32">
             {/* Top Eyebrow - Clean editorial typography, no AI-slop rounded pill bubbles */}
-            <div className="flex items-center gap-2 text-xs sm:text-sm font-mono tracking-widest uppercase text-ivory/70 mb-4 sm:mb-5">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-mono font-semibold tracking-widest uppercase text-ivory/80 mb-4 sm:mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-rush" />
               <span>Built for Pakistani Fast-Food, Cafes &amp; Cloud Kitchens 🇵🇰</span>
             </div>
 
-            {/* Main Headline (H1): Minimal, punchy, 2 clean lines, 56px at reference laptop screen, weight 400 */}
+            {/* Main Headline (H1): Minimal, punchy, 2 clean lines, 56px at reference laptop screen, weight 500 */}
             <h1 className="text-ivory fluid-heading max-w-[20ch] leading-[1.12]">
               Kagaz Chhorein. Apne Restaurant Ko 5-Second Digital Parchi Pe Shift Karein.
             </h1>
 
             {/* Sub-headline: Minimal text (2 lines), 16px at reference laptop screen, weight 400 */}
-            <p className="mt-4 sm:mt-5 max-w-[38rem] text-ivory/80 fluid-hero-sub leading-relaxed">
+            <p className="mt-4 sm:mt-5 max-w-[38rem] text-ivory/85 fluid-hero-sub leading-relaxed">
               Punch counter orders in 5 seconds, send instant kitchen KOT slips, and track 100% accurate daily cash sales on your phone with zero commission.
             </p>
 
@@ -173,7 +173,7 @@ export default function LandingPage() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-[6px] bg-white hover:bg-neutral-100 text-ink px-5 sm:px-6 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
+                className="group inline-flex items-center gap-2 rounded-[6px] bg-white hover:bg-neutral-100 text-ink px-5 sm:px-6 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-semibold shadow-md transition-all active:scale-[0.98]"
               >
                 <MessageCircle className="w-4 h-4 fill-emerald-600 text-emerald-600 shrink-0" />
                 <span>Get a Free Live Preview With Your Menu (WhatsApp Us)</span>
@@ -183,7 +183,7 @@ export default function LandingPage() {
               {/* Secondary CTA (Live Demo Dashboard) - Translucent dark rectangle, slightly rounded corners */}
               <Link
                 href="/demo"
-                className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/10 backdrop-blur-md text-ivory px-5 sm:px-6 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-medium hover:bg-white/20 transition-all active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/10 backdrop-blur-md text-ivory px-5 sm:px-6 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-semibold hover:bg-white/20 transition-all active:scale-[0.98]"
               >
                 <span>Try Live Counter Demo</span>
                 <span aria-hidden className="text-[12px]">↗</span>
@@ -201,11 +201,11 @@ export default function LandingPage() {
           className="rounded-[18px] sm:rounded-[22px] bg-ink text-ivory px-6 sm:px-10 lg:px-14 py-18 sm:py-24"
         >
           <div className="max-w-[1280px] mx-auto">
-            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ivory/50">
+            <p className="text-[12px] sm:text-[13px] font-mono font-semibold tracking-wider uppercase text-ivory/60">
               <span className="text-rush mr-1.5">•</span> [01] THE 3 BIG PROBLEMS WE SOLVE
             </p>
 
-            {/* Section Heading: 56px at reference laptop screen, weight 400 */}
+            {/* Section Heading: 56px at reference laptop screen, weight 500 */}
             <h2
               id="problems-heading"
               className="mt-4 sm:mt-5 max-w-[26ch] text-ivory fluid-heading"
@@ -230,7 +230,7 @@ export default function LandingPage() {
                     <div>
                       {/* Clean header: category text + monochrome icon */}
                       <div className="flex items-center justify-between gap-3 mb-5">
-                        <span className="text-[11px] font-mono tracking-wider uppercase text-ivory/45">
+                        <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-ivory/50">
                           {prob.num} / {prob.category}
                         </span>
                         <div className="w-9 h-9 rounded-[6px] bg-white/[0.06] border border-white/10 flex items-center justify-center text-ivory/80 shrink-0">
@@ -238,7 +238,7 @@ export default function LandingPage() {
                         </div>
                       </div>
 
-                      <h3 className="text-[19px] sm:text-[21px] font-medium leading-snug tracking-[-0.015em] text-ivory">
+                      <h3 className="text-[19px] sm:text-[21px] font-semibold leading-snug tracking-[-0.015em] text-ivory">
                         {prob.title}
                       </h3>
 
@@ -250,7 +250,7 @@ export default function LandingPage() {
 
                     <div className="mt-7 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-ivory/40">
                       <span>PROBLEM #{prob.num}</span>
-                      <span className="text-ivory/65 font-medium">Solved with ParchiOS</span>
+                      <span className="text-ivory/70 font-semibold">Solved with ParchiOS</span>
                     </div>
                   </div>
                 );
@@ -264,11 +264,11 @@ export default function LandingPage() {
         {/* ============================================================ */}
         <section id="features" aria-labelledby="features-heading" className="px-3 sm:px-6 lg:px-8 py-18 sm:py-24">
           <div className="max-w-[1280px] mx-auto">
-            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
+            <p className="text-[12px] sm:text-[13px] font-mono font-semibold tracking-wider uppercase text-ink/60">
               <span className="text-rush mr-1.5">•</span> [02] CORE FEATURES
             </p>
 
-            {/* Section Heading: 56px at reference laptop screen, weight 400 */}
+            {/* Section Heading: 56px at reference laptop screen, weight 500 */}
             <h2
               id="features-heading"
               className="mt-4 sm:mt-5 max-w-[28ch] text-ink fluid-heading"
@@ -303,12 +303,12 @@ export default function LandingPage() {
                     {/* Feature Copy */}
                     <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
                       <div>
-                        <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-ink/50 uppercase mb-2.5">
+                        <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink/60 uppercase mb-2.5">
                           <Icon className="w-4 h-4 text-ink" />
                           <span>{feature.num} / {feature.tag}</span>
                         </div>
 
-                        <h3 className="text-[20px] sm:text-[22px] font-medium leading-snug tracking-[-0.015em] text-ink">
+                        <h3 className="text-[20px] sm:text-[22px] font-semibold leading-snug tracking-[-0.015em] text-ink">
                           {feature.title}
                         </h3>
 
@@ -318,7 +318,7 @@ export default function LandingPage() {
                         </p>
                       </div>
 
-                      <div className="mt-7 pt-4 border-t border-ink/10 text-xs font-medium text-emerald-700 flex items-center gap-1.5">
+                      <div className="mt-7 pt-4 border-t border-ink/10 text-xs font-semibold text-emerald-700 flex items-center gap-1.5">
                         <CheckCircle2 className="w-4 h-4 shrink-0" />
                         <span>{feature.benefit}</span>
                       </div>
@@ -339,11 +339,11 @@ export default function LandingPage() {
           className="rounded-[18px] sm:rounded-[22px] bg-ink text-ivory px-6 sm:px-10 lg:px-14 py-18 sm:py-24"
         >
           <div className="max-w-[1280px] mx-auto">
-            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ivory/50">
+            <p className="text-[12px] sm:text-[13px] font-mono font-semibold tracking-wider uppercase text-ivory/60">
               <span className="text-rush mr-1.5">•</span> [03] LIVE CASE STUDY &amp; SOCIAL PROOF
             </p>
 
-            {/* Section Heading: 56px at reference laptop screen, weight 400 */}
+            {/* Section Heading: 56px at reference laptop screen, weight 500 */}
             <h2
               id="case-study-heading"
               className="mt-4 sm:mt-5 text-ivory fluid-heading"
@@ -360,7 +360,7 @@ export default function LandingPage() {
 
               <div className="mt-7 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <div className="text-base sm:text-lg font-medium text-white">
+                  <div className="text-base sm:text-lg font-semibold text-white">
                     Haseeb &amp; Team
                   </div>
                   <div className="text-xs sm:text-sm text-ivory/60 fluid-paragraph">
@@ -370,15 +370,15 @@ export default function LandingPage() {
 
                 <div className="flex items-center gap-6 text-xs sm:text-sm font-mono text-ivory/70">
                   <div>
-                    <span className="text-ivory font-medium">0</span> Missed Orders
+                    <span className="text-ivory font-semibold">0</span> Missed Orders
                   </div>
                   <div className="hidden sm:block">•</div>
                   <div>
-                    <span className="text-emerald-400 font-medium">45 Mins</span> Saved Daily
+                    <span className="text-emerald-400 font-semibold">45 Mins</span> Saved Daily
                   </div>
                   <div className="hidden sm:block">•</div>
                   <div>
-                    <span className="text-ivory font-medium">24 Hrs</span> Setup Time
+                    <span className="text-ivory font-semibold">24 Hrs</span> Setup Time
                   </div>
                 </div>
               </div>
@@ -388,7 +388,7 @@ export default function LandingPage() {
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <Link
                 href="/demo"
-                className="group inline-flex items-center gap-2 rounded-[6px] bg-ivory hover:bg-white text-ink px-6 sm:px-7 py-3 text-[14px] sm:text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
+                className="group inline-flex items-center gap-2 rounded-[6px] bg-ivory hover:bg-white text-ink px-6 sm:px-7 py-3 text-[14px] sm:text-[15px] font-semibold shadow-md transition-all active:scale-[0.98]"
               >
                 <span>Click Here to Test the Live HFC System</span>
                 <span aria-hidden className="text-[12px]">↗</span>
@@ -398,7 +398,7 @@ export default function LandingPage() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-ivory/80 hover:text-ivory text-sm font-medium underline underline-offset-4"
+                className="inline-flex items-center gap-2 text-ivory/80 hover:text-ivory text-sm font-semibold underline underline-offset-4"
               >
                 <MessageCircle className="w-4 h-4 fill-current text-emerald-400" />
                 <span>Ask Haseeb or Our Team on WhatsApp</span>
@@ -413,10 +413,10 @@ export default function LandingPage() {
         <section id="pricing" aria-labelledby="pricing-heading" className="px-3 sm:px-6 lg:px-8 py-18 sm:py-24">
           <div className="max-w-[1280px] mx-auto">
             <div className="text-center max-w-2xl mx-auto">
-              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
+              <p className="text-[12px] sm:text-[13px] font-mono font-semibold tracking-wider uppercase text-ink/60">
                 <span className="text-rush mr-1.5">•</span> [04] SIMPLE &quot;NO-HEADACHE&quot; PRICING
               </p>
-              {/* Section Heading: 56px at reference laptop screen, weight 400 */}
+              {/* Section Heading: 56px at reference laptop screen, weight 500 */}
               <h2
                 id="pricing-heading"
                 className="mt-3 text-ink fluid-heading"
@@ -433,19 +433,19 @@ export default function LandingPage() {
             <div className="mt-12 sm:mt-14 max-w-3xl mx-auto rounded-[18px] sm:rounded-[24px] bg-white border-2 border-ink p-7 sm:p-12 shadow-xl">
               <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-ink/10">
                 <div>
-                  <span className="text-xs font-mono font-medium tracking-wider uppercase text-rush">
+                  <span className="text-xs font-mono font-semibold tracking-wider uppercase text-rush">
                     ALL-IN-ONE PACKAGE
                   </span>
-                  <h3 className="mt-2 text-xl sm:text-2xl font-medium text-ink tracking-tight">
+                  <h3 className="mt-2 text-xl sm:text-2xl font-semibold text-ink tracking-tight">
                     Complete Restaurant Setup (24-Hour Turnaround)
                   </h3>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl sm:text-5xl font-normal text-ink tracking-tight font-mono">
-                    45,000 <span className="text-xl sm:text-2xl font-normal font-sans">PKR</span>
+                  <div className="text-3xl sm:text-5xl font-medium text-ink tracking-tight font-mono">
+                    45,000 <span className="text-xl sm:text-2xl font-semibold font-sans">PKR</span>
                   </div>
                   {/* Sub-callout: no dash between sentences */}
-                  <div className="text-xs sm:text-sm font-medium text-emerald-700 mt-1">
+                  <div className="text-xs sm:text-sm font-semibold text-emerald-700 mt-1">
                     One-Time Setup. Zero Commission Per Order
                   </div>
                 </div>
@@ -453,7 +453,7 @@ export default function LandingPage() {
 
               {/* What’s Included (Bullet List) */}
               <div className="mt-8">
-                <p className="text-xs font-mono uppercase tracking-wider text-ink/50 font-medium mb-4">
+                <p className="text-xs font-mono uppercase tracking-wider text-ink/60 font-semibold mb-4">
                   WHAT&apos;S INCLUDED:
                 </p>
                 <ul className="space-y-3.5">
@@ -473,11 +473,11 @@ export default function LandingPage() {
 
               {/* Risk-Reversal Guarantee Box */}
               <div className="mt-9 rounded-[10px] bg-amber-500/10 border border-amber-600/20 p-5 sm:p-6">
-                <div className="flex items-center gap-2 text-xs font-mono font-medium text-amber-900 uppercase tracking-wider mb-2">
+                <div className="flex items-center gap-2 text-xs font-mono font-semibold text-amber-900 uppercase tracking-wider mb-2">
                   <ShieldCheck className="w-4 h-4 text-amber-800" />
                   <span>100% Risk-Reversal Guarantee</span>
                 </div>
-                <p className="fluid-paragraph font-medium text-ink leading-relaxed">
+                <p className="fluid-paragraph font-semibold text-ink leading-relaxed">
                   &quot;Send us a photo of your paper menu on WhatsApp today. We will build a working demo with your restaurant&apos;s name and items first. You only pay after you test it on your phone!&quot;
                 </p>
               </div>
@@ -488,7 +488,7 @@ export default function LandingPage() {
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full group inline-flex items-center justify-center gap-2 rounded-[6px] bg-emerald-600 hover:bg-emerald-500 text-white px-7 py-3.5 text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
+                  className="w-full group inline-flex items-center justify-center gap-2 rounded-[6px] bg-emerald-600 hover:bg-emerald-500 text-white px-7 py-3.5 text-[15px] font-semibold shadow-md transition-all active:scale-[0.98]"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
                   <span>Send Your Menu on WhatsApp (+92 345 4159835)</span>
@@ -508,10 +508,10 @@ export default function LandingPage() {
         <section id="faq" aria-labelledby="faq-heading" className="px-3 sm:px-6 lg:px-8 py-18 sm:py-24">
           <div className="max-w-[1280px] mx-auto grid gap-12 lg:grid-cols-[1fr_1.6fr]">
             <div>
-              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
+              <p className="text-[12px] sm:text-[13px] font-mono font-semibold tracking-wider uppercase text-ink/60">
                 <span className="text-rush mr-1.5">•</span> [05] FREQUENTLY ASKED QUESTIONS
               </p>
-              {/* Section Heading: 56px at reference laptop screen, weight 400 */}
+              {/* Section Heading: 56px at reference laptop screen, weight 500 */}
               <h2
                 id="faq-heading"
                 className="mt-4 text-ink fluid-heading"
@@ -527,7 +527,7 @@ export default function LandingPage() {
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-[6px] bg-ink text-ivory px-5 py-2.5 text-sm font-medium hover:bg-neutral-800 transition-all"
+                  className="inline-flex items-center gap-2 rounded-[6px] bg-ink text-ivory px-5 py-2.5 text-sm font-semibold hover:bg-neutral-800 transition-all"
                 >
                   <MessageCircle className="w-4 h-4 fill-current text-emerald-400" />
                   <span>Chat With Us on WhatsApp</span>
@@ -538,7 +538,7 @@ export default function LandingPage() {
             <div className="border-t border-ink/15 divide-y divide-ink/15">
               {FAQ.map((f) => (
                 <details key={f.q} className="group py-5 sm:py-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[clamp(1rem,1.2vw,1.15rem)] font-medium tracking-tight text-ink [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[clamp(1rem,1.2vw,1.15rem)] font-semibold tracking-tight text-ink [&::-webkit-details-marker]:hidden">
                     <span>{f.q}</span>
                     <span
                       aria-hidden
@@ -564,10 +564,10 @@ export default function LandingPage() {
         <footer className="rounded-[18px] sm:rounded-[22px] bg-ink text-ivory px-6 sm:px-10 lg:px-14 pt-16 sm:pt-24 pb-10">
           <div className="max-w-[1280px] mx-auto">
             <div>
-              <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-ivory/50">
+              <p className="text-xs sm:text-sm font-mono font-semibold tracking-wider uppercase text-ivory/60">
                 <span className="text-rush mr-1.5">•</span> 24-HOUR TURNAROUND GUARANTEE
               </p>
-              {/* Section Heading: 56px at reference laptop screen, weight 400 */}
+              {/* Section Heading: 56px at reference laptop screen, weight 500 */}
               <h2 className="mt-4 max-w-[22ch] text-ivory fluid-heading">
                 Kagaz aur register se azaadi lein. Apne restaurant ko automate karein.
               </h2>
@@ -581,7 +581,7 @@ export default function LandingPage() {
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-[6px] bg-emerald-600 hover:bg-emerald-500 text-white px-7 py-3.5 text-[15px] font-medium shadow-md transition-all active:scale-[0.98]"
+                  className="group inline-flex items-center gap-2 rounded-[6px] bg-emerald-600 hover:bg-emerald-500 text-white px-7 py-3.5 text-[15px] font-semibold shadow-md transition-all active:scale-[0.98]"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
                   <span>Get Free Preview on WhatsApp (+92 345 4159835)</span>
@@ -590,7 +590,7 @@ export default function LandingPage() {
 
                 <Link
                   href="/demo"
-                  className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/5 backdrop-blur-md px-6 py-3.5 text-[15px] font-medium hover:bg-white/10 transition-all active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/5 backdrop-blur-md px-6 py-3.5 text-[15px] font-semibold hover:bg-white/10 transition-all active:scale-[0.98]"
                 >
                   <span>Try Live Counter Demo</span>
                   <span aria-hidden className="text-[12px]">↗</span>
@@ -601,7 +601,7 @@ export default function LandingPage() {
             {/* Sitemap Footer Grid - 3 Columns */}
             <div className="mt-18 sm:mt-24 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-3">
               <div>
-                <p className="flex items-center gap-2 text-[20px] font-medium tracking-tight text-white">
+                <p className="flex items-center gap-2 text-[20px] font-bold tracking-tight text-white">
                   parchiOS <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush" />
                 </p>
                 <p className="mt-3 text-ivory/60 fluid-paragraph max-w-[20rem]">
@@ -612,7 +612,7 @@ export default function LandingPage() {
                     href={WHATSAPP_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-mono font-medium text-emerald-400 hover:text-emerald-300"
+                    className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-emerald-400 hover:text-emerald-300"
                   >
                     <span>WhatsApp: +92 345 4159835</span>
                   </a>
@@ -692,7 +692,7 @@ export default function LandingPage() {
 function FooterCol({ title, links }: { title: string; links: [string, string][] }) {
   return (
     <div>
-      <p className="text-[12px] font-mono tracking-wider uppercase text-ivory/40">{title}</p>
+      <p className="text-[12px] font-mono font-semibold tracking-wider uppercase text-ivory/50">{title}</p>
       <ul className="mt-4 space-y-2.5">
         {links.map(([label, href]) => (
           <li key={label}>
