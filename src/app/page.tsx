@@ -11,11 +11,6 @@ import {
   ChefHat,
   ShieldCheck,
   ArrowRight,
-  TrendingUp,
-  Receipt,
-  Clock,
-  Printer,
-  FileText,
 } from 'lucide-react';
 
 const PROBLEMS = [
@@ -39,7 +34,7 @@ const PROBLEMS = [
     num: '03',
     title: 'Zero Foodpanda-Style Commissions (100% Yours Forever)',
     description:
-      "Don't pay 25%–30% commission or heavy monthly software fees. Pay a one-time setup fee and own your restaurant's complete order, delivery, and customer database forever.",
+      "Don't pay 25% to 30% commission or heavy monthly software fees. Pay a one-time setup fee and own your restaurant's complete order, delivery, and customer database forever.",
     icon: ShieldCheck,
     badge: '0% COMMISSION',
   },
@@ -65,7 +60,7 @@ const FEATURES = [
   {
     title: 'Custom Branded for Your Restaurant',
     description:
-      'Your logo, your menu deals, and your colors—deployed and live within 24 Hours.',
+      'Your logo, your menu deals, and your colors. Deployed and live within 24 Hours.',
     img: '/images/landing/kitchen-fire-pass.jpg',
     tag: '24-HOUR LAUNCH',
     icon: Sparkles,
@@ -76,7 +71,6 @@ const FEATURES = [
       'No need to buy a 150,000 PKR POS machine. Runs smoothly on any old laptop, tablet, cheap Android phone, or existing counter PC.',
     tag: 'HARDWARE FREEDOM',
     icon: Laptop,
-    isHardwareCard: true,
   },
 ];
 
@@ -91,7 +85,7 @@ const FAQ = [
   },
   {
     q: 'Is 45,000 PKR really a one-time fee, or are there hidden monthly charges?',
-    a: 'It is 100% one-time setup. There are zero per-order commissions (no 25% Foodpanda cut) and zero recurring monthly software fees. You own your system, menus, and customer database forever.',
+    a: 'It is 100% one-time setup. There are zero per-order commissions and zero recurring monthly software fees. You own your system, menus, and customer database forever.',
   },
   {
     q: 'How do you upload our restaurant menu and deals?',
@@ -141,18 +135,18 @@ export default function LandingPage() {
 
           <div className="w-full max-w-[1280px] mx-auto px-5 sm:px-10 lg:px-14 pb-12 sm:pb-20 pt-36 sm:pt-44">
             {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-ivory text-xs sm:text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-ivory text-xs sm:text-sm font-normal mb-6">
               <span className="w-2 h-2 rounded-full bg-rush animate-pulse" />
               <span>Built for Pakistani Fast-Food, Cafes &amp; Cloud Kitchens 🇵🇰</span>
             </div>
 
-            {/* Main Headline (H1) */}
-            <h1 className="text-ivory font-bold tracking-[-0.035em] leading-[1.04] text-[clamp(2.35rem,5.5vw,5.5rem)] max-w-[20ch]">
-              Kagaz Aur Register Ko Chhorein—Apne Restaurant Ko 5-Second Digital Parchi System Pe Shift Karein.
+            {/* Main Headline (H1): 56px at reference laptop screen, weight 400, no dash between sentences */}
+            <h1 className="text-ivory fluid-heading max-w-[26ch]">
+              Kagaz Aur Register Ko Chhorein. Apne Restaurant Ko 5-Second Digital Parchi System Pe Shift Karein.
             </h1>
 
-            {/* Sub-headline */}
-            <p className="mt-6 sm:mt-8 max-w-[42rem] text-ivory/85 text-[clamp(1.05rem,1.35vw,1.25rem)] leading-relaxed font-normal">
+            {/* Sub-headline: 16px at reference laptop screen, weight 400 */}
+            <p className="mt-6 sm:mt-8 max-w-[42rem] text-ivory/85 fluid-hero-sub">
               ParchiOS replaces messy register books and expensive monthly POS software. Punch counter orders in 5 seconds, send instant Kitchen Order Tickets (KOT), and get 100% accurate daily cash sales on your phone with Zero Monthly Commission.
             </p>
 
@@ -163,7 +157,7 @@ export default function LandingPage() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-7 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-semibold shadow-lg shadow-emerald-900/40 transition-all active:scale-[0.98]"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-7 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-medium shadow-lg shadow-emerald-900/40 transition-all active:scale-[0.98]"
               >
                 <MessageCircle className="w-4 h-4 fill-current shrink-0" />
                 <span>Get a Free Live Preview With Your Menu (WhatsApp Us)</span>
@@ -173,7 +167,7 @@ export default function LandingPage() {
               {/* Secondary CTA (Live Demo Dashboard) */}
               <Link
                 href="/demo"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-md text-ivory px-6 sm:px-7 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-semibold hover:bg-white/20 transition-all active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-md text-ivory px-6 sm:px-7 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-medium hover:bg-white/20 transition-all active:scale-[0.98]"
               >
                 <span>Try Live Counter Demo</span>
                 <span aria-hidden className="text-[12px]">↗</span>
@@ -191,17 +185,20 @@ export default function LandingPage() {
           className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 py-20 sm:py-32"
         >
           <div className="max-w-[1280px] mx-auto">
-            <p className="text-[12px] sm:text-[13px] font-semibold tracking-wider uppercase text-rush">
-              [01] &nbsp;THE 3 BIG PROBLEMS WE SOLVE
+            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-rush">
+              [01] THE 3 BIG PROBLEMS WE SOLVE
             </p>
 
+            {/* Section Heading: 56px at reference laptop screen, weight 400 */}
             <h2
               id="problems-heading"
-              className="mt-4 sm:mt-6 max-w-[22ch] text-[clamp(2.1rem,4.8vw,4.2rem)] font-bold leading-[1.06] tracking-[-0.035em]"
+              className="mt-4 sm:mt-6 max-w-[26ch] text-ivory fluid-heading"
             >
               Restaurant owners buy software when they feel the pain of their current setup.
             </h2>
-            <p className="mt-4 text-ivory/70 text-base sm:text-lg max-w-[36rem]">
+
+            {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
+            <p className="mt-4 text-ivory/75 max-w-[42rem] fluid-section-sub">
               Messy paper notes, shouting at the kitchen, and losing cash at closing time. Here is how ParchiOS eliminates the daily headache:
             </p>
 
@@ -216,7 +213,7 @@ export default function LandingPage() {
                   >
                     <div>
                       <div className="flex items-center justify-between gap-3 mb-6">
-                        <span className="text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-full bg-rush/20 text-rush border border-rush/30">
+                        <span className="text-[11px] font-mono font-medium tracking-wider px-2.5 py-1 rounded-full bg-rush/20 text-rush border border-rush/30">
                           {prob.badge}
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-ivory shrink-0">
@@ -224,18 +221,19 @@ export default function LandingPage() {
                         </div>
                       </div>
 
-                      <h3 className="text-[19px] sm:text-[21px] font-bold leading-snug tracking-[-0.02em] text-ivory">
+                      <h3 className="text-[19px] sm:text-[21px] font-medium leading-snug tracking-[-0.015em] text-ivory">
                         {prob.title}
                       </h3>
 
-                      <p className="mt-4 text-ivory/70 text-[15px] sm:text-[16px] leading-relaxed">
+                      {/* Paragraph: 14px at reference laptop screen, weight 400 */}
+                      <p className="mt-4 text-ivory/70 fluid-paragraph">
                         {prob.description}
                       </p>
                     </div>
 
                     <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-ivory/40">
                       <span>PROBLEM #{prob.num}</span>
-                      <span className="text-rush font-semibold">100% SOLVED</span>
+                      <span className="text-rush font-medium">100% SOLVED</span>
                     </div>
                   </div>
                 );
@@ -249,17 +247,20 @@ export default function LandingPage() {
         {/* ============================================================ */}
         <section id="features" aria-labelledby="features-heading" className="px-3 sm:px-8 py-20 sm:py-32">
           <div className="max-w-[1280px] mx-auto">
-            <p className="text-[12px] sm:text-[13px] font-semibold tracking-wider uppercase text-ink/50">
-              [02] &nbsp;CORE FEATURES (PRACTICAL &amp; NO-NONSENSE)
+            <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
+              [02] CORE FEATURES (PRACTICAL &amp; NO-NONSENSE)
             </p>
 
+            {/* Section Heading: 56px at reference laptop screen, weight 400 */}
             <h2
               id="features-heading"
-              className="mt-4 sm:mt-6 max-w-[24ch] text-[clamp(2.1rem,4.5vw,4.2rem)] font-bold leading-[1.06] tracking-[-0.035em] text-ink"
+              className="mt-4 sm:mt-6 max-w-[28ch] text-ink fluid-heading"
             >
               Engineered specifically for busy Pakistani food counters.
             </h2>
-            <p className="mt-4 text-ink/70 text-base sm:text-lg max-w-[36rem]">
+
+            {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
+            <p className="mt-4 text-ink/75 max-w-[42rem] fluid-section-sub">
               No confusing IT terminology. Straightforward tools that let you punch fast, control kitchen passes, and watch your daily sales from your phone.
             </p>
 
@@ -273,7 +274,7 @@ export default function LandingPage() {
                     className="absolute inset-0 bg-cover bg-center filter contrast-105"
                     style={{ backgroundImage: `url(${FEATURES[0].img})` }}
                   />
-                  <div className="absolute top-4 left-4 bg-ink/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono font-semibold text-ivory border border-white/10">
+                  <div className="absolute top-4 left-4 bg-ink/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono font-medium text-ivory border border-white/10">
                     {FEATURES[0].tag}
                   </div>
                 </div>
@@ -281,10 +282,11 @@ export default function LandingPage() {
                   <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-4">
                     <Zap className="w-5 h-5 text-rush" />
                   </div>
-                  <h3 className="text-[clamp(1.75rem,2.8vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.025em] text-ink">
+                  <h3 className="text-[clamp(1.5rem,2.2vw,2rem)] font-medium leading-[1.15] tracking-[-0.02em] text-ink">
                     {FEATURES[0].title}
                   </h3>
-                  <p className="mt-4 text-[16px] sm:text-[17px] leading-relaxed text-ink/75">
+                  {/* Paragraph: 14px at reference laptop screen, weight 400 */}
+                  <p className="mt-4 text-ink/75 fluid-paragraph">
                     {FEATURES[0].description}
                   </p>
                 </div>
@@ -298,7 +300,7 @@ export default function LandingPage() {
                     className="absolute inset-0 bg-cover bg-center filter contrast-105"
                     style={{ backgroundImage: `url(${FEATURES[1].img})` }}
                   />
-                  <div className="absolute top-4 left-4 bg-ink/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono font-semibold text-ivory border border-white/10">
+                  <div className="absolute top-4 left-4 bg-ink/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono font-medium text-ivory border border-white/10">
                     {FEATURES[1].tag}
                   </div>
                 </div>
@@ -306,10 +308,11 @@ export default function LandingPage() {
                   <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-4">
                     <Smartphone className="w-5 h-5 text-rush" />
                   </div>
-                  <h3 className="text-[clamp(1.75rem,2.8vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.025em] text-ink">
+                  <h3 className="text-[clamp(1.5rem,2.2vw,2rem)] font-medium leading-[1.15] tracking-[-0.02em] text-ink">
                     {FEATURES[1].title}
                   </h3>
-                  <p className="mt-4 text-[16px] sm:text-[17px] leading-relaxed text-ink/75">
+                  {/* Paragraph: 14px at reference laptop screen, weight 400 */}
+                  <p className="mt-4 text-ink/75 fluid-paragraph">
                     {FEATURES[1].description}
                   </p>
                 </div>
@@ -323,17 +326,18 @@ export default function LandingPage() {
                     <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-5">
                       <Sparkles className="w-5 h-5 text-rush" />
                     </div>
-                    <span className="text-xs font-mono font-bold tracking-wider uppercase text-ink/50">
+                    <span className="text-xs font-mono font-medium tracking-wider uppercase text-ink/50">
                       {FEATURES[2].tag}
                     </span>
-                    <h3 className="mt-3 text-[22px] sm:text-[24px] font-bold tracking-tight text-ink">
+                    <h3 className="mt-3 text-[20px] sm:text-[22px] font-medium tracking-tight text-ink">
                       {FEATURES[2].title}
                     </h3>
-                    <p className="mt-3 text-ink/70 text-[15px] sm:text-[16px] leading-relaxed">
+                    {/* Paragraph: 14px at reference laptop screen, weight 400 */}
+                    <p className="mt-3 text-ink/75 fluid-paragraph">
                       {FEATURES[2].description}
                     </p>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-semibold text-rush">
+                  <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-medium text-rush">
                     ✓ Deployed &amp; Live In 24 Hours
                   </div>
                 </div>
@@ -344,17 +348,18 @@ export default function LandingPage() {
                     <div className="w-10 h-10 rounded-xl bg-ink text-ivory flex items-center justify-center mb-5">
                       <Laptop className="w-5 h-5 text-rush" />
                     </div>
-                    <span className="text-xs font-mono font-bold tracking-wider uppercase text-ink/50">
+                    <span className="text-xs font-mono font-medium tracking-wider uppercase text-ink/50">
                       {FEATURES[3].tag}
                     </span>
-                    <h3 className="mt-3 text-[22px] sm:text-[24px] font-bold tracking-tight text-ink">
+                    <h3 className="mt-3 text-[20px] sm:text-[22px] font-medium tracking-tight text-ink">
                       {FEATURES[3].title}
                     </h3>
-                    <p className="mt-3 text-ink/70 text-[15px] sm:text-[16px] leading-relaxed">
+                    {/* Paragraph: 14px at reference laptop screen, weight 400 */}
+                    <p className="mt-3 text-ink/75 fluid-paragraph">
                       {FEATURES[3].description}
                     </p>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-semibold text-emerald-700">
+                  <div className="mt-8 pt-4 border-t border-ink/10 text-xs font-medium text-emerald-700">
                     ✓ Saves 150,000 PKR Hardware Cost
                   </div>
                 </div>
@@ -374,49 +379,50 @@ export default function LandingPage() {
         >
           <div className="max-w-[1280px] mx-auto">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="text-[12px] sm:text-[13px] font-semibold tracking-wider uppercase text-rush">
-                [03] &nbsp;LIVE CASE STUDY &amp; SOCIAL PROOF
+              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-rush">
+                [03] LIVE CASE STUDY &amp; SOCIAL PROOF
               </p>
               <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/10 text-ivory border border-white/15">
                 ACTIVE DAILY IN SAMAHNI, AJK
               </span>
             </div>
 
+            {/* Section Heading: 56px at reference laptop screen, weight 400 */}
             <h2
               id="case-study-heading"
-              className="mt-4 sm:mt-6 text-[clamp(2.1rem,4.5vw,4rem)] font-bold leading-[1.08] tracking-[-0.035em] text-ivory"
+              className="mt-4 sm:mt-6 text-ivory fluid-heading"
             >
               Live in Action: HFC (Haseeb Food Cafe)
             </h2>
 
-            {/* Testimonial Quote Box */}
+            {/* Testimonial Quote Box: 24px at reference laptop screen, weight 400 */}
             <div className="mt-10 sm:mt-14 rounded-[24px] sm:rounded-[36px] bg-white/[0.06] border border-white/15 p-8 sm:p-12 backdrop-blur-md">
               <div className="text-rush text-4xl sm:text-5xl font-serif leading-none mb-4">“</div>
-              <p className="text-[clamp(1.2rem,2.2vw,1.9rem)] font-semibold leading-relaxed tracking-[-0.015em] text-ivory max-w-[48ch]">
+              <p className="fluid-section-sub text-ivory max-w-[48ch]">
                 Before ParchiOS, our counter staff used manual register books during peak rush hours, leading to missed orders and 45 minutes of daily calculation at night. ParchiOS put our entire menu, kitchen slips, and daily sales report on autopilot in 24 hours.
               </p>
 
               <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <div className="text-base sm:text-lg font-bold text-white">
+                  <div className="text-base sm:text-lg font-medium text-white">
                     Haseeb &amp; Team
                   </div>
-                  <div className="text-xs sm:text-sm text-ivory/60">
+                  <div className="text-xs sm:text-sm text-ivory/60 fluid-paragraph">
                     Owner &amp; Operator, Haseeb Food Cafe (Samahni, AJK)
                   </div>
                 </div>
 
                 <div className="flex items-center gap-6 text-xs sm:text-sm font-mono text-ivory/70">
                   <div>
-                    <span className="text-rush font-bold">0</span> Missed Orders
+                    <span className="text-rush font-medium">0</span> Missed Orders
                   </div>
                   <div className="hidden sm:block">•</div>
                   <div>
-                    <span className="text-emerald-400 font-bold">45 Mins</span> Saved Daily
+                    <span className="text-emerald-400 font-medium">45 Mins</span> Saved Daily
                   </div>
                   <div className="hidden sm:block">•</div>
                   <div>
-                    <span className="text-ivory font-bold">24 Hrs</span> Setup Time
+                    <span className="text-ivory font-medium">24 Hrs</span> Setup Time
                   </div>
                 </div>
               </div>
@@ -426,7 +432,7 @@ export default function LandingPage() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
                 href="/demo"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-ivory hover:bg-white text-ink px-8 py-4 text-[15px] font-bold shadow-lg transition-all active:scale-[0.98]"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-ivory hover:bg-white text-ink px-8 py-4 text-[15px] font-medium shadow-lg transition-all active:scale-[0.98]"
               >
                 <span>Click Here to Test the Live HFC System</span>
                 <span aria-hidden className="text-[13px]">↗</span>
@@ -436,7 +442,7 @@ export default function LandingPage() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-ivory/80 hover:text-ivory text-sm font-semibold underline underline-offset-4"
+                className="inline-flex items-center gap-2 text-ivory/80 hover:text-ivory text-sm font-medium underline underline-offset-4"
               >
                 <MessageCircle className="w-4 h-4 fill-current text-emerald-400" />
                 <span>Ask Haseeb or Our Team on WhatsApp</span>
@@ -451,16 +457,18 @@ export default function LandingPage() {
         <section id="pricing" aria-labelledby="pricing-heading" className="px-3 sm:px-8 py-20 sm:py-32">
           <div className="max-w-[1280px] mx-auto">
             <div className="text-center max-w-2xl mx-auto">
-              <p className="text-[12px] sm:text-[13px] font-semibold tracking-wider uppercase text-rush">
-                [04] &nbsp;SIMPLE &quot;NO-HEADACHE&quot; PRICING
+              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-rush">
+                [04] SIMPLE &quot;NO-HEADACHE&quot; PRICING
               </p>
+              {/* Section Heading: 56px at reference laptop screen, weight 400 */}
               <h2
                 id="pricing-heading"
-                className="mt-3 text-[clamp(2.1rem,4.2vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.035em] text-ink"
+                className="mt-3 text-ink fluid-heading"
               >
                 Zero monthly fees. Zero per-order commissions.
               </h2>
-              <p className="mt-3 text-ink/70 text-base sm:text-lg">
+              {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
+              <p className="mt-3 text-ink/75 max-w-[36rem] mx-auto fluid-section-sub">
                 One transparent setup price. You own your restaurant system and customer list forever.
               </p>
             </div>
@@ -469,26 +477,27 @@ export default function LandingPage() {
             <div className="mt-12 sm:mt-16 max-w-3xl mx-auto rounded-[28px] sm:rounded-[40px] bg-white border-2 border-ink p-8 sm:p-14 shadow-xl">
               <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-ink/10">
                 <div>
-                  <span className="text-xs font-mono font-bold tracking-wider uppercase text-rush bg-rush/10 px-2.5 py-1 rounded-full">
+                  <span className="text-xs font-mono font-medium tracking-wider uppercase text-rush bg-rush/10 px-2.5 py-1 rounded-full">
                     ALL-IN-ONE PACKAGE
                   </span>
-                  <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+                  <h3 className="mt-2 text-xl sm:text-2xl font-medium text-ink tracking-tight">
                     Complete Restaurant Setup (24-Hour Turnaround)
                   </h3>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl sm:text-5xl font-extrabold text-ink tracking-tight font-mono">
-                    45,000 <span className="text-xl sm:text-2xl font-bold font-sans">PKR</span>
+                  <div className="text-3xl sm:text-5xl font-normal text-ink tracking-tight font-mono">
+                    45,000 <span className="text-xl sm:text-2xl font-normal font-sans">PKR</span>
                   </div>
-                  <div className="text-xs sm:text-sm font-semibold text-emerald-700 mt-1">
-                    One-Time Setup — Zero Commission Per Order
+                  {/* Sub-callout: no dash between sentences */}
+                  <div className="text-xs sm:text-sm font-medium text-emerald-700 mt-1">
+                    One-Time Setup. Zero Commission Per Order
                   </div>
                 </div>
               </div>
 
               {/* What’s Included (Bullet List) */}
               <div className="mt-8">
-                <p className="text-xs font-mono uppercase tracking-wider text-ink/50 font-bold mb-4">
+                <p className="text-xs font-mono uppercase tracking-wider text-ink/50 font-medium mb-4">
                   WHAT&apos;S INCLUDED:
                 </p>
                 <ul className="space-y-4">
@@ -498,22 +507,22 @@ export default function LandingPage() {
                     'Counter POS + Kitchen Order Tracking + Owner Sales Dashboard',
                     '1-on-1 WhatsApp staff training & support',
                   ].map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-[15px] sm:text-[17px] text-ink font-medium leading-snug">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <li key={idx} className="flex items-start gap-3 text-ink fluid-paragraph">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Risk-Reversal Guarantee Box */}
+              {/* Risk-Reversal Guarantee Box: no dash between sentences */}
               <div className="mt-10 rounded-2xl bg-amber-500/10 border border-amber-600/20 p-5 sm:p-6">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-900 uppercase tracking-wider mb-2">
+                <div className="flex items-center gap-2 text-xs font-mono font-medium text-amber-900 uppercase tracking-wider mb-2">
                   <ShieldCheck className="w-4 h-4 text-amber-800" />
                   <span>100% Risk-Reversal Guarantee</span>
                 </div>
-                <p className="text-[14px] sm:text-[15px] font-semibold text-ink leading-relaxed">
-                  &quot;Send us a photo of your paper menu on WhatsApp today. We will build a working demo with your restaurant&apos;s name and items first—you only pay after you test it on your phone!&quot;
+                <p className="fluid-paragraph font-medium text-ink leading-relaxed">
+                  &quot;Send us a photo of your paper menu on WhatsApp today. We will build a working demo with your restaurant&apos;s name and items first. You only pay after you test it on your phone!&quot;
                 </p>
               </div>
 
@@ -523,13 +532,13 @@ export default function LandingPage() {
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full group inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 text-[16px] font-bold shadow-lg shadow-emerald-800/20 transition-all active:scale-[0.98]"
+                  className="w-full group inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 text-[15px] sm:text-[16px] font-medium shadow-lg shadow-emerald-800/20 transition-all active:scale-[0.98]"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
                   <span>Send Your Menu on WhatsApp (+92 345 4159835)</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
-                <p className="text-center text-xs text-ink/50 mt-3 font-medium">
+                <p className="text-center text-xs text-ink/50 mt-3 font-normal">
                   We reply within 15 minutes • No payment required to see your demo
                 </p>
               </div>
@@ -543,16 +552,18 @@ export default function LandingPage() {
         <section id="faq" aria-labelledby="faq-heading" className="px-3 sm:px-8 py-20 sm:py-32">
           <div className="max-w-[1280px] mx-auto grid gap-12 lg:grid-cols-[1fr_1.6fr]">
             <div>
-              <p className="text-[12px] sm:text-[13px] font-semibold tracking-wider uppercase text-ink/50">
-                [05] &nbsp;FREQUENTLY ASKED QUESTIONS
+              <p className="text-[12px] sm:text-[13px] font-mono tracking-wider uppercase text-ink/50">
+                [05] FREQUENTLY ASKED QUESTIONS
               </p>
+              {/* Section Heading: 56px at reference laptop screen, weight 400 */}
               <h2
                 id="faq-heading"
-                className="mt-4 text-[clamp(2.1rem,4.2vw,3.75rem)] font-bold leading-[1.06] tracking-[-0.035em] text-ink"
+                className="mt-4 text-ink fluid-heading"
               >
                 Clear answers before you shift from paper registers.
               </h2>
-              <p className="mt-4 text-ink/65 text-sm sm:text-base leading-relaxed">
+              {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
+              <p className="mt-4 text-ink/75 fluid-section-sub">
                 Have questions about your thermal printer model, menu deals, or counter staff? Reach out directly on WhatsApp anytime.
               </p>
               <div className="mt-8">
@@ -560,7 +571,7 @@ export default function LandingPage() {
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-ink text-ivory px-6 py-3 text-sm font-semibold hover:bg-neutral-800 transition-all"
+                  className="inline-flex items-center gap-2 rounded-full bg-ink text-ivory px-6 py-3 text-sm font-medium hover:bg-neutral-800 transition-all"
                 >
                   <MessageCircle className="w-4 h-4 fill-current text-emerald-400" />
                   <span>Chat With Us on WhatsApp</span>
@@ -571,7 +582,7 @@ export default function LandingPage() {
             <div className="border-t border-ink/15 divide-y divide-ink/15">
               {FAQ.map((f) => (
                 <details key={f.q} className="group py-5 sm:py-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[clamp(1.05rem,1.4vw,1.25rem)] font-semibold tracking-tight text-ink [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[clamp(1rem,1.2vw,1.15rem)] font-medium tracking-tight text-ink [&::-webkit-details-marker]:hidden">
                     <span>{f.q}</span>
                     <span
                       aria-hidden
@@ -581,7 +592,8 @@ export default function LandingPage() {
                       <span className="text-xs font-mono hidden group-open:inline">−</span>
                     </span>
                   </summary>
-                  <p className="mt-4 pr-10 text-ink/75 text-sm sm:text-[15px] leading-relaxed font-normal">
+                  {/* Paragraph: 14px at reference laptop screen, weight 400 */}
+                  <p className="mt-4 pr-10 text-ink/75 fluid-paragraph">
                     {f.a}
                   </p>
                 </details>
@@ -596,13 +608,15 @@ export default function LandingPage() {
         <footer className="rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-ink text-ivory px-6 sm:px-12 lg:px-16 pt-18 sm:pt-28 pb-10">
           <div className="max-w-[1280px] mx-auto">
             <div>
-              <p className="text-xs sm:text-sm font-semibold font-mono tracking-wider uppercase text-rush">
+              <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-rush">
                 24-HOUR TURNAROUND GUARANTEE
               </p>
-              <h2 className="mt-4 max-w-[18ch] text-[clamp(2.4rem,6.5vw,5.5rem)] font-bold leading-[1.0] tracking-[-0.035em] text-ivory">
+              {/* Section Heading: 56px at reference laptop screen, weight 400 */}
+              <h2 className="mt-4 max-w-[22ch] text-ivory fluid-heading">
                 Kagaz aur register se azaadi lein. Apne restaurant ko automate karein.
               </h2>
-              <p className="mt-6 max-w-[36rem] text-ivory/75 text-base sm:text-lg leading-relaxed">
+              {/* Section Sub-heading: 24px at reference laptop screen, weight 400 */}
+              <p className="mt-6 max-w-[38rem] text-ivory/75 fluid-section-sub">
                 WhatsApp us a photo of your paper menu right now. We will configure a live preview with your restaurant deals and prices before you pay a single rupee.
               </p>
 
@@ -611,7 +625,7 @@ export default function LandingPage() {
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 text-[15px] font-bold shadow-lg shadow-emerald-950/40 transition-all active:scale-[0.98]"
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 text-[15px] font-medium shadow-lg shadow-emerald-950/40 transition-all active:scale-[0.98]"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
                   <span>Get Free Preview on WhatsApp (+92 345 4159835)</span>
@@ -620,7 +634,7 @@ export default function LandingPage() {
 
                 <Link
                   href="/demo"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-7 py-4 text-[15px] font-semibold hover:bg-white/10 transition-all active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-7 py-4 text-[15px] font-medium hover:bg-white/10 transition-all active:scale-[0.98]"
                 >
                   <span>Try Live Counter Demo</span>
                   <span aria-hidden className="text-[12px]">↗</span>
@@ -631,10 +645,10 @@ export default function LandingPage() {
             {/* Sitemap Footer Grid */}
             <div className="mt-20 sm:mt-28 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <p className="flex items-center gap-2 text-[20px] font-bold tracking-tight text-white">
+                <p className="flex items-center gap-2 text-[20px] font-medium tracking-tight text-white">
                   parchiOS <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush" />
                 </p>
-                <p className="mt-3 text-ivory/60 text-sm leading-relaxed max-w-[20rem]">
+                <p className="mt-3 text-ivory/60 fluid-paragraph max-w-[20rem]">
                   The 5-second digital parchi system for Pakistani fast-food, cafes, and cloud kitchens. Zero monthly commission.
                 </p>
                 <div className="mt-4">
@@ -642,7 +656,7 @@ export default function LandingPage() {
                     href={WHATSAPP_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-emerald-400 hover:text-emerald-300"
+                    className="inline-flex items-center gap-2 text-xs font-mono font-medium text-emerald-400 hover:text-emerald-300"
                   >
                     <span>WhatsApp: +92 345 4159835</span>
                   </a>
@@ -731,12 +745,12 @@ export default function LandingPage() {
 function FooterCol({ title, links }: { title: string; links: [string, string][] }) {
   return (
     <div>
-      <p className="text-[12px] font-semibold tracking-wider uppercase text-ivory/40">{title}</p>
+      <p className="text-[12px] font-mono tracking-wider uppercase text-ivory/40">{title}</p>
       <ul className="mt-4 space-y-2.5">
         {links.map(([label, href]) => (
           <li key={label}>
             {href.startsWith('/') && !href.startsWith('/api') ? (
-              <Link href={href} className="text-sm text-ivory/70 hover:text-white transition-colors">
+              <Link href={href} className="fluid-paragraph text-ivory/70 hover:text-white transition-colors">
                 {label}
               </Link>
             ) : (
@@ -744,7 +758,7 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
                 href={href}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="text-sm text-ivory/70 hover:text-white transition-colors"
+                className="fluid-paragraph text-ivory/70 hover:text-white transition-colors"
               >
                 {label}
               </a>

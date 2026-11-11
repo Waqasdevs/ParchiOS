@@ -48,6 +48,33 @@
    Strictly no italics, no 900 weights, balanced headings & pretty body copy.
    ============================================================================ */
 @layer components {
+  /* Responsive Viewport Scaled Typography (Reference: 2256 x 1504 laptop screen) */
+  .fluid-heading {
+    font-size: clamp(1.875rem, 2.33vw + 1.3rem, 3.5rem); /* ~30px on 390px, 56px on 1504px+ */
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    font-weight: 400 !important;
+    text-wrap: balance;
+  }
+  .fluid-hero-sub {
+    font-size: clamp(0.875rem, 0.3vw + 0.72rem, 1rem); /* 14px on mobile, 16px on 1504px+ */
+    line-height: 1.6;
+    font-weight: 400 !important;
+    text-wrap: pretty;
+  }
+  .fluid-section-sub {
+    font-size: clamp(1.125rem, 1vw + 0.6rem, 1.5rem); /* 18px on mobile, 24px on 1504px+ */
+    line-height: 1.45;
+    font-weight: 400 !important;
+    text-wrap: pretty;
+  }
+  .fluid-paragraph {
+    font-size: clamp(0.8125rem, 0.2vw + 0.7rem, 0.875rem); /* 13px on mobile, 14px on 1504px+ */
+    line-height: 1.6;
+    font-weight: 400 !important;
+    text-wrap: pretty;
+  }
+
   .heading-1 {
     font-size: clamp(2.35rem, 4.6vw + 1rem, 4.5rem);
     line-height: 1.08;
