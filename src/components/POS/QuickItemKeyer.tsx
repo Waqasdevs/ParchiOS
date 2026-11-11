@@ -190,9 +190,9 @@ export const QuickItemKeyer: React.FC<QuickItemKeyerProps> = ({
   return (
     <div className="relative bg-white dark:bg-[#27231D] rounded-2xl p-3 border border-black/5 dark:border-white/5 shadow-apple-sm transition-all">
       {/* Top Main Fast Bar */}
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
         {/* Fast Input Field */}
-        <div className="relative flex-1 min-w-[200px]">
+        <div className="relative flex-1 min-w-[140px] sm:min-w-[200px]">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-apple-blue font-mono font-bold text-sm pointer-events-none">
             <Hash className="w-4 h-4" />
           </div>

@@ -49,6 +49,7 @@ interface CartDrawerProps {
   onRemoveItem: (index: number) => void;
   onClearCart: () => void;
   onCompleteOrder: (paymentMethod: PaymentMethod, paymentStatus: PaymentStatus) => void;
+  onCloseMobile?: () => void;
 }
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({
@@ -71,6 +72,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onRemoveItem,
   onClearCart,
   onCompleteOrder,
+  onCloseMobile,
 }) => {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
   const [showDiscountInput, setShowDiscountInput] = useState(false);
@@ -131,7 +133,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   return (
-    <div className="w-80 lg:w-84 xl:w-96 h-screen flex flex-col justify-between border-l border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#201D18]/70 backdrop-blur-2xl select-none z-20 shrink-0">
+    <div className="w-full lg:w-84 xl:w-96 h-full lg:h-screen flex flex-col justify-between border-l border-black/5 dark:border-white/10 bg-white/95 dark:bg-[#201D18]/95 backdrop-blur-2xl select-none z-20 shrink-0">
       {/* Header & Order Type Segmented Control */}
       <div className="p-4 border-b border-black/5 dark:border-white/10 space-y-3">
         <div className="flex items-center justify-between">
@@ -141,17 +143,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               {cart.reduce((total, i) => total + i.quantity, 0)} items
             </span>
           </div>
-          {cart.length > 0 && (
-            <button
-              onClick={() => {
-                sound.playTap();
-                onClearCart();
-              }}
-              className="text-xs text-apple-red hover:underline font-semibold"
-            >
-              Clear
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {cart.length > 0 && (
+              <button
+                onClick={() => {
+                  sound.playTap();
+                  onClearCart();
+                }}
+                className="text-xs text-apple-red hover:underline font-semibold"
+              >
+                Clear
+              </button>
+            )}
+            {onCloseMobile && (
+              <button
+                onClick={onCloseMobile}
+                className="lg:hidden w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-xs font-bold transition-colors"
+                aria-label="Close Order Tray"
+              >
+                ✕
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Cupertino Segmented Control for Order Type */}

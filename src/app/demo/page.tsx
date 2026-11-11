@@ -50,6 +50,8 @@ export default function Home() {
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
+  const [isMobileCartOpen, setIsMobileCartOpen] = useState<boolean>(false);
 
   // Cart & POS Order state
   const [cart, setCart] = useState<OrderItem[]>([]);
@@ -196,6 +198,10 @@ export default function Home() {
   const riders = useMemo(() => {
     return employees.filter(e => e.role === 'rider');
   }, [employees]);
+
+  const cartItemCount = useMemo(() => {
+    return cart.reduce((total, i) => total + i.quantity, 0);
+  }, [cart]);
 
   // --- Handlers ---
   const handleItemClick = (item: MenuItem, initialQty: number = 1) => {
@@ -631,20 +637,55 @@ export default function Home() {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-neutral-100 dark:bg-[#15130F] text-neutral-900 dark:text-neutral-100 font-sans">
-      {/* 1. Apple macOS / iPadOS Frosted Sidebar */}
-      <AppleSidebar
-        currentTab={currentTab}
-        onSelectTab={(tab) => {
-          if (soundEnabled) sound.playTap();
-          setCurrentTab(tab);
-        }}
-        activeOrdersCount={activeOrders.length}
-        activeDeliveryCount={activeDeliveryCount}
-        lowStockCount={lowStockCount}
-        currentStaff={currentStaff}
-        onOpenPinSwitch={() => setIsPinSwitchOpen(true)}
-        onOpenInstall={() => setIsInstallModalOpen(true)}
-      />
+      {/* 1. Apple macOS / iPadOS Frosted Sidebar - Desktop */}
+      <div className="hidden lg:flex shrink-0">
+        <AppleSidebar
+          currentTab={currentTab}
+          onSelectTab={(tab) => {
+            if (soundEnabled) sound.playTap();
+            setCurrentTab(tab);
+          }}
+          activeOrdersCount={activeOrders.length}
+          activeDeliveryCount={activeDeliveryCount}
+          lowStockCount={lowStockCount}
+          currentStaff={currentStaff}
+          onOpenPinSwitch={() => setIsPinSwitchOpen(true)}
+          onOpenInstall={() => setIsInstallModalOpen(true)}
+        />
+      </div>
+
+      {/* Mobile Sidebar Drawer Overlay */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 flex lg:hidden">
+          <div 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+            onClick={() => setIsMobileSidebarOpen(false)} 
+          />
+          <div className="relative w-72 max-w-[85vw] h-full shadow-2xl z-10 flex flex-col bg-white dark:bg-[#201D18]">
+            <AppleSidebar
+              currentTab={currentTab}
+              onSelectTab={(tab) => {
+                if (soundEnabled) sound.playTap();
+                setCurrentTab(tab);
+                setIsMobileSidebarOpen(false);
+              }}
+              activeOrdersCount={activeOrders.length}
+              activeDeliveryCount={activeDeliveryCount}
+              lowStockCount={lowStockCount}
+              currentStaff={currentStaff}
+              onOpenPinSwitch={() => {
+                setIsMobileSidebarOpen(false);
+                setIsPinSwitchOpen(true);
+              }}
+              onOpenInstall={() => {
+                setIsMobileSidebarOpen(false);
+                setIsInstallModalOpen(true);
+              }}
+              onCloseMobile={() => setIsMobileSidebarOpen(false)}
+            />
+          </div>
+        </div>
+      )}
 
       {/* 2. Main Central Work Area */}
       <main className="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
@@ -682,6 +723,9 @@ export default function Home() {
           onToggleSound={() => setSoundEnabled(!soundEnabled)}
           onOpenInstall={() => setIsInstallModalOpen(true)}
           onOpenSettings={() => setCurrentTab('settings')}
+          onToggleMobileSidebar={() => setIsMobileSidebarOpen(prev => !prev)}
+          onToggleMobileCart={() => setIsMobileCartOpen(prev => !prev)}
+          cartItemCount={cartItemCount}
         />
 
         {/* Tab Content Router */}
@@ -814,29 +858,88 @@ export default function Home() {
         </div>
       </main>
 
-      {/* 3. POS Order Cart Drawer (Visible when on POS tab) */}
+      {/* 3. POS Order Cart Drawer (Visible when on POS tab) - Desktop */}
       {currentTab === 'pos' && (
-        <CartDrawer
-          cart={cart}
-          orderType={orderType}
-          onChangeOrderType={setOrderType}
-          selectedTable={selectedTable}
-          onSelectTable={setSelectedTable}
-          availableTables={tables}
-          customerInfo={customerInfo}
-          onChangeCustomerInfo={setCustomerInfo}
-          deliveryCharge={deliveryCharge}
-          onChangeDeliveryCharge={setDeliveryCharge}
-          discountPercentage={discountPercentage}
-          onChangeDiscount={setDiscountPercentage}
-          currency={settings.currency}
-          taxRate={settings.taxRate}
-          currentStaff={currentStaff}
-          onUpdateQuantity={handleUpdateQuantity}
-          onRemoveItem={handleRemoveCartItem}
-          onClearCart={handleClearCart}
-          onCompleteOrder={handleCompleteOrder}
-        />
+        <div className="hidden lg:flex shrink-0">
+          <CartDrawer
+            cart={cart}
+            orderType={orderType}
+            onChangeOrderType={setOrderType}
+            selectedTable={selectedTable}
+            onSelectTable={setSelectedTable}
+            availableTables={tables}
+            customerInfo={customerInfo}
+            onChangeCustomerInfo={setCustomerInfo}
+            deliveryCharge={deliveryCharge}
+            onChangeDeliveryCharge={setDeliveryCharge}
+            discountPercentage={discountPercentage}
+            onChangeDiscount={setDiscountPercentage}
+            currency={settings.currency}
+            taxRate={settings.taxRate}
+            currentStaff={currentStaff}
+            onUpdateQuantity={handleUpdateQuantity}
+            onRemoveItem={handleRemoveCartItem}
+            onClearCart={handleClearCart}
+            onCompleteOrder={handleCompleteOrder}
+          />
+        </div>
+      )}
+
+      {/* Mobile Floating Cart Summary Bar */}
+      {currentTab === 'pos' && cartItemCount > 0 && !isMobileCartOpen && (
+        <div className="fixed bottom-4 left-4 right-4 z-40 lg:hidden">
+          <button
+            onClick={() => setIsMobileCartOpen(true)}
+            className="w-full bg-rush hover:bg-rush/90 text-white font-semibold py-3 px-4 rounded-xl shadow-xl flex items-center justify-between transition-all active:scale-[0.99]"
+          >
+            <div className="flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">
+                {cartItemCount}
+              </span>
+              <span className="text-sm">View Order Tray</span>
+            </div>
+            <span className="text-sm font-bold">
+              {settings.currency} {cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toLocaleString()} →
+            </span>
+          </button>
+        </div>
+      )}
+
+      {/* Mobile Cart Drawer Overlay */}
+      {currentTab === 'pos' && isMobileCartOpen && (
+        <div className="fixed inset-0 z-50 flex justify-end lg:hidden">
+          <div 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+            onClick={() => setIsMobileCartOpen(false)} 
+          />
+          <div className="relative w-full max-w-sm sm:max-w-md h-full shadow-2xl z-10 flex flex-col bg-white dark:bg-[#201D18]">
+            <CartDrawer
+              cart={cart}
+              orderType={orderType}
+              onChangeOrderType={setOrderType}
+              selectedTable={selectedTable}
+              onSelectTable={setSelectedTable}
+              availableTables={tables}
+              customerInfo={customerInfo}
+              onChangeCustomerInfo={setCustomerInfo}
+              deliveryCharge={deliveryCharge}
+              onChangeDeliveryCharge={setDeliveryCharge}
+              discountPercentage={discountPercentage}
+              onChangeDiscount={setDiscountPercentage}
+              currency={settings.currency}
+              taxRate={settings.taxRate}
+              currentStaff={currentStaff}
+              onUpdateQuantity={handleUpdateQuantity}
+              onRemoveItem={handleRemoveCartItem}
+              onClearCart={handleClearCart}
+              onCompleteOrder={(method, status) => {
+                handleCompleteOrder(method, status);
+                setIsMobileCartOpen(false);
+              }}
+              onCloseMobile={() => setIsMobileCartOpen(false)}
+            />
+          </div>
+        </div>
       )}
 
       {/* --- Modals & Sheets --- */}

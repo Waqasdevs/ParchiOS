@@ -50,20 +50,20 @@
 @layer components {
   /* Responsive Viewport Scaled Typography (Reference: 2256 x 1504 laptop screen) */
   .fluid-heading {
-    font-size: clamp(1.875rem, 2.33vw + 1.3rem, 3.5rem); /* ~30px on 390px, 56px on 1504px+ */
-    line-height: 1.12;
+    font-size: clamp(1.75rem, 2.33vw + 1.2rem, 3.5rem); /* ~28px on 390px, 56px on 1504px+ */
+    line-height: 1.15;
     letter-spacing: -0.025em;
     font-weight: 500 !important;
     text-wrap: balance;
   }
   .fluid-hero-sub {
     font-size: clamp(0.875rem, 0.3vw + 0.72rem, 1rem); /* 14px on mobile, 16px on 1504px+ */
-    line-height: 1.6;
+    line-height: 1.55;
     font-weight: 400 !important;
     text-wrap: pretty;
   }
   .fluid-section-sub {
-    font-size: clamp(1.125rem, 1vw + 0.6rem, 1.5rem); /* 18px on mobile, 24px on 1504px+ */
+    font-size: clamp(1.05rem, 0.9vw + 0.6rem, 1.5rem); /* ~17px on mobile, 24px on 1504px+ */
     line-height: 1.45;
     font-weight: 400 !important;
     text-wrap: pretty;
