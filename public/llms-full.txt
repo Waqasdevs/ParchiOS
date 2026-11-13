@@ -1,0 +1,49 @@
+# ParchiOS Technical and Operational Documentation
+
+> Full specification of ParchiOS — the 5-second digital parchi POS and restaurant management operating system designed for Pakistani food operators.
+
+## 1. System Architecture
+ParchiOS is engineered with an offline-first architecture designed to withstand the volatile connectivity environments common in Pakistani urban and semi-urban commercial centers (PTCL fiber drops, cellular 4G throttling, load shedding).
+
+### Database Layers
+1. **Client Storage**: Dexie.js wrapping browser IndexedDB.
+   - Operations (punch order, void item, split bill, print thermal receipt, cash reconciliation) complete in 0ms locally.
+   - Zero dependence on cloud round-trips during peak order rushes.
+   - Storage includes catalog (`menuItems`, `categories`), operational state (`diningTables`, `orders`, `stock`), staff identities (`employees`, `shifts`), and hardware configurations (`settings`).
+2. **Cloud Synchronization**: Supabase PostgreSQL with real-time replication.
+   - Background delta sync queues changes in an indexed mutation log.
+   - Automatic exponential backoff and optimistic state reconciliation.
+   - Owner mobile dashboard connects to cloud replica to query live revenue, active orders, and shift summaries in real-time.
+
+### Hardware Interface Layer
+- **Receipt and KOT Printing**:
+  - Direct ESC/POS thermal printing engine tuned for 80mm paper widths.
+  - Supports USB, Bluetooth (Web Bluetooth API), and network raw socket printers (port 9100).
+  - Compatible hardware: Black Copper (BC-85AC / BC-95AC), Xprinter (XP-N160M / XP-Q200), SpeedX, Rongta, Epson TM-T88/TM-T20.
+- **Display Interfaces**:
+  - Cashier POS terminal: optimized for 10-inch to 24-inch touchscreens or standard keyboard/mouse setups.
+  - Kitchen Display System (KDS): real-time color-coded tickets (yellow for new, blue for cooking, green for ready).
+
+## 2. Commercial Model
+- **Setup Fee**: 45,000 PKR (One-time commercial license).
+- **Monthly SaaS Subscription**: 0 PKR (Zero recurring software charges).
+- **Per-Order Commission**: 0% (Unlike third-party delivery platforms taking 25% to 30%).
+- **Turnaround Window**: 24 hours from receipt of paper menu photograph.
+- **Onboarding Process**: WhatsApp-first. Operator submits menu photos to +92 345 4159835; team stages working demo; operator tests before payment.
+
+## 3. Security and Audit Controls
+- **Manager Authorization**: Role-based access controls require a 4-digit Manager PIN for bill deletions, order cancellations, item voids, and manual discounts.
+- **Shift Handover / Cash Reconciliation**: Cashiers record opening drawer cash, track cash sales, card sales, rider cash-on-delivery, and closing drawer balance. Nightly closing reports record expected vs actual cash with discrepancy alerts.
+
+## 4. Entity Schemas
+- **Order Types**: `dine_in`, `takeaway`, `delivery`.
+- **Payment Types**: `cash`, `card`, `online` (EasyPaisa / JazzCash / Raast), `cod`.
+- **Order Statuses**: `pending`, `preparing`, `ready`, `completed`, `cancelled`.
+- **Shift Properties**: `openingCash`, `expectedCash`, `closingCash`, `clockIn`, `clockOut`, `notes`.
+
+## 5. Official Verification Endpoints
+- Web Homepage: https://parchios.vercel.app/
+- Live Interactive POS Sandbox: https://parchios.vercel.app/demo
+- High-Speed POS Terminal: https://parchios.vercel.app/pos
+- Machine-Readable Summary: https://parchios.vercel.app/llms.txt
+- Official Direct Line: https://wa.me/923454159835

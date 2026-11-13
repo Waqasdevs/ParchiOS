@@ -138,6 +138,8 @@ export default function LandingPage() {
             muted
             playsInline
             poster="/images/landing/hero-restaurant.jpg"
+            title="ParchiOS Restaurant Operations - Fast-Food Kitchen and Counter POS"
+            aria-label="ParchiOS Restaurant Operations - Fast-Food Kitchen and Counter POS"
             className="absolute inset-0 -z-20 h-full w-full object-cover filter contrast-[1.08] brightness-[0.80]"
           >
             <source src="/videos/hero-restaurant-loop.mp4" type="video/mp4" />
@@ -293,12 +295,13 @@ export default function LandingPage() {
                   >
                     {/* Visual Feature Image */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-ink/5">
-                      <div
-                        aria-hidden
-                        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-                        style={{ backgroundImage: `url(${feature.img})` }}
+                      <img
+                        src={feature.img}
+                        alt={`${feature.title} - ParchiOS Restaurant POS Pakistan`}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                     </div>
 
                     {/* Feature Copy */}

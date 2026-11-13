@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import JsonLd from '@/components/SEO/JsonLd';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -10,19 +11,36 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://parchios.vercel.app'),
-  title: 'parchiOS — High-Performance Offline-First Restaurant OS for Pakistan',
+  title: {
+    default: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
+    template: '%s | ParchiOS Pakistan',
+  },
   description:
-    'The offline-first restaurant operating system built for Pakistani kitchens. Instant 80mm thermal KOT printing, touch Kitchen Display Screens, table floor plans, and 0% commission direct delivery even when internet cuts out.',
+    'ParchiOS replaces messy paper register books and expensive monthly POS software. 5-second counter screen, instant KOT slips, real-time sales on your phone, and 100% offline-ready with zero monthly commission. 45,000 PKR one-time setup.',
   keywords: [
     'restaurant POS Pakistan',
-    'parchi OS',
-    'offline POS Lahore Karachi Islamabad',
-    '80mm thermal KOT printer software',
-    'kitchen display system Pakistan',
-    'zero commission delivery restaurant system',
-    'Pakistani restaurant software',
-    'FBR PRA SRB restaurant billing software',
+    'digital parchi system',
+    'restaurant management software Pakistan',
+    'fast food POS Lahore Karachi Islamabad',
+    'kitchen order ticket KOT Pakistan',
+    '80mm thermal receipt printer software',
+    'offline restaurant POS system',
+    'zero commission food delivery software',
+    'cafe billing machine Pakistan',
+    'Pakistani restaurant POS',
+    'cloud kitchen software Pakistan',
+    'HFC ParchiOS',
+    'restaurant cash management Pakistan',
   ],
+  authors: [{ name: 'ParchiOS Pakistan', url: 'https://parchios.vercel.app' }],
+  creator: 'ParchiOS Pakistan',
+  publisher: 'ParchiOS Pakistan',
+  formatDetection: {
+    telephone: false,
+  },
+  alternates: {
+    canonical: 'https://parchios.vercel.app',
+  },
   manifest: '/manifest.json',
   icons: {
     icon: [
@@ -32,17 +50,17 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'parchiOS — High-Performance Offline-First Restaurant OS for Pakistan',
+    title: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
     description:
-      'Zero cloud delay during Friday rush. 80mm thermal KOT slips, touch KDS, rapid item numbering, and 0% commission direct delivery built for Pakistani restaurants.',
+      'Replace messy register books with ParchiOS. 5-second counter screen, instant KOT slips, and real-time sales on your phone with zero monthly commission. 45,000 PKR one-time setup.',
     url: 'https://parchios.vercel.app',
-    siteName: 'parchiOS Pakistan',
+    siteName: 'ParchiOS Pakistan',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'parchiOS — High-Performance Offline-First Restaurant OS for Pakistan',
+        alt: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
       },
     ],
     locale: 'en_PK',
@@ -50,10 +68,21 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'parchiOS — High-Performance Offline-First Restaurant OS for Pakistan',
+    title: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
     description:
-      '80mm thermal KOT printing, touch KDS, and zero-commission delivery management built for Pakistani kitchens.',
+      '5-second counter screen, instant KOT slips, and real-time sales on your phone with zero monthly commission. 45,000 PKR one-time setup.',
     images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
@@ -71,6 +100,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
+        <JsonLd />
       </head>
       <body className="min-h-screen antialiased selection:bg-[#15130F] selection:text-[#F6F0E4]">
         {children}

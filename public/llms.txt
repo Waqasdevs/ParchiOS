@@ -1,0 +1,63 @@
+# ParchiOS
+
+> 5-Second Digital Parchi System & Offline-First Restaurant Operating System Built for Pakistani Fast-Food, Cafes, and Cloud Kitchens.
+
+ParchiOS replaces messy register books and expensive monthly POS software. Punch counter orders in 5 seconds, send instant Kitchen Order Tickets (KOT), and get 100% accurate daily cash sales on your phone with Zero Monthly Commission.
+
+## Quick Facts
+- **One-Time Setup Fee**: 45,000 PKR (One-time payment, Zero commission per order, Zero monthly subscription fees)
+- **Deployment Speed**: 24-Hour Turnaround (Menu, deals, and logo uploaded by ParchiOS team)
+- **Target Market**: Pakistani fast-food counters, burger joints, pizza cafes, broast & shawarma shops, dhabas, and cloud kitchens
+- **Hardware Agnostic**: Runs smoothly on any device: old counter PC, laptop, Android tablet, iPad, or cheap Android smartphone. No need to buy an expensive 150,000 PKR touchscreen POS machine.
+- **Printer Compatibility**: Direct 80mm ESC/POS thermal receipt and kitchen KOT printing (supports Black Copper, Xprinter, SpeedX, Epson via USB, Bluetooth, or LAN/WiFi)
+- **Offline Architecture**: Offline-first local database powered by Dexie.js (IndexedDB). Zero cloud delay during Friday dinner rush; automatically syncs with Supabase cloud database when internet reconnects.
+- **WhatsApp Onboarding**: +92 345 4159835 (Send a photo of your paper menu to get a free live preview built before paying)
+- **Live Demo Sandbox**: https://parchios.vercel.app/demo
+- **Official Website**: https://parchios.vercel.app
+
+## Core Problems Solved
+1. **"Raat Ko Cash Match Nahi Hota" (Stop Daily Cash Leakage)**: Paper parchis get lost, overwritten, or miscalculated during the 9 PM dinner rush. ParchiOS tracks every single burger, deal, and drink automatically so your drawer cash matches 100% at closing time.
+2. **Kitchen Confusion & Late Orders (Instant Counter-to-Kitchen Sync)**: No more shouting orders into the kitchen or lost paper slips. The moment your cashier punches an order, the kitchen screen or printer gets a clean digital KOT slip with exact deal items and table or delivery numbers.
+3. **Zero Foodpanda-Style Commissions (100% Yours Forever)**: Avoid paying 25% to 30% commission or heavy monthly SaaS fees. Pay a one-time setup fee and own your restaurant complete order, delivery, and customer database forever.
+
+## Core Features
+- **5-Second Fast-Food Counter Screen**: Designed for high-rush burger, broast, pizza, and shawarma counters. Non-technical staff can learn it in 10 minutes. Fast numpad and item number keyer (#1 to #135).
+- **Owner Live Phone Dashboard**: Real-time sales, live running orders, top-selling items, and total cash collected today accessible from mobile while sitting at home.
+- **Custom Branded for Your Restaurant**: Restaurant logo, custom menu deals, item add-ons, and brand colors deployed and live within 24 hours.
+- **Works on Any Device**: Runs directly in modern browsers (Chrome, Edge, Safari) and installs as a progressive web app (PWA) with desktop and mobile offline support.
+- **Cashier Fraud Prevention**: Sensitive operations (item voids, order deletions, custom discounts) require an authorized Manager PIN and generate immutable timestamped audit logs.
+
+## Verified Case Study: HFC (Haseeb Food Cafe)
+- **Client**: Haseeb Food Cafe (HFC), commercial fast-food operator.
+- **Before ParchiOS**: Counter staff used manual paper registers during peak rush hours, causing missed orders and 45 minutes of manual cash calculation every night.
+- **After ParchiOS**: Entire menu, kitchen slips, and daily sales report placed on autopilot within 24 hours.
+- **Results**: 0 missed orders, 45 minutes saved daily, 24-hour turnaround.
+
+## Complete Setup Package (45,000 PKR One-Time)
+What is included:
+- Full system branded with Restaurant Name & Logo
+- Complete Menu, Deals & Pricing uploaded by ParchiOS team (cashier simply sends photos of paper menu over WhatsApp)
+- Counter POS + Kitchen Order Tracking (KOT) + Owner Sales Dashboard
+- 1-on-1 WhatsApp staff training & operational support
+- Risk-Reversal Guarantee: Team builds a working preview with the restaurant menu first; operator only pays after testing it on their phone.
+
+## Frequently Asked Questions
+- **Do I need to buy an expensive 150,000 PKR touchscreen POS machine?**
+  No. ParchiOS runs inside Chrome or Edge on any computer, laptop, Android tablet, iPad, or mobile phone you already own. It connects directly with standard 80mm thermal receipt printers like Black Copper, Xprinter, SpeedX, and Epson.
+- **What happens if PTCL internet or mobile 4G disconnects during Friday rush?**
+  ParchiOS is built offline-first. Your counter screen never freezes. You keep punching orders, printing kitchen KOT slips, and settling bills without zero-point cloud delay. Everything syncs automatically once your internet returns.
+- **Is 45,000 PKR really a one-time fee, or are there hidden monthly charges?**
+  It is 100% one-time setup. There are zero per-order commissions and zero recurring monthly software fees. You own your system, menus, and customer database forever.
+- **How do you upload our restaurant menu and deals?**
+  You do not have to type anything yourself. Just take clear photos of your paper menu or WhatsApp us your menu PDF. Our team formats and uploads every single deal, add-on, and price within 24 hours.
+- **Can our cashier delete orders or tamper with drawer cash?**
+  No. Cashier staff can only punch and settle bills. Any item void, order deletion, or discount requires an authorized Manager PIN and leaves an unalterable timestamped audit trail in the daily closing report.
+- **How does staff training work if our counter boy is not technical?**
+  The counter screen is designed with large item tiles and numbers (#1 for Zinger, #14 for Karahi) so anyone can learn it in 10 minutes. We also provide direct 1-on-1 WhatsApp voice note and video support until your team feels 100% confident.
+
+## Canonical Resources
+- Web Application: https://parchios.vercel.app
+- Interactive Demo: https://parchios.vercel.app/demo
+- POS Screen: https://parchios.vercel.app/pos
+- Full Machine-Readable Knowledge Base: https://parchios.vercel.app/llms-full.txt
+- Contact / WhatsApp: https://wa.me/923454159835
