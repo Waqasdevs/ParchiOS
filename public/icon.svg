@@ -1,56 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
   <defs>
-    <radialGradient id="bgA" cx="50%" cy="46%" r="68%">
-      <stop offset="0%" stop-color="#1E1A15"/>
-      <stop offset="100%" stop-color="#100E0B"/>
-    </radialGradient>
-    <linearGradient id="slipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFFDF9"/>
-      <stop offset="100%" stop-color="#ECE3D4"/>
-    </linearGradient>
-    <linearGradient id="foldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E2D7C5"/>
-      <stop offset="100%" stop-color="#C7BBA5"/>
-    </linearGradient>
-    <radialGradient id="rushGlow" cx="35%" cy="35%" r="65%">
-      <stop offset="0%" stop-color="#FF4D40"/>
-      <stop offset="100%" stop-color="#D92B1F"/>
-    </radialGradient>
-    <filter id="subtleDrop" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
-    </filter>
+    <rect id="bg" width="1024" height="1024" fill="#0E0E0E"/>
   </defs>
-
-  <!-- Deep Ink Black Background (circular safe margin preserved) -->
-  <rect width="1024" height="1024" fill="url(#bgA)"/>
-
-  <!-- Subtle Circular Guide Ring (Ultra-Faint 0.04 Opacity) -->
-  <circle cx="512" cy="512" r="416" fill="none" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="2"/>
-
-  <!-- Geometric Parchi Logo Mark (Centered inside circle) -->
-  <g id="parchi-mark" filter="url(#subtleDrop)">
-    <!-- Vertical Pillar (Counter Register Stem) -->
-    <rect x="304" y="236" width="112" height="552" rx="28" fill="url(#slipGrad)"/>
-
-    <!-- Parchi Loop (Curved Paper Slip Upper Body) -->
-    <path d="M416 236 H612 C704 236 756 288 756 380 C756 472 704 524 612 524 H416 V236 Z" 
-          fill="url(#slipGrad)"/>
-
-    <!-- Negative Space Cutout -->
-    <path d="M416 336 H596 C636 336 656 354 656 380 C656 406 636 424 596 424 H416 V336 Z" 
-          fill="url(#bgA)"/>
-
-    <!-- Precise 45-degree Origami Fold Facet on Top Right Corner -->
-    <path d="M612 236 L756 380 H668 C638 380 612 354 612 324 V236 Z" 
-          fill="url(#foldGrad)"/>
-
-    <!-- Thermal Perforation Dots on Lower Stem -->
-    <circle cx="360" cy="656" r="8" fill="#1E1A15" opacity="0.35"/>
-    <circle cx="360" cy="688" r="8" fill="#1E1A15" opacity="0.35"/>
-    <circle cx="360" cy="720" r="8" fill="#1E1A15" opacity="0.35"/>
-
-    <!-- Rush Red Pulse Dot (The 5-Second Real-Time Indicator) -->
-    <circle cx="672" cy="700" r="52" fill="url(#rushGlow)"/>
-    <circle cx="656" cy="684" r="16" fill="#FFA59E" opacity="0.6"/>
+  <use href="#bg"/>
+  <g id="parchios-logo">
+    <rect x="307" y="255" width="154" height="513" fill="#F5EEDC"/>
+    <polygon points="307,255 556,255 556,360 461,360 461,255" fill="#F5EEDC"/>
+    <polygon points="556,255 660,360 556,360" fill="#E4DAC7"/>
+    <path d="M461,614 L640,614 C700,570 717,525 717,480 C717,420 690,375 660,360 L556,360 L461,455 Z" fill="#F8F8F8"/>
+    <polygon points="461,360 660,360 461,560" fill="#0E0E0E"/>
+    <circle cx="683" cy="289" r="34" fill="#D2261A"/>
   </g>
 </svg>
