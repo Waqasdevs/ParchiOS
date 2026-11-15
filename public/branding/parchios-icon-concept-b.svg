@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bgB" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A1713"/>
+      <stop offset="100%" stop-color="#0E0C0A"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bgB)"/>
+
+  <g transform="translate(512, 512)">
+    <!-- Vertical Paper Pillar -->
+    <rect x="-192" y="-272" width="112" height="544" rx="24" fill="#F6F0E4"/>
+    
+    <!-- Upper Monogram Loop -->
+    <path d="M-80 -272 H104 C192 -272 240 -224 240 -136 C240 -48 192 0 104 0 H-80 Z" fill="#F6F0E4"/>
+    
+    <!-- Cutout -->
+    <path d="M-80 -184 H92 C132 -184 150 -166 150 -136 C150 -106 132 -88 92 -88 H-80 Z" fill="#12100D"/>
+    
+    <!-- Clean Horizontal Ticket Notch Cut -->
+    <line x1="-80" y1="0" x2="160" y2="0" stroke="#12100D" stroke-width="14" stroke-linecap="round"/>
+
+    <!-- Vivid Rush Red Pill / Pulse -->
+    <circle cx="164" cy="188" r="48" fill="#D92B1F"/>
+  </g>
+</svg>

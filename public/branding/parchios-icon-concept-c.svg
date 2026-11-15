@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="ivoryBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF7EE"/>
+      <stop offset="100%" stop-color="#EFE7D7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#ivoryBg)"/>
+
+  <g id="parchi-mark-c">
+    <!-- Solid Ink Black Base Monogram -->
+    <rect x="304" y="236" width="112" height="552" rx="28" fill="#15130F"/>
+    <path d="M416 236 H612 C704 236 756 288 756 380 C756 472 704 524 612 524 H416 V236 Z" fill="#15130F"/>
+    <path d="M416 336 H596 C636 336 656 354 656 380 C656 406 636 424 596 424 H416 V336 Z" fill="url(#ivoryBg)"/>
+    
+    <!-- Rush Red Geometric Accent -->
+    <circle cx="672" cy="700" r="52" fill="#D92B1F"/>
+  </g>
+</svg>
