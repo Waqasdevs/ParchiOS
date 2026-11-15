@@ -71,9 +71,8 @@ export const AppleSidebar: React.FC<AppleSidebarProps> = ({
       <div className="p-5 pb-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-ink text-ivory flex items-center justify-center shadow-apple-sm font-bold text-xl tracking-tight relative overflow-hidden">
-              <span>P</span>
-              <span className="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-rush" />
+            <div className="w-10 h-10 rounded-2xl bg-ink overflow-hidden shadow-apple-sm shrink-0 flex items-center justify-center border border-black/5 dark:border-white/10">
+              <img src="/icon-192.png" alt="ParchiOS Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <h1 className="font-bold text-base tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">

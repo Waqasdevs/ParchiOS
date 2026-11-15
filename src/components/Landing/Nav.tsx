@@ -18,10 +18,13 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50 w-full bg-ivory/95 backdrop-blur-md border-b border-ink/10 shadow-[0_1px_4px_rgba(21,19,15,0.04)] transition-all">
       <div className="mx-auto w-full max-w-[1536px] px-3 sm:px-5 lg:px-6 h-16 sm:h-20 flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold tracking-tight text-[18px] sm:text-[20px] text-ink">
-          parchiOS
-          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush" />
+        {/* Brand Logo with Origami Parchi Icon */}
+        <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight text-[18px] sm:text-[20px] text-ink group">
+          <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg overflow-hidden bg-ink shadow-sm flex items-center justify-center shrink-0 border border-ink/10 transition-transform group-hover:scale-105">
+            <img src="/icon-192.png" alt="ParchiOS Logo" className="w-full h-full object-cover" />
+          </span>
+          <span>parchiOS</span>
+          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush -ml-1" />
         </Link>
 
         {/* Center Desktop Navigation (Higher weight, crisp text) */}

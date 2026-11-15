@@ -608,8 +608,12 @@ export default function LandingPage() {
             {/* Sitemap Footer Grid - 3 Columns */}
             <div className="mt-14 sm:mt-24 grid gap-8 sm:gap-10 border-t border-white/10 pt-10 sm:pt-12 sm:grid-cols-2 lg:grid-cols-3">
               <div>
-                <p className="flex items-center gap-2 text-[20px] font-bold tracking-tight text-white">
-                  parchiOS <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush" />
+                <p className="flex items-center gap-2.5 text-[20px] font-bold tracking-tight text-white">
+                  <span className="w-7 h-7 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center shrink-0 border border-white/10">
+                    <img src="/icon-192.png" alt="ParchiOS Logo" className="w-full h-full object-cover" />
+                  </span>
+                  <span>parchiOS</span>
+                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-rush -ml-1" />
                 </p>
                 <p className="mt-3 text-ivory/60 fluid-paragraph max-w-[20rem]">
                   The 5-second digital parchi system for Pakistani fast-food, cafes, and cloud kitchens. Zero monthly commission.
