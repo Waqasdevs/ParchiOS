@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://parchios.vercel.app'),
+  metadataBase: new URL('https://parchi-os.vercel.app'),
   title: {
     default: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
     template: '%s | ParchiOS Pakistan',
@@ -32,14 +32,14 @@ export const metadata: Metadata = {
     'HFC ParchiOS',
     'restaurant cash management Pakistan',
   ],
-  authors: [{ name: 'ParchiOS Pakistan', url: 'https://parchios.vercel.app' }],
+  authors: [{ name: 'ParchiOS Pakistan', url: 'https://parchi-os.vercel.app' }],
   creator: 'ParchiOS Pakistan',
   publisher: 'ParchiOS Pakistan',
   formatDetection: {
     telephone: false,
   },
   alternates: {
-    canonical: 'https://parchios.vercel.app',
+    canonical: 'https://parchi-os.vercel.app',
   },
   manifest: '/manifest.json',
   icons: {
@@ -56,13 +56,21 @@ export const metadata: Metadata = {
     title: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
     description:
       'Replace messy register books with ParchiOS. 5-second counter screen, instant KOT slips, and real-time sales on your phone with zero monthly commission. 45,000 PKR one-time setup.',
-    url: 'https://parchios.vercel.app',
+    url: 'https://parchi-os.vercel.app',
     siteName: 'ParchiOS Pakistan',
     images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+        alt: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
+      },
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
+        type: 'image/png',
         alt: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
       },
     ],
@@ -74,7 +82,7 @@ export const metadata: Metadata = {
     title: 'ParchiOS — 5-Second Digital Parchi & Restaurant POS System Pakistan',
     description:
       '5-second counter screen, instant KOT slips, and real-time sales on your phone with zero monthly commission. 45,000 PKR one-time setup.',
-    images: ['/og-image.png'],
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
