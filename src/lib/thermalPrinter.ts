@@ -96,13 +96,12 @@ export function generateCustomerReceiptText(order: Order, settings: RestaurantSe
     }
   }
 
-  // Simulated Barcode
+  // Trailing paper feed lines (ensures entire receipt feeds past cutter/tear bar)
   lines.push('');
-  lines.push(formatCenter('||||| ||| ||||||| || |||||', width));
-  lines.push(formatCenter(order.id, width));
-  lines.push(formatCenter('Powered by parchiOS / HFC POS', width));
   lines.push('');
-  lines.push(''); // Bottom paper feed for cutter
+  lines.push('');
+  lines.push('');
+  lines.push('');
 
   return lines.join('\n');
 }
@@ -135,6 +134,11 @@ export function generateKitchenSlipText(order: Order, width = 42): string {
   lines.push(line);
   const totalQty = order.items.reduce((sum, i) => sum + i.quantity, 0);
   lines.push(formatReceiptLine(`Total Items: ${totalQty}`, 'Kitchen Pass', width));
+
+  // Trailing paper feed lines for KOT
+  lines.push('');
+  lines.push('');
+  lines.push('');
   lines.push('');
   lines.push('');
 
@@ -201,7 +205,7 @@ export function printThermalText(text: string, title = 'Receipt'): void {
           width: 78mm;
           max-width: 78mm;
           margin: 0 auto;
-          padding: 6mm 2mm 10mm 2mm;
+          padding: 6mm 2mm 25mm 2mm;
           font-family: inherit;
           font-size: inherit;
           line-height: inherit;

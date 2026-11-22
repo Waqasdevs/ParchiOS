@@ -185,16 +185,11 @@ export const ThermalReceiptModal: React.FC<ThermalReceiptModalProps> = ({
 
             <div className="border-t border-dashed border-neutral-400 my-2"></div>
 
-            {/* Footer message and simulated QR / Barcode */}
-            <div className="text-center text-[10px] space-y-1 pt-1">
+            {/* Footer message and Closing */}
+            <div className="text-center text-[10px] space-y-1 pt-2">
               <p className="font-semibold whitespace-pre-line">{settings.receiptFooter}</p>
-              <div className="text-center py-2 flex flex-col items-center">
-                <div className="font-mono tracking-widest text-[16px] font-bold">
-                  ||||| ||| ||||||| || |||||
-                </div>
-                <span className="text-[9px] text-neutral-500">{order.id}</span>
-              </div>
-              <p className="text-[9px] text-neutral-400">Powered by HFC Offline POS</p>
+              <p className="text-[10px] text-neutral-500 pt-1 font-medium">Thank You for Dining With Us!</p>
+              <p className="text-[9px] text-neutral-400">Powered by parchiOS POS</p>
             </div>
           </div>
         </div>
