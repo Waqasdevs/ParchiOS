@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ParchiOS • Team Outreach & Cold Call Dispatcher (Live)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            ink: '#15130F',
+            ivory: '#F6F0E4',
+            rush: '#D2261A',
+            phoneGreen: '#16a34a',
+            whatsapp: '#25D366',
+            whatsappDark: '#128C7E',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F8F5EE;
+      color: #15130F;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #D1C7B7;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-rush selection:text-white pb-10">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-ink/10 shadow-xs">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-phoneGreen text-white flex items-center justify-center font-extrabold text-lg sm:text-xl shadow-md shrink-0">
+          📞
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <h1 class="text-base sm:text-lg font-black tracking-tight text-ink">ParchiOS Live Dispatcher</h1>
+            <span class="px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold tracking-wider bg-phoneGreen text-white uppercase">Live Cloud</span>
+          </div>
+          <p class="text-[11px] sm:text-xs text-ink/60 font-medium">Collaborative Calling & Outreach Hub • Zero Overlap Mode</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Live Demo Link Badge -->
+        <a 
+          href="https://parchi-os.vercel.app/demo" 
+          target="_blank" 
+          class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-ink/5 hover:bg-ink/10 border border-ink/10 text-xs font-bold text-ink transition-colors"
+        >
+          <span>Live Demo</span>
+          <span class="text-xs">↗</span>
+        </a>
+
+        <!-- Share Progress Button -->
+        <button 
+          onclick="shareTeamProgress()"
+          class="px-3 sm:px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition-all shadow-xs flex items-center gap-1.5 shrink-0"
+        >
+          <span>📋</span>
+          <span class="hidden sm:inline">Copy Progress to WhatsApp</span>
+          <span class="sm:hidden">Share Update</span>
+        </button>
+
+        <!-- Cold Call Objections Button -->
+        <button 
+          onclick="toggleObjectionsModal()"
+          class="px-3 py-2 rounded-xl bg-ink text-ivory hover:bg-black font-semibold text-xs transition-all shadow-xs shrink-0"
+        >
+          <span>❓ FAQs</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 space-y-5">
+
+    <!-- TEAM COLLABORATION SELECTOR (NO OVERLAP) -->
+    <div class="bg-white rounded-3xl p-4 sm:p-5 border border-ink/10 shadow-sm space-y-3">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-lg">👥</span>
+            <h2 class="text-sm sm:text-base font-extrabold text-ink">Team Member Assignment (Zero Overlap):</h2>
+          </div>
+          <p class="text-xs text-ink/60 mt-0.5">
+            Select who is calling to only see your assigned 10 restaurants. No duplicate calls!
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <button 
+            onclick="setTeamMember('all')" 
+            id="btn-member-all" 
+            class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all bg-ink text-white"
+          >
+            All Team (30)
+          </button>
+          <button 
+            onclick="setTeamMember(1)" 
+            id="btn-member-1" 
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold text-ink/70 hover:bg-ink/5 transition-all flex items-center gap-1"
+          >
+            <span>👤 Member 1</span>
+            <span class="text-[10px] bg-ink/10 px-1 rounded-full font-bold">10</span>
+          </button>
+          <button 
+            onclick="setTeamMember(2)" 
+            id="btn-member-2" 
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold text-ink/70 hover:bg-ink/5 transition-all flex items-center gap-1"
+          >
+            <span>👤 Member 2</span>
+            <span class="text-[10px] bg-ink/10 px-1 rounded-full font-bold">10</span>
+          </button>
+          <button 
+            onclick="setTeamMember(3)" 
+            id="btn-member-3" 
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold text-ink/70 hover:bg-ink/5 transition-all flex items-center gap-1"
+          >
+            <span>👤 Member 3</span>
+            <span class="text-[10px] bg-ink/10 px-1 rounded-full font-bold">10</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Territory Info Pill -->
+      <div id="territory-info" class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-xs text-amber-950 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <span id="territory-text">
+          <strong>Showing:</strong> All 30 Leads across Lahore Belt, Northern GT Road, and Central/Potohar.
+        </span>
+        <button 
+          onclick="renameMemberPrompt()" 
+          class="self-start sm:self-auto text-[11px] font-bold text-amber-900 underline hover:text-black"
+        >
+          Set My Name (Local)
+        </button>
+      </div>
+
+      <!-- Real-time Counters -->
+      <div class="flex items-center gap-2 sm:gap-3 text-xs flex-wrap pt-1 border-t border-ink/5">
+        <div class="px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-1.5">
+          <span class="font-semibold">📞 Pitched:</span>
+          <span id="stat-pitched" class="font-extrabold text-emerald-900">0</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-800 flex items-center gap-1.5">
+          <span class="font-semibold">💬 Interested:</span>
+          <span id="stat-interested" class="font-extrabold text-blue-900">0</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 flex items-center gap-1.5">
+          <span class="font-semibold">⏳ Busy:</span>
+          <span id="stat-busy" class="font-extrabold text-amber-900">0</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-center gap-1.5">
+          <span class="font-semibold">❌ No Ans:</span>
+          <span id="stat-noans" class="font-extrabold text-rose-900">0</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 flex items-center gap-1.5">
+          <span class="font-semibold">○ Remaining:</span>
+          <span id="stat-pending" class="font-extrabold text-slate-900">30</span>
+        </div>
+      </div>
+
+      <!-- Visual Progress Bar -->
+      <div class="w-full h-2.5 rounded-full bg-ink/5 overflow-hidden flex">
+        <div id="bar-pitched" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+        <div id="bar-interested" class="h-full bg-blue-500 transition-all duration-300" style="width: 0%"></div>
+        <div id="bar-busy" class="h-full bg-amber-500 transition-all duration-300" style="width: 0%"></div>
+        <div id="bar-noans" class="h-full bg-rose-500 transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Calling Flow Instructions Banner -->
+    <div class="p-3.5 sm:p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+      <div class="space-y-1">
+        <div class="flex items-center gap-1.5">
+          <span class="text-base">🎙️</span>
+          <span class="font-bold text-emerald-950 text-sm">Urdu Phone Call Step-by-Step:</span>
+        </div>
+        <p class="text-emerald-900 leading-relaxed text-[11px] sm:text-xs">
+          <strong>1.</strong> Greet & confirm counter manager • <strong>2.</strong> Mention their popular deal • <strong>3.</strong> Ask: <em>"Rush time counter pe parchi hath se likh rahe hain ya machine lagayi hai?"</em> • <strong>4.</strong> Offer 1-min WhatsApp demo!
+        </p>
+      </div>
+      <button 
+        onclick="toggleObjectionsModal()" 
+        class="shrink-0 px-3 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold transition-colors shadow-xs text-xs self-start md:self-auto"
+      >
+        View Objection Replies
+      </button>
+    </div>
+
+    <!-- Filters & Search Toolbar -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
+      
+      <!-- Status Filter Pills -->
+      <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 custom-scrollbar">
+        <div class="flex items-center gap-1 bg-white p-1 rounded-2xl border border-ink/10 shadow-xs shrink-0">
+          <button onclick="setStatusFilter('all')" id="btn-status-all" class="px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-ink/10 text-ink">
+            All Status
+          </button>
+          <button onclick="setStatusFilter('pending')" id="btn-status-pending" class="px-2 py-1.5 rounded-xl text-xs font-semibold text-slate-800 hover:bg-slate-50 transition-all">
+            To Call
+          </button>
+          <button onclick="setStatusFilter('pitched')" id="btn-status-pitched" class="px-2 py-1.5 rounded-xl text-xs font-semibold text-emerald-800 hover:bg-emerald-50 transition-all">
+            Pitched
+          </button>
+          <button onclick="setStatusFilter('interested')" id="btn-status-interested" class="px-2 py-1.5 rounded-xl text-xs font-semibold text-blue-800 hover:bg-blue-50 transition-all">
+            Interested
+          </button>
+          <button onclick="setStatusFilter('busy')" id="btn-status-busy" class="px-2 py-1.5 rounded-xl text-xs font-semibold text-amber-800 hover:bg-amber-50 transition-all">
+            Busy
+          </button>
+          <button onclick="setStatusFilter('no_answer')" id="btn-status-noans" class="px-2 py-1.5 rounded-xl text-xs font-semibold text-rose-800 hover:bg-rose-50 transition-all">
+            No Ans
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Search Box -->
+      <div class="relative w-full md:w-72">
+        <input 
+          type="text" 
+          id="search-input"
+          oninput="handleSearch(this.value)"
+          placeholder="Search restaurant, town, deal..." 
+          class="w-full bg-white border border-ink/10 rounded-2xl px-4 py-2.5 pl-10 text-xs font-medium text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-phoneGreen/20 focus:border-phoneGreen"
+        >
+        <span class="absolute left-3.5 top-3 text-xs text-ink/40">🔍</span>
+        <button 
+          id="clear-search" 
+          onclick="clearSearch()" 
+          class="hidden absolute right-3 top-2.5 text-xs text-ink/40 hover:text-ink"
+        >
+          ✕
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Lead Cards Grid -->
+    <div id="leads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+      <!-- Cards rendered via JS -->
+    </div>
+
+  </main>
+
+  <!-- Objections & Urdu Quick-Replies Modal -->
+  <div id="objections-modal" class="fixed inset-0 z-50 bg-ink/60 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-6 space-y-5 shadow-2xl border border-ink/10 custom-scrollbar">
+      <div class="flex items-center justify-between border-b border-ink/10 pb-4">
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-ink">Cold Call Objection Handling (Urdu Scripts)</h3>
+          <p class="text-xs text-ink/60">Tap 'Copy' to paste or read directly to the restaurant owner</p>
+        </div>
+        <button onclick="toggleObjectionsModal()" class="w-8 h-8 rounded-full bg-ink/5 hover:bg-ink/10 flex items-center justify-center text-ink text-sm font-bold">
+          ✕
+        </button>
+      </div>
+
+      <!-- Objections List -->
+      <div class="space-y-3.5 text-xs">
+        <!-- Q1: Price -->
+        <div class="p-3.5 rounded-2xl bg-ink/[0.02] border border-ink/10 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-ink uppercase tracking-wide text-[11px]">1. "Kitne ka software hai? (Price)"</span>
+            <button onclick="copySnippet('snippet-price')" class="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[10px]">
+              Copy
+            </button>
+          </div>
+          <p id="snippet-price" class="font-medium text-ink/80 leading-relaxed bg-white p-2.5 rounded-xl border border-ink/5 font-sans">
+"Sir ParchiOS ka koi mahana kharcha nahi hai, zero commission hai. Sirf 45,000 PKR one-time lifetime license hai. Isme hum aap ka poora menu add kar ke denge, counter laptop/mobile aur kitchen printer connect karenge, aur staff ko 10 minute mein train karenge. Aap pehle demo link pe sirf 1 minute check karein: https://parchi-os.vercel.app/demo"
+          </p>
+        </div>
+
+        <!-- Q2: Hardware -->
+        <div class="p-3.5 rounded-2xl bg-ink/[0.02] border border-ink/10 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-ink uppercase tracking-wide text-[11px]">2. "Naya computer ya machine leni paregi?"</span>
+            <button onclick="copySnippet('snippet-hardware')" class="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[10px]">
+              Copy
+            </button>
+          </div>
+          <p id="snippet-hardware" class="font-medium text-ink/80 leading-relaxed bg-white p-2.5 rounded-xl border border-ink/5 font-sans">
+"Bilkul nahi Sir! Yehi ParchiOS ki sab se bari khoobi hai. Aap ke counter pe jo bhi purana laptop, tablet ya mobile para hai, yeh us pe 5 second mein smoothly chal jata hai (offline bhi kaam karta hai agar net band ho). Hardware pe aap ka 1 rupiya bhi extra nahi lagta."
+          </p>
+        </div>
+
+        <!-- Q3: Offline -->
+        <div class="p-3.5 rounded-2xl bg-ink/[0.02] border border-ink/10 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-ink uppercase tracking-wide text-[11px]">3. "Agar net band ho jaye toh?"</span>
+            <button onclick="copySnippet('snippet-offline')" class="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[10px]">
+              Copy
+            </button>
+          </div>
+          <p id="snippet-offline" class="font-medium text-ink/80 leading-relaxed bg-white p-2.5 rounded-xl border border-ink/5 font-sans">
+"Nahi Sir! ParchiOS 100% offline-ready hai. Agar net disconnect bhi ho jaye, counter pe parchi punch hoti rahegi aur slips print hoti rahengi. Jaise hi net connect hoga, data automatic sync ho jayega."
+          </p>
+        </div>
+
+        <!-- Q4: Hand Parchi / Register -->
+        <div class="p-3.5 rounded-2xl bg-ink/[0.02] border border-ink/10 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-ink uppercase tracking-wide text-[11px]">4. "Hum hath se parchi theek kaat rahe hain"</span>
+            <button onclick="copySnippet('snippet-register')" class="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[10px]">
+              Copy
+            </button>
+          </div>
+          <p id="snippet-register" class="font-medium text-ink/80 leading-relaxed bg-white p-2.5 rounded-xl border border-ink/5 font-sans">
+"Sir hath se parchi likhne mein 40-50 second lagte hain aur rush time counter pe rush barh jata hai. ParchiOS sirf 5 second mein parchi nikaal deta hai. Aur sab se barh kar raat ko hisaab ginne ki tension khatam—daily sales aur profit report direct aap ke mobile WhatsApp pe aa jati hai: https://parchi-os.vercel.app/demo"
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-ink text-white px-5 py-3 rounded-2xl shadow-xl border border-white/10 flex items-center gap-3 opacity-0 pointer-events-none transition-opacity duration-300">
+    <span class="text-phoneGreen font-bold">✓</span>
+    <span id="toast-msg" class="text-xs font-medium">Notification message</span>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const DEMO_URL = "https://parchi-os.vercel.app/demo";
+
+    // BATCH 6 LEADS (IDs #143 to #172)
+    const LEADS = [
+    {
+        "id": 143,
+        "name": "Tengo Pizza & Burger",
+        "town": "Phool Nagar (Bhai Pheru)",
+        "cluster": "Main Multan Road, Phool Nagar",
+        "region": "lahore_belt",
+        "region_label": "Phool Nagar",
+        "member_id": 1,
+        "phone": "923264111515",
+        "reviews": 15,
+        "deal": "Special Tengo Zinger Burger + Cheesy Fries Deal",
+        "pain": "Highway takeaway counter; manual paper order slips",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Tengo Pizza & Burger ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Tengo Zinger Burger + Cheesy Fries Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Tengo Pizza & Burger ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Tengo Zinger Burger + Cheesy Fries Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Tengo Pizza & Burger se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 144,
+        "name": "Malik Burger Point",
+        "town": "Phool Nagar (Bhai Pheru)",
+        "cluster": "Main Bazaar, Phool Nagar",
+        "region": "lahore_belt",
+        "region_label": "Phool Nagar",
+        "member_id": 1,
+        "phone": "923085421558",
+        "reviews": 11,
+        "deal": "Double Anda Shami Burger + Crispy Fries Combo",
+        "pain": "Street counter; cash drawer with handwritten paper tokens",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Malik Burger Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Anda Shami Burger + Crispy Fries Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Malik Burger Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Anda Shami Burger + Crispy Fries Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Malik Burger Point se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 145,
+        "name": "Flavours Pizza & Burgers",
+        "town": "Phool Nagar (Bhai Pheru)",
+        "cluster": "Cinema Road, Phool Nagar",
+        "region": "lahore_belt",
+        "region_label": "Phool Nagar",
+        "member_id": 1,
+        "phone": "923334633444",
+        "reviews": 18,
+        "deal": "Special Crown Crust Pizza + Zinger Burger Deal",
+        "pain": "Order desk with desktop calculator & paper receipt book",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Flavours Pizza & Burgers ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Crown Crust Pizza + Zinger Burger Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Flavours Pizza & Burgers ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Crown Crust Pizza + Zinger Burger Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Flavours Pizza & Burgers se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 146,
+        "name": "Pizzaro Phool Nagar",
+        "town": "Phool Nagar (Bhai Pheru)",
+        "cluster": "Multan Road, Phool Nagar",
+        "region": "lahore_belt",
+        "region_label": "Phool Nagar",
+        "member_id": 1,
+        "phone": "923086111566",
+        "reviews": 14,
+        "deal": "Large Family Pan Pizza + 1L Cold Drink Combo",
+        "pain": "Counter shared with pizza oven; paper slips get misplaced",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Pizzaro Phool Nagar ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Large Family Pan Pizza + 1L Cold Drink Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Pizzaro Phool Nagar ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Large Family Pan Pizza + 1L Cold Drink Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Pizzaro Phool Nagar se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 147,
+        "name": "SFC Pizza Burger",
+        "town": "Kot Radha Kishan",
+        "cluster": "Raiwind Road, Kot Radha Kishan",
+        "region": "lahore_belt",
+        "region_label": "Kot Radha Kishan",
+        "member_id": 1,
+        "phone": "923044600127",
+        "reviews": 16,
+        "deal": "Special Zinger Burger + Chicken Shawarma Combo",
+        "pain": "Order desk with handwritten bill book & caller",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat SFC Pizza Burger ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Zinger Burger + Chicken Shawarma Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat SFC Pizza Burger ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Zinger Burger + Chicken Shawarma Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, SFC Pizza Burger se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 148,
+        "name": "Watto Burger & Shawarma Point",
+        "town": "Kot Radha Kishan",
+        "cluster": "Main Chowk, Kot Radha Kishan",
+        "region": "lahore_belt",
+        "region_label": "Kot Radha Kishan",
+        "member_id": 1,
+        "phone": "923029010014",
+        "reviews": 8,
+        "deal": "Special Arabic Shawarma Platter + Mayo Garlic Dip",
+        "pain": "High evening rush; manual paper caller slips",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Watto Burger & Shawarma Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Arabic Shawarma Platter + Mayo Garlic Dip bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Watto Burger & Shawarma Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Arabic Shawarma Platter + Mayo Garlic Dip bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Watto Burger & Shawarma Point se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 149,
+        "name": "Hadir Burger Point",
+        "town": "Kot Radha Kishan",
+        "cluster": "Station Road, Kot Radha Kishan",
+        "region": "lahore_belt",
+        "region_label": "Kot Radha Kishan",
+        "member_id": 1,
+        "phone": "923008814027",
+        "reviews": 12,
+        "deal": "Double Patty Beef Shami Burger + Loaded Fries",
+        "pain": "Streetfront counter; manual slip notepad",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Hadir Burger Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Patty Beef Shami Burger + Loaded Fries bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Hadir Burger Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Patty Beef Shami Burger + Loaded Fries bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Hadir Burger Point se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 150,
+        "name": "Bin Shafi Pizza House",
+        "town": "Chunian / Pattoki",
+        "cluster": "Chunian - Pattoki Road",
+        "region": "lahore_belt",
+        "region_label": "Chunian",
+        "member_id": 1,
+        "phone": "923034927163",
+        "reviews": 19,
+        "deal": "Chicken Tikka Pizza + 2 Zinger Burgers Deal",
+        "pain": "Takeaway hatch; duplicate paper bill pad",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Bin Shafi Pizza House ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Chicken Tikka Pizza + 2 Zinger Burgers Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Bin Shafi Pizza House ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Chicken Tikka Pizza + 2 Zinger Burgers Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Bin Shafi Pizza House se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 151,
+        "name": "MS Pizza Farooqabad",
+        "town": "Farooqabad",
+        "cluster": "Lahore - Sargodha Road, Farooqabad",
+        "region": "lahore_belt",
+        "region_label": "Farooqabad",
+        "member_id": 1,
+        "phone": "923248497144",
+        "reviews": 21,
+        "deal": "Stuffed Crust Pizza + Crispy Zinger Combo",
+        "pain": "Order counter; manual KOT tickets to kitchen",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat MS Pizza Farooqabad ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Stuffed Crust Pizza + Crispy Zinger Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat MS Pizza Farooqabad ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Stuffed Crust Pizza + Crispy Zinger Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, MS Pizza Farooqabad se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 152,
+        "name": "Al.Makkah Pizza & Fast Food",
+        "town": "Shahkot",
+        "cluster": "College Road (opposite Faisal Bank), Shahkot",
+        "region": "lahore_belt",
+        "region_label": "Shahkot",
+        "member_id": 1,
+        "phone": "923011642638",
+        "reviews": 17,
+        "deal": "Special Shahkot Pizza + Chicken Paratha Roll Deal",
+        "pain": "Cash counter with physical receipt ledger",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Al.Makkah Pizza & Fast Food ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Shahkot Pizza + Chicken Paratha Roll Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Al.Makkah Pizza & Fast Food ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Shahkot Pizza + Chicken Paratha Roll Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Al.Makkah Pizza & Fast Food se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 153,
+        "name": "Stone Bake Pizza Dina",
+        "town": "Dina",
+        "cluster": "Mangla Road, Dina",
+        "region": "gt_road",
+        "region_label": "Dina",
+        "member_id": 2,
+        "phone": "923256120333",
+        "reviews": 22,
+        "deal": "Stone-Baked Tikka Pizza + Garlic Bread Deal",
+        "pain": "Billing counter with handwritten receipt book",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Stone Bake Pizza Dina ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Stone-Baked Tikka Pizza + Garlic Bread Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Stone Bake Pizza Dina ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Stone-Baked Tikka Pizza + Garlic Bread Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Stone Bake Pizza Dina se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 154,
+        "name": "Haji Pizza Hut Sohawa",
+        "town": "Sohawa",
+        "cluster": "Main GT Road, Sohawa",
+        "region": "gt_road",
+        "region_label": "Sohawa",
+        "member_id": 2,
+        "phone": "923045636293",
+        "reviews": 16,
+        "deal": "Loaded Cheesy Pizza + Zinger Burger Combo",
+        "pain": "High GT Road traffic; manual paper tokens",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Haji Pizza Hut Sohawa ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Loaded Cheesy Pizza + Zinger Burger Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Haji Pizza Hut Sohawa ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Loaded Cheesy Pizza + Zinger Burger Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Haji Pizza Hut Sohawa se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 155,
+        "name": "Golden Crust Pizza",
+        "town": "Sarai Alamgir",
+        "cluster": "GT Road, Sarai Alamgir",
+        "region": "gt_road",
+        "region_label": "Sarai Alamgir",
+        "member_id": 2,
+        "phone": "923246229595",
+        "reviews": 24,
+        "deal": "Golden Crust Special Pizza + 1L Cold Drink",
+        "pain": "Order window with manual duplicate receipts",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Golden Crust Pizza ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Golden Crust Special Pizza + 1L Cold Drink bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Golden Crust Pizza ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Golden Crust Special Pizza + 1L Cold Drink bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Golden Crust Pizza se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 156,
+        "name": "The Brothers Pizza & Fast Food",
+        "town": "Sarai Alamgir",
+        "cluster": "Main Bazaar, Sarai Alamgir",
+        "region": "gt_road",
+        "region_label": "Sarai Alamgir",
+        "member_id": 2,
+        "phone": "923070869300",
+        "reviews": 13,
+        "deal": "Crispy Chicken Burger + Loaded Pizza Fries Deal",
+        "pain": "Small takeaway kiosk; paper order pad",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat The Brothers Pizza & Fast Food ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Crispy Chicken Burger + Loaded Pizza Fries Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat The Brothers Pizza & Fast Food ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Crispy Chicken Burger + Loaded Pizza Fries Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, The Brothers Pizza & Fast Food se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 157,
+        "name": "Mr. Broast Sarai Alamgir",
+        "town": "Sarai Alamgir",
+        "cluster": "Canal Road, Sarai Alamgir",
+        "region": "gt_road",
+        "region_label": "Sarai Alamgir",
+        "member_id": 2,
+        "phone": "923115617500",
+        "reviews": 18,
+        "deal": "Quarter Crispy Broast + Garlic Sauce + Dinner Roll",
+        "pain": "Fryer counter with manual caller slips",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Mr. Broast Sarai Alamgir ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Quarter Crispy Broast + Garlic Sauce + Dinner Roll bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Mr. Broast Sarai Alamgir ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Quarter Crispy Broast + Garlic Sauce + Dinner Roll bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Mr. Broast Sarai Alamgir se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 158,
+        "name": "Pizza Chef Kharian",
+        "town": "Kharian",
+        "cluster": "Mohalla Jhandy Wali, Kharian",
+        "region": "gt_road",
+        "region_label": "Kharian",
+        "member_id": 2,
+        "phone": "923289595004",
+        "reviews": 15,
+        "deal": "Chef Special Pan Pizza + Crispy Wings Combo",
+        "pain": "Order desk with desktop calculator & paper bills",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Pizza Chef Kharian ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Chef Special Pan Pizza + Crispy Wings Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Pizza Chef Kharian ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Chef Special Pan Pizza + Crispy Wings Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Pizza Chef Kharian se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 159,
+        "name": "Sosas Food Kharian",
+        "town": "Kharian",
+        "cluster": "Main GT Road, near NADRA Office, Kharian",
+        "region": "gt_road",
+        "region_label": "Kharian",
+        "member_id": 2,
+        "phone": "923094408914",
+        "reviews": 19,
+        "deal": "Double Patty Beef Smashed Burger + Fries Deal",
+        "pain": "Cash till with physical paper ledger",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Sosas Food Kharian ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Patty Beef Smashed Burger + Fries Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Sosas Food Kharian ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Patty Beef Smashed Burger + Fries Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Sosas Food Kharian se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 160,
+        "name": "Al Kabeer Pizza Point",
+        "town": "Sambrial",
+        "cluster": "Model Town Ghuman Colony / Daska Rd, Sambrial",
+        "region": "gt_road",
+        "region_label": "Sambrial",
+        "member_id": 2,
+        "phone": "923349848209",
+        "reviews": 14,
+        "deal": "Special Crown Pizza + Zinger Burger Deal",
+        "pain": "Order counter; manual KOT tickets to kitchen",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Al Kabeer Pizza Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Crown Pizza + Zinger Burger Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Al Kabeer Pizza Point ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Crown Pizza + Zinger Burger Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Al Kabeer Pizza Point se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 161,
+        "name": "Tasty Twist Pasrur",
+        "town": "Pasrur",
+        "cluster": "Railway Road, Loharan Mandi Bazaar, Pasrur",
+        "region": "gt_road",
+        "region_label": "Pasrur",
+        "member_id": 2,
+        "phone": "923280232144",
+        "reviews": 16,
+        "deal": "Crispy Zinger Burger + Chicken Shawarma Combo",
+        "pain": "Prep station with manual notepad ordering",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Tasty Twist Pasrur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Crispy Zinger Burger + Chicken Shawarma Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Tasty Twist Pasrur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Crispy Zinger Burger + Chicken Shawarma Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Tasty Twist Pasrur se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 162,
+        "name": "Pizza Lovers Pasrur",
+        "town": "Pasrur",
+        "cluster": "Kutchery Road, Pasrur",
+        "region": "gt_road",
+        "region_label": "Pasrur",
+        "member_id": 2,
+        "phone": "923476442785",
+        "reviews": 12,
+        "deal": "Lovers Special Large Pizza + 1.5L Drink",
+        "pain": "Billing desk with manual paper book",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Pizza Lovers Pasrur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Lovers Special Large Pizza + 1.5L Drink bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Pizza Lovers Pasrur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Lovers Special Large Pizza + 1.5L Drink bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Pizza Lovers Pasrur se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 163,
+        "name": "Imran Pizza & Shawarma",
+        "town": "Renala Khurd",
+        "cluster": "Welcome Road, Gulshan-e-Ishaq, Renala Khurd",
+        "region": "central_potohar",
+        "region_label": "Renala Khurd",
+        "member_id": 3,
+        "phone": "923430151554",
+        "reviews": 17,
+        "deal": "Jumbo Arabic Shawarma Platter + Pan Pizza",
+        "pain": "Spit counter with manual paper tokens",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Imran Pizza & Shawarma ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Jumbo Arabic Shawarma Platter + Pan Pizza bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Imran Pizza & Shawarma ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Jumbo Arabic Shawarma Platter + Pan Pizza bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Imran Pizza & Shawarma se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 164,
+        "name": "Capital Bite",
+        "town": "Renala Khurd",
+        "cluster": "Hussnain & Tariq Trade Center, Renala Khurd",
+        "region": "central_potohar",
+        "region_label": "Renala Khurd",
+        "member_id": 3,
+        "phone": "923000717047",
+        "reviews": 11,
+        "deal": "Monster Crispy Burger + Loaded Fries Deal",
+        "pain": "Order desk with handwritten bill book",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Capital Bite ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Monster Crispy Burger + Loaded Fries Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Capital Bite ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Monster Crispy Burger + Loaded Fries Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Capital Bite se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 165,
+        "name": "Pizza Souq Depalpur",
+        "town": "Depalpur",
+        "cluster": "Street 1, Paracha Basti, Depalpur",
+        "region": "central_potohar",
+        "region_label": "Depalpur",
+        "member_id": 3,
+        "phone": "923220000878",
+        "reviews": 20,
+        "deal": "Special Stuffed Pizza + Garlic Mayo Dip",
+        "pain": "Order hatch with duplicate receipt slips",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Pizza Souq Depalpur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Stuffed Pizza + Garlic Mayo Dip bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Pizza Souq Depalpur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Stuffed Pizza + Garlic Mayo Dip bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Pizza Souq Depalpur se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 166,
+        "name": "DFC Depalpur",
+        "town": "Depalpur",
+        "cluster": "Pakpattan Chowk, Depalpur",
+        "region": "central_potohar",
+        "region_label": "Depalpur",
+        "member_id": 3,
+        "phone": "923103377882",
+        "reviews": 18,
+        "deal": "Crispy Fried Chicken Broast + Zinger Deal",
+        "pain": "Fryer counter with manual token calling",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat DFC Depalpur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Crispy Fried Chicken Broast + Zinger Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat DFC Depalpur ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Crispy Fried Chicken Broast + Zinger Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, DFC Depalpur se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 167,
+        "name": "Man-O-Salwa Fast Food",
+        "town": "Fateh Jang",
+        "cluster": "Main Bazaar, Fateh Jang",
+        "region": "central_potohar",
+        "region_label": "Fateh Jang",
+        "member_id": 3,
+        "phone": "923110750081",
+        "reviews": 14,
+        "deal": "Special Crispy Burger + Paratha Roll Combo",
+        "pain": "Cash counter with physical receipt notepad",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Man-O-Salwa Fast Food ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Crispy Burger + Paratha Roll Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Man-O-Salwa Fast Food ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Crispy Burger + Paratha Roll Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Man-O-Salwa Fast Food se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 168,
+        "name": "Lahori Shawarma Fateh Jang",
+        "town": "Fateh Jang",
+        "cluster": "Rawalpindi Road, Fateh Jang",
+        "region": "central_potohar",
+        "region_label": "Fateh Jang",
+        "member_id": 3,
+        "phone": "923453437665",
+        "reviews": 9,
+        "deal": "Double Chicken Shawarma + Mayo Garlic Dip",
+        "pain": "Street counter; manual paper tokens",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Lahori Shawarma Fateh Jang ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Chicken Shawarma + Mayo Garlic Dip bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Lahori Shawarma Fateh Jang ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Double Chicken Shawarma + Mayo Garlic Dip bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Lahori Shawarma Fateh Jang se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 169,
+        "name": "Khaleej Fast Food & Pizza",
+        "town": "Dinga",
+        "cluster": "Main Bazaar, Dinga",
+        "region": "central_potohar",
+        "region_label": "Dinga",
+        "member_id": 3,
+        "phone": "923023404040",
+        "reviews": 15,
+        "deal": "Special Khaleej Pizza + Crispy Zinger Deal",
+        "pain": "Billing desk with handwritten paper slips",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Khaleej Fast Food & Pizza ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Khaleej Pizza + Crispy Zinger Deal bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Khaleej Fast Food & Pizza ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Khaleej Pizza + Crispy Zinger Deal bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Khaleej Fast Food & Pizza se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 170,
+        "name": "FIRE GRILL Dinga",
+        "town": "Dinga",
+        "cluster": "Dalyan Chowk, Dinga",
+        "region": "central_potohar",
+        "region_label": "Dinga",
+        "member_id": 3,
+        "phone": "923367404100",
+        "reviews": 19,
+        "deal": "Charcoal Grilled Burger + Loaded Curly Fries",
+        "pain": "Grill station with handwritten KOT tickets",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat FIRE GRILL Dinga ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Charcoal Grilled Burger + Loaded Curly Fries bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat FIRE GRILL Dinga ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Charcoal Grilled Burger + Loaded Curly Fries bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, FIRE GRILL Dinga se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 171,
+        "name": "Ono Pizza Kunjah",
+        "town": "Kunjah",
+        "cluster": "Shekha Wala Chowk, Kunjah",
+        "region": "central_potohar",
+        "region_label": "Kunjah",
+        "member_id": 3,
+        "phone": "923408222234",
+        "reviews": 13,
+        "deal": "Deep Pan Meat Pizza + 1L Drink Combo",
+        "pain": "Order desk with desktop calculator & paper bills",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Ono Pizza Kunjah ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Deep Pan Meat Pizza + 1L Drink Combo bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Ono Pizza Kunjah ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Deep Pan Meat Pizza + 1L Drink Combo bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Ono Pizza Kunjah se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    },
+    {
+        "id": 172,
+        "name": "Bite & Roll Kunjah",
+        "town": "Kunjah",
+        "cluster": "Circular Road, Kunjah",
+        "region": "central_potohar",
+        "region_label": "Kunjah",
+        "member_id": 3,
+        "phone": "923086082878",
+        "reviews": 11,
+        "deal": "Special Zinger Paratha Roll + Loaded Pizza Fries",
+        "pain": "Compact takeaway counter; paper token slips",
+        "call_step1": "Assalam-o-Alaikum Sir, kya meri baat Bite & Roll Kunjah ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Zinger Paratha Roll + Loaded Pizza Fries bohot zabardast chal rahi hai mashallah!",
+        "call_step2": "Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?",
+        "call_step3": "Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.",
+        "call_step4": "Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "full_call_pitch": "Assalam-o-Alaikum Sir, kya meri baat Bite & Roll Kunjah ke owner ya counter manager se ho rahi hai? Zabardast! Sir main Waqas baat kar raha hoon, main aap ka menu dekh raha tha, aap ki Special Zinger Paratha Roll + Loaded Pizza Fries bohot zabardast chal rahi hai mashallah!\n\n👉 [Sawaal]: Sir ek chota sa sawaal tha: rush ke time pe aap counter pe order hath se parchi pe likh rahe hain ya koi computerized billing machine lagayi hui hai?\n\n👉 [Jab woh kahein hath se likhte hain]: Sahi! Sir humne khas tor pe aap jaise fast-food counters ke liye ParchiOS banaya hai—jo counter pe kisi bhi aam mobile ya purane laptop pe sirf 5 second mein digital parchi nikaal deta hai, bina internet ke bhi chalta hai, aur daily sale ka hisaab raat ko seedha aap ke WhatsApp pe bhejta hai. Koi monthly fees nahi hai.\n\n👉 [Demo Link mangna]: Sir main aap ka waqt nahi loonga, kya main isi number pe WhatsApp pe 1-minute ka demo link bhej doon taake aap free time mein khud test kar lein?",
+        "wa_followup": "Assalam-o-Alaikum Sir, Bite & Roll Kunjah se baat karne ka shukriya! Yeh ParchiOS ka 1-minute live demo link hai: https://parchi-os.vercel.app/demo\n\nIspe aap bina kisi software download ke, apne mobile pe hi 5 second mein digital parchi punch kar ke test kar sakte hain. Jab aap free hon toh zaroor check kar ke batayein!"
+    }
+];
+
+    const STORAGE_KEY = 'parchios_calling_live_v1';
+    const TEAM_NAMES_KEY = 'parchios_team_names_v1';
+
+    let currentMember = 'all'; // 'all' | 1 | 2 | 3
+    let currentStatusFilter = 'all';
+    let searchQuery = '';
+
+    // Territory Descriptions
+    const TERRITORIES = {
+      'all': 'Showing all 30 small town spots across Punjab (Zero websites, pure manual parchi counters).',
+      1: 'Member 1 Assignment: 10 Spots in Lahore Belt (Phool Nagar, Kot Radha Kishan, Chunian, Farooqabad, Shahkot).',
+      2: 'Member 2 Assignment: 10 Spots in Northern GT Road (Dina, Sohawa, Sarai Alamgir, Kharian, Sambrial, Pasrur).',
+      3: 'Member 3 Assignment: 10 Spots in Central & Potohar (Renala Khurd, Depalpur, Fateh Jang, Dinga, Kunjah).'
+    };
+
+    function getTeamNames() {
+      try {
+        return JSON.parse(localStorage.getItem(TEAM_NAMES_KEY)) || {
+          1: 'Waqas (Member 1)',
+          2: 'Teammate 2',
+          3: 'Teammate 3'
+        };
+      } catch (e) {
+        return { 1: 'Waqas', 2: 'Teammate 2', 3: 'Teammate 3' };
+      }
+    }
+
+    function saveTeamNames(names) {
+      localStorage.setItem(TEAM_NAMES_KEY, JSON.stringify(names));
+      updateTeamMemberButtons();
+    }
+
+    function renameMemberPrompt() {
+      const names = getTeamNames();
+      const current = currentMember === 'all' ? 1 : currentMember;
+      const promptName = prompt(`Enter custom name for Member ${current}:`, names[current] || `Member ${current}`);
+      if (promptName && promptName.trim()) {
+        names[current] = promptName.trim();
+        saveTeamNames(names);
+        showToast(`Saved name: ${promptName.trim()}`);
+        renderGrid();
+      }
+    }
+
+    function updateTeamMemberButtons() {
+      const names = getTeamNames();
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById(`btn-member-${i}`);
+        if (btn) {
+          btn.innerHTML = `<span>👤 ${names[i] || 'Member ' + i}</span> <span class="text-[10px] bg-ink/10 px-1 rounded-full font-bold">10</span>`;
+        }
+      }
+    }
+
+    function getStoredStatus() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveStatus(id, status) {
+      const stored = getStoredStatus();
+      if (status === 'pending') {
+        delete stored[id];
+      } else {
+        stored[id] = status; // 'pitched' | 'interested' | 'busy' | 'no_answer'
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+    }
+
+    function setLeadStatus(id, status) {
+      saveStatus(id, status);
+      const lead = LEADS.find(l => l.id === id);
+      const label = status === 'pitched' ? 'Pitched 📞' : status === 'interested' ? 'Interested 💬' : status === 'busy' ? 'Busy / Call Back ⏳' : status === 'no_answer' ? 'No Answer ❌' : 'Reset to Pending';
+      showToast(`${lead ? lead.name : 'Lead'} marked as ${label}`);
+      renderGrid();
+    }
+
+    function setTeamMember(m) {
+      currentMember = m;
+      ['all', 1, 2, 3].forEach(val => {
+        const btn = document.getElementById(`btn-member-${val}`);
+        if (!btn) return;
+        if (val === m) {
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition-all bg-ink text-white";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold text-ink/70 hover:bg-ink/5 transition-all flex items-center gap-1";
+        }
+      });
+
+      const territoryEl = document.getElementById('territory-text');
+      if (territoryEl) {
+        territoryEl.innerHTML = `<strong>Territory:</strong> ${TERRITORIES[m]}`;
+      }
+
+      renderGrid();
+    }
+
+    function setStatusFilter(status) {
+      currentStatusFilter = status;
+      const ids = {
+        'all': 'btn-status-all',
+        'pending': 'btn-status-pending',
+        'pitched': 'btn-status-pitched',
+        'interested': 'btn-status-interested',
+        'busy': 'btn-status-busy',
+        'no_answer': 'btn-status-noans'
+      };
+      Object.keys(ids).forEach(s => {
+        const btn = document.getElementById(ids[s]);
+        if (!btn) return;
+        if (s === status) {
+          btn.classList.add('bg-ink/10', 'font-bold');
+        } else {
+          btn.classList.remove('bg-ink/10', 'font-bold');
+        }
+      });
+      renderGrid();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-search');
+      if (searchQuery) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderGrid();
+    }
+
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      searchQuery = '';
+      document.getElementById('clear-search').classList.add('hidden');
+      renderGrid();
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+
+    function copySnippet(elementId) {
+      const text = document.getElementById(elementId).innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Text copied to clipboard!');
+      });
+    }
+
+    function copyPitch(id) {
+      const lead = LEADS.find(l => l.id === id);
+      if (lead) {
+        navigator.clipboard.writeText(lead.full_call_pitch).then(() => {
+          showToast(`Copied Call Pitch for ${lead.name}!`);
+        });
+      }
+    }
+
+    function toggleObjectionsModal() {
+      const modal = document.getElementById('objections-modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+
+    function makePhoneCall(phone) {
+      window.location.href = `tel:+${phone}`;
+      showToast(`Dialing +${phone}...`);
+    }
+
+    function openWhatsAppFollowup(id) {
+      const lead = LEADS.find(l => l.id === id);
+      if (lead) {
+        const encoded = encodeURIComponent(lead.wa_followup);
+        const url = `https://wa.me/${lead.phone}?text=${encoded}`;
+        window.open(url, '_blank');
+        showToast(`Opening WhatsApp follow-up for ${lead.name}...`);
+      }
+    }
+
+    // Share Team Member Progress into WhatsApp Group
+    function shareTeamProgress() {
+      const stored = getStoredStatus();
+      const names = getTeamNames();
+      const memberLabel = currentMember === 'all' ? 'All Team (Batch 6)' : (names[currentMember] || `Member ${currentMember}`);
+
+      const currentLeads = currentMember === 'all' 
+        ? LEADS 
+        : LEADS.filter(l => l.member_id === currentMember);
+
+      let pitched = 0, interested = 0, busy = 0, noans = 0;
+      currentLeads.forEach(l => {
+        const s = stored[l.id];
+        if (s === 'pitched') pitched++;
+        else if (s === 'interested') interested++;
+        else if (s === 'busy') busy++;
+        else if (s === 'no_answer') noans++;
+      });
+
+      const total = currentLeads.length;
+      const completed = pitched + interested + busy + noans;
+
+      const report = `🚀 *ParchiOS Calling Progress: ${memberLabel}*\n` +
+        `📅 Date: ${new Date().toLocaleDateString('en-GB')}\n\n` +
+        `📞 Pitched (Sent Demo): ${pitched}\n` +
+        `💬 Interested (Hot Lead): ${interested}\n` +
+        `⏳ Busy / Call Back: ${busy}\n` +
+        `❌ No Answer / Off: ${noans}\n` +
+        `🎯 Progress: ${completed} / ${total} Spots Called (${Math.round((completed/total)*100)}%)\n\n` +
+        `🔗 Live Dashboard: https://parchi-os.vercel.app/outreach`;
+
+      navigator.clipboard.writeText(report).then(() => {
+        showToast('📋 Progress report copied! Paste it in your WhatsApp team group.');
+      });
+    }
+
+    function updateProgressDisplay() {
+      const stored = getStoredStatus();
+      let pitchedCount = 0;
+      let interestedCount = 0;
+      let busyCount = 0;
+      let noAnsCount = 0;
+
+      const scopeLeads = currentMember === 'all'
+        ? LEADS
+        : LEADS.filter(l => l.member_id === currentMember);
+
+      scopeLeads.forEach(lead => {
+        const status = stored[lead.id];
+        if (status === 'pitched') pitchedCount++;
+        else if (status === 'interested') interestedCount++;
+        else if (status === 'busy') busyCount++;
+        else if (status === 'no_answer') noAnsCount++;
+      });
+
+      const total = scopeLeads.length;
+      const pendingCount = total - (pitchedCount + interestedCount + busyCount + noAnsCount);
+
+      document.getElementById('stat-pitched').innerText = pitchedCount;
+      document.getElementById('stat-interested').innerText = interestedCount;
+      document.getElementById('stat-busy').innerText = busyCount;
+      document.getElementById('stat-noans').innerText = noAnsCount;
+      document.getElementById('stat-pending').innerText = pendingCount;
+
+      const pitchedPct = total ? (pitchedCount / total) * 100 : 0;
+      const interestedPct = total ? (interestedCount / total) * 100 : 0;
+      const busyPct = total ? (busyCount / total) * 100 : 0;
+      const noAnsPct = total ? (noAnsCount / total) * 100 : 0;
+
+      document.getElementById('bar-pitched').style.width = `${pitchedPct}%`;
+      document.getElementById('bar-interested').style.width = `${interestedPct}%`;
+      document.getElementById('bar-busy').style.width = `${busyPct}%`;
+      document.getElementById('bar-noans').style.width = `${noAnsPct}%`;
+    }
+
+    function renderGrid() {
+      updateProgressDisplay();
+      const container = document.getElementById('leads-grid');
+      const stored = getStoredStatus();
+      const names = getTeamNames();
+
+      const filtered = LEADS.filter(lead => {
+        // Team member filter
+        if (currentMember !== 'all' && lead.member_id !== currentMember) {
+          return false;
+        }
+
+        // Status filter
+        const status = stored[lead.id] || 'pending';
+        if (currentStatusFilter !== 'all' && status !== currentStatusFilter) {
+          return false;
+        }
+
+        // Search filter
+        if (searchQuery) {
+          const matchStr = `${lead.name} ${lead.town} ${lead.cluster} ${lead.deal} ${lead.pain}`.toLowerCase();
+          if (!matchStr.includes(searchQuery)) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center text-ink/40">
+            <p class="text-3xl mb-2">🔍</p>
+            <p class="text-sm font-semibold">No spots match your current filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(lead => {
+        const status = stored[lead.id] || 'pending';
+
+        let statusBadge = '';
+        let cardBorder = 'border-ink/10';
+
+        if (status === 'pitched') {
+          statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">📞 Pitched</span>';
+          cardBorder = 'border-emerald-300 bg-emerald-50/20';
+        } else if (status === 'interested') {
+          statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-300">💬 Interested</span>';
+          cardBorder = 'border-blue-400 bg-blue-50/30 ring-1 ring-blue-300';
+        } else if (status === 'busy') {
+          statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">⏳ Busy</span>';
+          cardBorder = 'border-amber-300 bg-amber-50/20';
+        } else if (status === 'no_answer') {
+          statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-300">❌ No Answer</span>';
+          cardBorder = 'border-rose-200 bg-rose-50/20 opacity-75';
+        } else {
+          statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">○ To Call</span>';
+        }
+
+        const assignedName = names[lead.member_id] || `Member ${lead.member_id}`;
+
+        return `
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border ${cardBorder} shadow-sm flex flex-col justify-between space-y-3.5 hover:shadow-md transition-shadow">
+            
+            <!-- Card Header -->
+            <div>
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-[11px] font-mono font-bold text-ink/40">#${lead.id}</span>
+                    <h3 class="text-base font-extrabold text-ink leading-tight">${lead.name}</h3>
+                  </div>
+                  <p class="text-xs text-ink/60 font-medium mt-0.5 flex items-center gap-1">
+                    <span class="text-phoneGreen font-bold">📍 ${lead.town}</span> • ${lead.cluster}
+                  </p>
+                </div>
+                <div>
+                  ${statusBadge}
+                </div>
+              </div>
+
+              <!-- Quick Meta Tags -->
+              <div class="flex items-center gap-1.5 mt-2.5 text-xs flex-wrap">
+                <span class="px-2 py-0.5 rounded-lg bg-amber-50 border border-amber-200/80 text-amber-900 font-bold flex items-center gap-1 text-[10px]">
+                  ⭐ ${lead.reviews} Reviews
+                </span>
+                <span class="px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-900 font-bold text-[10px] border border-emerald-200">
+                  Zero POS / No Site
+                </span>
+                <span class="px-2 py-0.5 rounded-lg bg-indigo-50 text-indigo-900 font-bold text-[10px] border border-indigo-200">
+                  👤 ${assignedName}
+                </span>
+                <span class="px-2 py-0.5 rounded-lg bg-ink/5 text-ink/70 font-mono text-[10px]">
+                  +${lead.phone}
+                </span>
+              </div>
+
+              <!-- Deal & Pain Point -->
+              <div class="mt-3 space-y-1.5 text-xs">
+                <div class="p-2 rounded-xl bg-ink/[0.02] border border-ink/5">
+                  <span class="font-bold text-ink/60 uppercase tracking-wider text-[9px] block">Deal to Mention:</span>
+                  <span class="font-semibold text-ink text-[11px]">${lead.deal}</span>
+                </div>
+
+                <div class="p-2 rounded-xl bg-rush/[0.03] border border-rush/10 text-ink/80 text-[11px]">
+                  <span class="font-bold text-rush uppercase tracking-wider text-[9px] block">Shop Pain:</span>
+                  <span>${lead.pain}</span>
+                </div>
+              </div>
+
+              <!-- Custom Phone Pitch Card (Urdu) -->
+              <div class="mt-3 bg-emerald-50/40 rounded-2xl p-3 border border-emerald-200/80 space-y-2 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-extrabold text-emerald-950 uppercase tracking-wide text-[10px] flex items-center gap-1">
+                    <span>🎙️</span> Custom Urdu Call Pitch
+                  </span>
+                  <button 
+                    onclick="copyPitch(${lead.id})"
+                    class="text-[10px] font-bold text-emerald-800 hover:text-emerald-950 bg-white px-2 py-0.5 rounded-lg border border-emerald-200 shadow-2xs"
+                  >
+                    Copy
+                  </button>
+                </div>
+
+                <!-- Call Cue Steps -->
+                <div class="space-y-1.5 text-[11px] leading-relaxed text-ink/90 font-sans">
+                  <div>
+                    <span class="font-bold text-emerald-900 block text-[9px] uppercase">1. Opening & Deal Hook:</span>
+                    <p class="bg-white/80 p-2 rounded-lg border border-emerald-100 text-[11px]">${lead.call_step1}</p>
+                  </div>
+
+                  <div>
+                    <span class="font-bold text-amber-900 block text-[9px] uppercase">2. Qualifier Question:</span>
+                    <p class="bg-amber-50/70 p-2 rounded-lg border border-amber-200/60 font-medium text-[11px]">${lead.call_step2}</p>
+                  </div>
+
+                  <details class="group">
+                    <summary class="cursor-pointer font-bold text-emerald-900 hover:text-emerald-950 text-[10px] uppercase select-none flex items-center justify-between py-0.5">
+                      <span>3 & 4. Value Pitch & Ask Demo</span>
+                      <span class="text-[10px] text-emerald-600 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="space-y-1.5 pt-1">
+                      <p class="bg-white/80 p-2 rounded-lg border border-emerald-100 text-[11px]">
+                        <strong>Pitch:</strong> ${lead.call_step3}
+                      </p>
+                      <p class="bg-white/80 p-2 rounded-lg border border-emerald-100 text-[11px]">
+                        <strong>Close:</strong> ${lead.call_step4}
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Card Actions -->
+            <div class="pt-2.5 border-t border-ink/5 space-y-2">
+              
+              <!-- 1-Click Call Button + Send WhatsApp Demo -->
+              <div class="grid grid-cols-2 gap-2">
+                <button 
+                  onclick="makePhoneCall('${lead.phone}')"
+                  class="py-2.5 px-3 rounded-xl bg-phoneGreen hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                >
+                  <span>📞 Call Now</span>
+                </button>
+
+                <button 
+                  onclick="openWhatsAppFollowup(${lead.id})"
+                  class="py-2.5 px-3 rounded-xl bg-whatsapp hover:bg-whatsappDark text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                >
+                  <span>📲 Send Demo</span>
+                </button>
+              </div>
+
+              <!-- Call Status Logging Buttons -->
+              <div class="grid grid-cols-4 gap-1 text-[10px]">
+                <button 
+                  onclick="setLeadStatus(${lead.id}, 'pitched')"
+                  class="py-1.5 px-1 rounded-lg font-bold ${status === 'pitched' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100'} transition-colors"
+                >
+                  Pitched
+                </button>
+                <button 
+                  onclick="setLeadStatus(${lead.id}, 'interested')"
+                  class="py-1.5 px-1 rounded-lg font-bold ${status === 'interested' ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-800 hover:bg-blue-100'} transition-colors"
+                >
+                  Interested
+                </button>
+                <button 
+                  onclick="setLeadStatus(${lead.id}, 'busy')"
+                  class="py-1.5 px-1 rounded-lg font-bold ${status === 'busy' ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-800 hover:bg-amber-100'} transition-colors"
+                >
+                  Busy
+                </button>
+                <button 
+                  onclick="setLeadStatus(${lead.id}, 'no_answer')"
+                  class="py-1.5 px-1 rounded-lg font-bold ${status === 'no_answer' ? 'bg-rose-600 text-white' : 'bg-rose-50 text-rose-800 hover:bg-rose-100'} transition-colors"
+                >
+                  No Ans
+                </button>
+              </div>
+
+              ${status !== 'pending' ? `
+                <div class="text-center pt-0.5">
+                  <button 
+                    onclick="setLeadStatus(${lead.id}, 'pending')" 
+                    class="text-[10px] text-ink/40 hover:text-ink font-semibold underline"
+                  >
+                    Reset Status
+                  </button>
+                </div>
+              ` : ''}
+
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Initial render
+    window.addEventListener('DOMContentLoaded', () => {
+      updateTeamMemberButtons();
+      renderGrid();
+    });
+  </script>
+</body>
+</html>
