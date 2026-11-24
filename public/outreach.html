@@ -84,7 +84,7 @@
               type="password" 
               id="passcode-input"
               autofocus
-              placeholder="Enter passcode (e.g. parchi786)" 
+              placeholder="Enter team passcode..." 
               class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm font-semibold text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
             >
             <button 
@@ -442,13 +442,38 @@
     const STORAGE_KEY = 'parchios_calling_live_v1';
     const TEAM_NAMES_KEY = 'parchios_team_names_v1';
 
-    // Accepted passcodes (all map to internal decryption key)
-    const VALID_PASSCODES = {
-      'parchi786': 'parchi786',
-      '7860': 'parchi786',
-      'parchi2026': 'parchi786',
-      'waqas': 'parchi786'
+    // Cryptographic verification envelopes (SHA-256 hashes + encrypted key envelopes)
+    // No plaintext passwords or decryption keys exist anywhere in this source code or UI
+    const AUTH_ENVELOPES = {
+      "3b494374df4674f4f31920d9cc25b38ea04a6f71117bea5fcb5fc58eefc751ef": "4b283117b72f43ccc5",
+      "e2f691407acb1efa4c9f9f8b1ae626cf6d9a4d96e73e207e9ea7f429293127a8": "9297e32312a229c27a",
+      "dcc4b3c6236851fa025598b641a275a4886ef166a94b653bdfdf030310fed7cc": "aca5c1a54b0166c234",
+      "1a473243f879345414a4df5b69a645c46373166115fcdf1e3779c9be041ae116": "6a2640209010036c22"
     };
+
+    async function recoverKey(passcode) {
+      const clean = (passcode || '').trim().toLowerCase();
+      if (!clean) return null;
+      try {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(clean));
+        const hashBytes = new Uint8Array(buf);
+        const hashHex = Array.from(hashBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+        const envelopeHex = AUTH_ENVELOPES[hashHex];
+        if (!envelopeHex) return null;
+
+        const encBytes = [];
+        for (let i = 0; i < envelopeHex.length; i += 2) {
+          encBytes.push(parseInt(envelopeHex.substr(i, 2), 16));
+        }
+        const keyBytes = [];
+        for (let i = 0; i < encBytes.length; i++) {
+          keyBytes.push(encBytes[i] ^ hashBytes[i]);
+        }
+        return new TextDecoder().decode(new Uint8Array(keyBytes));
+      } catch (e) {
+        return null;
+      }
+    }
 
     let LEADS = [];
     let currentMember = 'all'; // 'all' | 1 | 2 | 3
@@ -486,23 +511,23 @@
     }
 
     // Auth Submission Handler
-    function handleAuthSubmit(e) {
+    async function handleAuthSubmit(e) {
       e.preventDefault();
-      const input = document.getElementById('passcode-input').value.trim().toLowerCase();
+      const input = document.getElementById('passcode-input').value.trim();
       const errorMsg = document.getElementById('auth-error-msg');
       const lockBox = document.querySelector('#auth-lock-screen > div');
 
-      const mappedKey = VALID_PASSCODES[input];
-      if (mappedKey) {
-        const decrypted = tryDecrypt(mappedKey);
+      const recoveredKey = await recoverKey(input);
+      if (recoveredKey) {
+        const decrypted = tryDecrypt(recoveredKey);
         if (decrypted && decrypted.length) {
           LEADS = decrypted;
           errorMsg.classList.add('hidden');
 
           if (document.getElementById('remember-device').checked) {
-            localStorage.setItem(AUTH_STORAGE_KEY, input);
+            localStorage.setItem(AUTH_STORAGE_KEY, input.toLowerCase());
           } else {
-            sessionStorage.setItem(AUTH_STORAGE_KEY, input);
+            sessionStorage.setItem(AUTH_STORAGE_KEY, input.toLowerCase());
           }
 
           unlockUI();
@@ -546,13 +571,12 @@
     }
 
     // Auto-login check on page load
-    function checkSavedAuth() {
+    async function checkSavedAuth() {
       const saved = localStorage.getItem(AUTH_STORAGE_KEY) || sessionStorage.getItem(AUTH_STORAGE_KEY);
       if (saved) {
-        const clean = saved.trim().toLowerCase();
-        const mappedKey = VALID_PASSCODES[clean];
-        if (mappedKey) {
-          const decrypted = tryDecrypt(mappedKey);
+        const recoveredKey = await recoverKey(saved);
+        if (recoveredKey) {
+          const decrypted = tryDecrypt(recoveredKey);
           if (decrypted && decrypted.length) {
             LEADS = decrypted;
             unlockUI();
@@ -560,6 +584,8 @@
           }
         }
       }
+      const passInput = document.getElementById('passcode-input');
+      if (passInput) passInput.focus();
     }
 
     function getTeamNames() {
