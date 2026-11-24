@@ -481,10 +481,14 @@
     let currentStatusFilter = 'all';
     let searchQuery = '';
     let cloudStatusMeta = {}; // { [id]: { status, updatedBy, updatedAt } }
+    let cloudHistoryMeta = {}; // { [id]: Array<{ status, note, by, at }> }
+    let openHistoryLeadIds = new Set();
+    let lastSyncedSignature = '';
     let syncEpoch = 0;
     let isSyncing = false;
     let syncTimer = null;
 
+    const HISTORY_STORAGE_KEY = 'parchios_calling_history_v1';
     const IS_WEB_HOSTED = window.location.protocol.startsWith('http');
     const API_STATUS_URL = '/api/outreach/status';
 
@@ -517,6 +521,19 @@
       return `${days}d ago`;
     }
 
+    function formatHistoryTime(isoStr) {
+      if (!isoStr) return '';
+      const d = new Date(isoStr);
+      if (Number.isNaN(d.getTime())) return '';
+      return d.toLocaleString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+    }
+
     function updateSyncBadge(mode, label) {
       const badge = document.getElementById('cloud-sync-badge');
       if (!badge) return;
@@ -533,8 +550,18 @@
       badge.innerText = label;
     }
 
-    function applyCloudStatuses(statusesMap) {
+    function getStoredHistory() {
+      try {
+        return JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function applyCloudState(statusesMap, historyMap) {
       cloudStatusMeta = statusesMap && typeof statusesMap === 'object' ? statusesMap : {};
+      cloudHistoryMeta = historyMap && typeof historyMap === 'object' ? historyMap : {};
+
       const flat = {};
       Object.entries(cloudStatusMeta).forEach(([id, entry]) => {
         if (entry && entry.status && entry.status !== 'pending') {
@@ -542,6 +569,13 @@
         }
       });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(flat));
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(cloudHistoryMeta));
+      lastSyncedSignature = JSON.stringify({ statuses: cloudStatusMeta, history: cloudHistoryMeta });
+    }
+
+    function isTypingNote() {
+      const active = document.activeElement;
+      return Boolean(active && active.dataset && active.dataset.noteLeadId);
     }
 
     async function syncFromCloud(manual = false, allowInitialSeed = false) {
@@ -568,9 +602,10 @@
 
         const payload = await res.json();
         const serverStatuses = payload && payload.statuses ? payload.statuses : {};
+        const serverHistory = payload && payload.history ? payload.history : {};
 
         // One-time migration: if cloud DB is empty and this device had prior local statuses, seed them
-        if (allowInitialSeed && Object.keys(serverStatuses).length === 0) {
+        if (allowInitialSeed && Object.keys(serverStatuses).length === 0 && Object.keys(serverHistory).length === 0) {
           const localExisting = getStoredStatus();
           if (Object.keys(localExisting).length > 0) {
             const names = getTeamNames();
@@ -586,7 +621,7 @@
             if (seedRes.ok) {
               const seedData = await seedRes.json();
               if (reqEpoch === syncEpoch) {
-                applyCloudStatuses(seedData.statuses || {});
+                applyCloudState(seedData.statuses || {}, seedData.history || {});
                 renderGrid();
               }
               updateSyncBadge('live', '☁️ Cloud Live');
@@ -596,8 +631,13 @@
         }
 
         if (reqEpoch === syncEpoch) {
-          applyCloudStatuses(serverStatuses);
-          renderGrid();
+          const incomingSig = JSON.stringify({ statuses: serverStatuses, history: serverHistory });
+          if (incomingSig !== lastSyncedSignature) {
+            applyCloudState(serverStatuses, serverHistory);
+            if (!isTypingNote()) {
+              renderGrid();
+            }
+          }
         }
         updateSyncBadge('live', '☁️ Cloud Live');
         if (manual) showToast('Synced latest team updates!');
@@ -676,6 +716,7 @@
       protectedApp.classList.remove('hidden');
       protectedApp.classList.add('flex');
 
+      cloudHistoryMeta = getStoredHistory();
       updateTeamMemberButtons();
       renderGrid();
       showToast('Welcome to ParchiOS Dispatcher!');
@@ -768,37 +809,46 @@
       }
     }
 
-    function saveStatus(id, status, updatedBy) {
-      const stored = getStoredStatus();
-      if (status === 'pending') {
-        delete stored[id];
-        delete cloudStatusMeta[id];
+    function toggleHistoryLead(id, isOpen) {
+      if (isOpen) {
+        openHistoryLeadIds.add(id);
       } else {
-        stored[id] = status;
-        cloudStatusMeta[id] = {
-          status,
-          updatedBy: updatedBy || 'Team',
-          updatedAt: new Date().toISOString()
-        };
+        openHistoryLeadIds.delete(id);
       }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
     }
 
-    async function setLeadStatus(id, status) {
-      const names = getTeamNames();
-      const lead = LEADS.find(l => l.id === id);
-      const updatedBy = currentMember === 'all'
-        ? (lead ? (names[lead.member_id] || 'Team') : 'Team')
-        : (names[currentMember] || (currentMember === 1 ? 'Waqas' : 'Muneeb'));
+    function saveStatus(id, status, updatedBy, note) {
+      const now = new Date().toISOString();
+      const actor = updatedBy || 'Team';
 
-      syncEpoch++;
-      const writeEpoch = syncEpoch;
+      if (status !== 'note') {
+        const stored = getStoredStatus();
+        if (status === 'pending') {
+          delete stored[id];
+          delete cloudStatusMeta[id];
+        } else {
+          stored[id] = status;
+          cloudStatusMeta[id] = {
+            status,
+            updatedBy: actor,
+            updatedAt: now
+          };
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+      }
 
-      saveStatus(id, status, updatedBy);
-      const label = status === 'pitched' ? 'Pitched 📞' : status === 'interested' ? 'Interested 💬' : status === 'busy' ? 'Busy / Call Back ⏳' : status === 'no_answer' ? 'No Answer ❌' : 'Reset to Pending';
-      showToast(`${lead ? lead.name : 'Lead'} marked as ${label}`);
-      renderGrid();
+      const existing = Array.isArray(cloudHistoryMeta[id]) ? cloudHistoryMeta[id] : [];
+      const entry = {
+        status,
+        ...(note ? { note } : (status === 'pending' ? { note: 'Status reset to To Call' } : {})),
+        by: actor,
+        at: now
+      };
+      cloudHistoryMeta[id] = [entry, ...existing].slice(0, 50);
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(cloudHistoryMeta));
+    }
 
+    async function postCloudUpdate(payloadBody, writeEpoch) {
       if (!activePasscode || !IS_WEB_HOSTED) return;
 
       updateSyncBadge('syncing', '⏳ Saving...');
@@ -809,19 +859,65 @@
             'Content-Type': 'application/json',
             'x-outreach-passcode': activePasscode
           },
-          body: JSON.stringify({ leadId: id, status, updatedBy })
+          body: JSON.stringify(payloadBody)
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const payload = await res.json();
         if (writeEpoch === syncEpoch && payload && payload.statuses) {
-          applyCloudStatuses(payload.statuses);
-          renderGrid();
+          applyCloudState(payload.statuses, payload.history || {});
+          if (!isTypingNote()) {
+            renderGrid();
+          }
         }
         updateSyncBadge('live', '☁️ Cloud Live');
       } catch (err) {
         updateSyncBadge('error', '⚠️ Sync Failed');
         showToast('Saved locally — cloud sync failed, tap Cloud badge to retry');
       }
+    }
+
+    function getActorForLead(lead) {
+      const names = getTeamNames();
+      return currentMember === 'all'
+        ? (lead ? (names[lead.member_id] || 'Team') : 'Team')
+        : (names[currentMember] || (currentMember === 1 ? 'Waqas' : 'Muneeb'));
+    }
+
+    async function setLeadStatus(id, status, note) {
+      const lead = LEADS.find(l => l.id === id);
+      const updatedBy = getActorForLead(lead);
+
+      syncEpoch++;
+      const writeEpoch = syncEpoch;
+
+      saveStatus(id, status, updatedBy, note);
+      const label = status === 'pitched' ? 'Pitched 📞' : status === 'interested' ? 'Interested 💬' : status === 'busy' ? 'Busy / Call Back ⏳' : status === 'no_answer' ? 'No Answer ❌' : 'Reset to Pending';
+      showToast(`${lead ? lead.name : 'Lead'} marked as ${label}`);
+      renderGrid();
+
+      await postCloudUpdate({ leadId: id, status, updatedBy, ...(note ? { note } : {}) }, writeEpoch);
+    }
+
+    async function submitLeadNote(e, id) {
+      e.preventDefault();
+      const input = document.getElementById(`note-input-${id}`);
+      if (!input) return;
+      const note = input.value.trim();
+      if (!note) return;
+
+      const lead = LEADS.find(l => l.id === id);
+      const updatedBy = getActorForLead(lead);
+      openHistoryLeadIds.add(id);
+
+      syncEpoch++;
+      const writeEpoch = syncEpoch;
+
+      saveStatus(id, 'note', updatedBy, note);
+      input.value = '';
+      showToast(`Saved note for ${lead ? lead.name : 'Lead'}`);
+      renderGrid();
+
+      await postCloudUpdate({ leadId: id, status: 'note', updatedBy, note }, writeEpoch);
     }
 
     function setTeamMember(m) {
@@ -1066,6 +1162,7 @@
         const metaLine = meta && meta.updatedBy
           ? `<span class="text-[10px] text-ink/50 font-medium">Updated by ${escapeHtml(meta.updatedBy)}${meta.updatedAt ? ' • ' + formatTimeAgo(meta.updatedAt) : ''}</span>`
           : '';
+        const historyList = Array.isArray(cloudHistoryMeta[lead.id]) ? cloudHistoryMeta[lead.id] : [];
 
         return `
           <div class="bg-white rounded-3xl p-4 sm:p-5 border ${cardBorder} shadow-sm flex flex-col justify-between space-y-3.5 hover:shadow-md transition-shadow">
@@ -1220,6 +1317,61 @@
                   </button>
                 </div>
               ` : ''}
+
+              <!-- Per-Lead History & Notes Accordion -->
+              <details
+                class="group pt-1 border-t border-ink/5"
+                ${openHistoryLeadIds.has(lead.id) ? 'open' : ''}
+                ontoggle="toggleHistoryLead(${lead.id}, this.open)"
+              >
+                <summary class="cursor-pointer flex items-center justify-between text-[10px] font-bold text-ink/65 hover:text-ink py-1 select-none">
+                  <span>📜 History & Notes (${historyList.length})</span>
+                  <span class="text-[9px] text-ink/40 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <div class="pt-1.5 space-y-2">
+                  <form onsubmit="submitLeadNote(event, ${lead.id})" class="flex gap-1.5">
+                    <input
+                      type="text"
+                      id="note-input-${lead.id}"
+                      data-note-lead-id="${lead.id}"
+                      placeholder="Add call note (e.g. Call back at 6pm)..."
+                      maxlength="300"
+                      class="flex-1 min-w-0 px-2.5 py-1.5 rounded-lg border border-ink/15 bg-ink/[0.02] text-[11px] text-ink placeholder:text-ink/40 focus:outline-none focus:border-phoneGreen"
+                    >
+                    <button
+                      type="submit"
+                      class="px-2.5 py-1.5 rounded-lg bg-ink text-white text-[10px] font-bold hover:bg-black transition-colors shrink-0"
+                    >
+                      Save
+                    </button>
+                  </form>
+                  ${historyList.length > 0 ? `
+                    <div class="max-h-32 overflow-y-auto space-y-1.5 pr-1">
+                      ${historyList.map(ev => {
+                        const badgeMap = {
+                          pitched: '📞 Pitched',
+                          interested: '💬 Interested',
+                          busy: '⏳ Busy',
+                          no_answer: '❌ No Answer',
+                          pending: '↺ Reset',
+                          note: '📝 Note'
+                        };
+                        const evLabel = badgeMap[ev.status] || escapeHtml(ev.status);
+                        const timeStr = formatHistoryTime(ev.at);
+                        return `
+                          <div class="p-1.5 rounded-lg bg-ink/[0.03] border border-ink/5 text-[10px] leading-snug">
+                            <div class="flex items-center justify-between gap-1 font-bold text-ink/80">
+                              <span>${evLabel} • ${escapeHtml(ev.by)}</span>
+                              <span class="text-[9px] font-normal text-ink/45 shrink-0">${timeStr}</span>
+                            </div>
+                            ${ev.note ? `<p class="text-ink/75 mt-0.5 break-words">${escapeHtml(ev.note)}</p>` : ''}
+                          </div>
+                        `;
+                      }).join('')}
+                    </div>
+                  ` : `<p class="text-[10px] text-ink/40 italic">No activity logged yet.</p>`}
+                </div>
+              </details>
 
             </div>
 

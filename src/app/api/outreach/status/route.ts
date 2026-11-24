@@ -5,6 +5,7 @@ import { BlobPreconditionFailedError, get, put } from '@vercel/blob';
 export const dynamic = 'force-dynamic';
 
 const STATUS_BLOB_PATH = 'outreach/batch6-statuses.json';
+const MAX_HISTORY_PER_LEAD = 50;
 
 const VALID_AUTH_HASHES = new Set([
   '3b494374df4674f4f31920d9cc25b38ea04a6f71117bea5fcb5fc58eefc751ef',
@@ -21,8 +22,16 @@ export interface LeadStatusRecord {
   updatedAt: string;
 }
 
+export interface LeadHistoryEvent {
+  status: 'pending' | 'pitched' | 'interested' | 'busy' | 'no_answer' | 'note';
+  note?: string;
+  by: string;
+  at: string;
+}
+
 interface OutreachStoreData {
   statuses: Record<string, LeadStatusRecord>;
+  history: Record<string, LeadHistoryEvent[]>;
   updatedAt: string;
 }
 
@@ -47,7 +56,7 @@ async function readStatusStore(): Promise<{ data: OutreachStoreData; etag?: stri
 
   if (!result || result.statusCode !== 200) {
     return {
-      data: { statuses: {}, updatedAt: new Date(0).toISOString() },
+      data: { statuses: {}, history: {}, updatedAt: new Date(0).toISOString() },
       etag: undefined,
     };
   }
@@ -58,13 +67,14 @@ async function readStatusStore(): Promise<{ data: OutreachStoreData; etag?: stri
     return {
       data: {
         statuses: parsed?.statuses && typeof parsed.statuses === 'object' ? parsed.statuses : {},
+        history: parsed?.history && typeof parsed.history === 'object' ? parsed.history : {},
         updatedAt: typeof parsed?.updatedAt === 'string' ? parsed.updatedAt : new Date().toISOString(),
       },
       etag: result.blob.etag,
     };
   } catch {
     return {
-      data: { statuses: {}, updatedAt: new Date(0).toISOString() },
+      data: { statuses: {}, history: {}, updatedAt: new Date(0).toISOString() },
       etag: result.blob.etag,
     };
   }
@@ -74,6 +84,12 @@ function sanitizeActorName(value: unknown): string {
   if (typeof value !== 'string') return 'Team';
   const trimmed = value.trim().slice(0, 32);
   return trimmed || 'Team';
+}
+
+function sanitizeNote(value: unknown): string | undefined {
+  if (typeof value !== 'string') return undefined;
+  const trimmed = value.trim().slice(0, 300);
+  return trimmed || undefined;
 }
 
 export async function GET(request: Request) {
@@ -88,7 +104,7 @@ export async function GET(request: Request) {
   try {
     const { data } = await readStatusStore();
     return NextResponse.json(
-      { ok: true, statuses: data.statuses, updatedAt: data.updatedAt },
+      { ok: true, statuses: data.statuses, history: data.history, updatedAt: data.updatedAt },
       { headers: { 'Cache-Control': 'no-store, max-age=0' } }
     );
   } catch (error) {
@@ -119,13 +135,17 @@ export async function POST(request: Request) {
   const leadIdRaw = body.leadId;
   const statusRaw = body.status;
   const updatedBy = sanitizeActorName(body.updatedBy);
+  const cleanNote = sanitizeNote(body.note);
 
   if (!isSeedRequest) {
     if ((typeof leadIdRaw !== 'string' && typeof leadIdRaw !== 'number') || String(leadIdRaw).trim() === '') {
       return NextResponse.json({ error: 'Invalid leadId' }, { status: 400 });
     }
-    if (typeof statusRaw !== 'string' || !VALID_STATUSES.has(statusRaw)) {
+    if (typeof statusRaw !== 'string' || (statusRaw !== 'note' && !VALID_STATUSES.has(statusRaw))) {
       return NextResponse.json({ error: 'Invalid status' }, { status: 400 });
+    }
+    if (statusRaw === 'note' && !cleanNote) {
+      return NextResponse.json({ error: 'Note cannot be empty' }, { status: 400 });
     }
   }
 
@@ -134,48 +154,76 @@ export async function POST(request: Request) {
     try {
       const { data, etag } = await readStatusStore();
       const nextStatuses: Record<string, LeadStatusRecord> = { ...data.statuses };
+      const nextHistory: Record<string, LeadHistoryEvent[]> = { ...data.history };
       const now = new Date().toISOString();
 
       if (isSeedRequest) {
-        // Only migrate local statuses if cloud store is currently empty
-        if (Object.keys(nextStatuses).length > 0) {
+        if (Object.keys(nextStatuses).length > 0 || Object.keys(nextHistory).length > 0) {
           return NextResponse.json(
-            { ok: true, statuses: data.statuses, updatedAt: data.updatedAt },
+            { ok: true, statuses: data.statuses, history: data.history, updatedAt: data.updatedAt },
             { headers: { 'Cache-Control': 'no-store, max-age=0' } }
           );
         }
         let seededCount = 0;
         for (const [id, st] of Object.entries(seedStatuses as Record<string, unknown>)) {
           if (typeof st === 'string' && st !== 'pending' && VALID_STATUSES.has(st)) {
+            const typedStatus = st as LeadStatusRecord['status'];
             nextStatuses[id] = {
-              status: st as LeadStatusRecord['status'],
+              status: typedStatus,
               updatedBy,
               updatedAt: now,
             };
+            nextHistory[id] = [{ status: typedStatus, by: updatedBy, at: now }];
             seededCount++;
           }
         }
         if (seededCount === 0) {
           return NextResponse.json(
-            { ok: true, statuses: data.statuses, updatedAt: data.updatedAt },
+            { ok: true, statuses: data.statuses, history: data.history, updatedAt: data.updatedAt },
             { headers: { 'Cache-Control': 'no-store, max-age=0' } }
           );
         }
       } else {
         const key = String(leadIdRaw).trim();
-        if (statusRaw === 'pending') {
+        const existingLog = Array.isArray(nextHistory[key]) ? nextHistory[key] : [];
+
+        if (statusRaw === 'note') {
+          const entry: LeadHistoryEvent = {
+            status: 'note',
+            note: cleanNote,
+            by: updatedBy,
+            at: now,
+          };
+          nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
+        } else if (statusRaw === 'pending') {
           delete nextStatuses[key];
+          const entry: LeadHistoryEvent = {
+            status: 'pending',
+            note: cleanNote || 'Status reset to To Call',
+            by: updatedBy,
+            at: now,
+          };
+          nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
         } else {
+          const typedStatus = statusRaw as LeadStatusRecord['status'];
           nextStatuses[key] = {
-            status: statusRaw as LeadStatusRecord['status'],
+            status: typedStatus,
             updatedBy,
             updatedAt: now,
           };
+          const entry: LeadHistoryEvent = {
+            status: typedStatus,
+            ...(cleanNote ? { note: cleanNote } : {}),
+            by: updatedBy,
+            at: now,
+          };
+          nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
         }
       }
 
       const nextStore: OutreachStoreData = {
         statuses: nextStatuses,
+        history: nextHistory,
         updatedAt: now,
       };
 
@@ -189,7 +237,12 @@ export async function POST(request: Request) {
       });
 
       return NextResponse.json(
-        { ok: true, statuses: nextStore.statuses, updatedAt: nextStore.updatedAt },
+        {
+          ok: true,
+          statuses: nextStore.statuses,
+          history: nextStore.history,
+          updatedAt: nextStore.updatedAt,
+        },
         { headers: { 'Cache-Control': 'no-store, max-age=0' } }
       );
     } catch (error) {
