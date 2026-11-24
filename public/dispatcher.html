@@ -135,9 +135,17 @@
             📞
           </div>
           <div>
-            <div class="flex items-center gap-1.5 sm:gap-2">
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               <h1 class="text-base sm:text-lg font-black tracking-tight text-ink">ParchiOS Live Dispatcher</h1>
               <span class="px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold tracking-wider bg-phoneGreen text-white uppercase">Protected</span>
+              <button
+                id="cloud-sync-badge"
+                onclick="syncFromCloud(true, false)"
+                title="Click to sync team progress now"
+                class="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold tracking-wide bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition-colors cursor-pointer"
+              >
+                ☁️ Connecting...
+              </button>
             </div>
             <p class="text-[11px] sm:text-xs text-ink/60 font-medium">Collaborative Calling & Outreach Hub • Zero Overlap Mode</p>
           </div>
@@ -468,9 +476,17 @@
     }
 
     let LEADS = [];
-    let currentMember = 'all'; // 'all' | 1 | 2 | 3
+    let activePasscode = '';
+    let currentMember = 'all'; // 'all' | 1 | 2
     let currentStatusFilter = 'all';
     let searchQuery = '';
+    let cloudStatusMeta = {}; // { [id]: { status, updatedBy, updatedAt } }
+    let syncEpoch = 0;
+    let isSyncing = false;
+    let syncTimer = null;
+
+    const IS_WEB_HOSTED = window.location.protocol.startsWith('http');
+    const API_STATUS_URL = '/api/outreach/status';
 
     // Territory Descriptions
     const TERRITORIES = {
@@ -478,6 +494,120 @@
       1: 'Waqas Assignment (10 spots): Lahore Belt (Phool Nagar, Kot Radha Kishan, Chunian, Farooqabad, Shahkot).',
       2: 'Muneeb Assignment (20 spots): GT Road, Potohar & Central Punjab (Dina, Sohawa, Sarai Alamgir, Kharian, Sambrial, Pasrur, Renala Khurd, Depalpur, Fateh Jang, Dinga, Kunjah).'
     };
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatTimeAgo(isoStr) {
+      if (!isoStr) return '';
+      const diffSec = Math.max(0, Math.floor((Date.now() - new Date(isoStr).getTime()) / 1000));
+      if (Number.isNaN(diffSec)) return '';
+      if (diffSec < 60) return 'just now';
+      const mins = Math.floor(diffSec / 60);
+      if (mins < 60) return `${mins}m ago`;
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return `${hrs}h ago`;
+      const days = Math.floor(hrs / 24);
+      return `${days}d ago`;
+    }
+
+    function updateSyncBadge(mode, label) {
+      const badge = document.getElementById('cloud-sync-badge');
+      if (!badge) return;
+      const base = 'px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold tracking-wide border transition-colors cursor-pointer';
+      if (mode === 'live') {
+        badge.className = `${base} bg-emerald-100 text-emerald-800 border-emerald-200 hover:bg-emerald-200`;
+      } else if (mode === 'syncing') {
+        badge.className = `${base} bg-amber-100 text-amber-800 border-amber-200`;
+      } else if (mode === 'local') {
+        badge.className = `${base} bg-slate-100 text-slate-700 border-slate-200`;
+      } else {
+        badge.className = `${base} bg-rose-100 text-rose-800 border-rose-200 hover:bg-rose-200`;
+      }
+      badge.innerText = label;
+    }
+
+    function applyCloudStatuses(statusesMap) {
+      cloudStatusMeta = statusesMap && typeof statusesMap === 'object' ? statusesMap : {};
+      const flat = {};
+      Object.entries(cloudStatusMeta).forEach(([id, entry]) => {
+        if (entry && entry.status && entry.status !== 'pending') {
+          flat[id] = entry.status;
+        }
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(flat));
+    }
+
+    async function syncFromCloud(manual = false, allowInitialSeed = false) {
+      if (!activePasscode || !IS_WEB_HOSTED) {
+        if (!IS_WEB_HOSTED) updateSyncBadge('local', '💾 Local Mode');
+        return;
+      }
+      if (isSyncing && !manual) return;
+
+      isSyncing = true;
+      const reqEpoch = syncEpoch;
+      if (manual) updateSyncBadge('syncing', '⏳ Syncing...');
+
+      try {
+        const res = await fetch(API_STATUS_URL, {
+          method: 'GET',
+          headers: { 'x-outreach-passcode': activePasscode },
+          cache: 'no-store'
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        const payload = await res.json();
+        const serverStatuses = payload && payload.statuses ? payload.statuses : {};
+
+        // One-time migration: if cloud DB is empty and this device had prior local statuses, seed them
+        if (allowInitialSeed && Object.keys(serverStatuses).length === 0) {
+          const localExisting = getStoredStatus();
+          if (Object.keys(localExisting).length > 0) {
+            const names = getTeamNames();
+            const actor = currentMember === 'all' ? 'Team' : (names[currentMember] || 'Team');
+            const seedRes = await fetch(API_STATUS_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-outreach-passcode': activePasscode
+              },
+              body: JSON.stringify({ seedStatuses: localExisting, updatedBy: actor })
+            });
+            if (seedRes.ok) {
+              const seedData = await seedRes.json();
+              if (reqEpoch === syncEpoch) {
+                applyCloudStatuses(seedData.statuses || {});
+                renderGrid();
+              }
+              updateSyncBadge('live', '☁️ Cloud Live');
+              return;
+            }
+          }
+        }
+
+        if (reqEpoch === syncEpoch) {
+          applyCloudStatuses(serverStatuses);
+          renderGrid();
+        }
+        updateSyncBadge('live', '☁️ Cloud Live');
+        if (manual) showToast('Synced latest team updates!');
+      } catch (err) {
+        updateSyncBadge('error', '⚠️ Offline Cache');
+        if (manual) showToast('Could not reach cloud — using local cache');
+      } finally {
+        isSyncing = false;
+      }
+    }
 
     // Decrypt leads from encrypted payload
     function tryDecrypt(keyStr) {
@@ -513,12 +643,13 @@
         const decrypted = tryDecrypt(recoveredKey);
         if (decrypted && decrypted.length) {
           LEADS = decrypted;
+          activePasscode = input.toLowerCase();
           errorMsg.classList.add('hidden');
 
           if (document.getElementById('remember-device').checked) {
-            localStorage.setItem(AUTH_STORAGE_KEY, input.toLowerCase());
+            localStorage.setItem(AUTH_STORAGE_KEY, activePasscode);
           } else {
-            sessionStorage.setItem(AUTH_STORAGE_KEY, input.toLowerCase());
+            sessionStorage.setItem(AUTH_STORAGE_KEY, activePasscode);
           }
 
           unlockUI();
@@ -548,9 +679,17 @@
       updateTeamMemberButtons();
       renderGrid();
       showToast('Welcome to ParchiOS Dispatcher!');
+
+      syncFromCloud(false, true);
+      if (syncTimer) clearInterval(syncTimer);
+      syncTimer = setInterval(() => {
+        if (!document.hidden) syncFromCloud(false, false);
+      }, 10000);
     }
 
     function lockPortal() {
+      if (syncTimer) clearInterval(syncTimer);
+      activePasscode = '';
       localStorage.removeItem(AUTH_STORAGE_KEY);
       sessionStorage.removeItem(AUTH_STORAGE_KEY);
       location.reload();
@@ -570,6 +709,7 @@
           const decrypted = tryDecrypt(recoveredKey);
           if (decrypted && decrypted.length) {
             LEADS = decrypted;
+            activePasscode = saved.trim().toLowerCase();
             unlockUI();
             return;
           }
@@ -628,22 +768,60 @@
       }
     }
 
-    function saveStatus(id, status) {
+    function saveStatus(id, status, updatedBy) {
       const stored = getStoredStatus();
       if (status === 'pending') {
         delete stored[id];
+        delete cloudStatusMeta[id];
       } else {
         stored[id] = status;
+        cloudStatusMeta[id] = {
+          status,
+          updatedBy: updatedBy || 'Team',
+          updatedAt: new Date().toISOString()
+        };
       }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
     }
 
-    function setLeadStatus(id, status) {
-      saveStatus(id, status);
+    async function setLeadStatus(id, status) {
+      const names = getTeamNames();
       const lead = LEADS.find(l => l.id === id);
+      const updatedBy = currentMember === 'all'
+        ? (lead ? (names[lead.member_id] || 'Team') : 'Team')
+        : (names[currentMember] || (currentMember === 1 ? 'Waqas' : 'Muneeb'));
+
+      syncEpoch++;
+      const writeEpoch = syncEpoch;
+
+      saveStatus(id, status, updatedBy);
       const label = status === 'pitched' ? 'Pitched 📞' : status === 'interested' ? 'Interested 💬' : status === 'busy' ? 'Busy / Call Back ⏳' : status === 'no_answer' ? 'No Answer ❌' : 'Reset to Pending';
       showToast(`${lead ? lead.name : 'Lead'} marked as ${label}`);
       renderGrid();
+
+      if (!activePasscode || !IS_WEB_HOSTED) return;
+
+      updateSyncBadge('syncing', '⏳ Saving...');
+      try {
+        const res = await fetch(API_STATUS_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-outreach-passcode': activePasscode
+          },
+          body: JSON.stringify({ leadId: id, status, updatedBy })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const payload = await res.json();
+        if (writeEpoch === syncEpoch && payload && payload.statuses) {
+          applyCloudStatuses(payload.statuses);
+          renderGrid();
+        }
+        updateSyncBadge('live', '☁️ Cloud Live');
+      } catch (err) {
+        updateSyncBadge('error', '⚠️ Sync Failed');
+        showToast('Saved locally — cloud sync failed, tap Cloud badge to retry');
+      }
     }
 
     function setTeamMember(m) {
@@ -884,6 +1062,10 @@
         }
 
         const assignedName = names[lead.member_id] || (lead.member_id === 1 ? 'Waqas' : 'Muneeb');
+        const meta = cloudStatusMeta[lead.id];
+        const metaLine = meta && meta.updatedBy
+          ? `<span class="text-[10px] text-ink/50 font-medium">Updated by ${escapeHtml(meta.updatedBy)}${meta.updatedAt ? ' • ' + formatTimeAgo(meta.updatedAt) : ''}</span>`
+          : '';
 
         return `
           <div class="bg-white rounded-3xl p-4 sm:p-5 border ${cardBorder} shadow-sm flex flex-col justify-between space-y-3.5 hover:shadow-md transition-shadow">
@@ -1028,10 +1210,11 @@
               </div>
 
               ${status !== 'pending' ? `
-                <div class="text-center pt-0.5">
+                <div class="flex items-center justify-between pt-0.5 px-0.5 gap-2">
+                  <div class="truncate">${metaLine}</div>
                   <button 
                     onclick="setLeadStatus(${lead.id}, 'pending')" 
-                    class="text-[10px] text-ink/40 hover:text-ink font-semibold underline"
+                    class="text-[10px] text-ink/40 hover:text-ink font-semibold underline shrink-0"
                   >
                     Reset Status
                   </button>
@@ -1048,6 +1231,12 @@
     // Check saved auth on page load
     window.addEventListener('DOMContentLoaded', () => {
       checkSavedAuth();
+    });
+
+    window.addEventListener('focus', () => {
+      if (activePasscode && IS_WEB_HOSTED) {
+        syncFromCloud(false, false);
+      }
     });
   </script>
 </body>
