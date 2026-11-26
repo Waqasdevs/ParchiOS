@@ -69,6 +69,8 @@ export async function seedInitialData() {
       });
       await db.menuItems.bulkPut(updated);
     }
+    // Cleanup: Remove legacy stuck demo takeaway order (PARCHI-102)
+    await db.orders.delete('order-demo-102').catch(() => {});
     return; // already initialized
   }
 
@@ -187,31 +189,6 @@ export async function seedInitialData() {
       serverName: 'Bilal (Cashier)',
       createdAt: new Date(now - 14 * 60 * 1000).toISOString(), // 14 mins ago
       updatedAt: new Date(now - 14 * 60 * 1000).toISOString(),
-    },
-    {
-      id: 'order-demo-102',
-      token: 'PARCHI-102',
-      type: 'takeaway',
-      status: 'ready',
-      items: [
-        {
-          id: 'item-demo-4',
-          menuItemId: 'deal-2',
-          name: 'Deal 2: Zinger + Shawarma + Half Fries + Drink',
-          price: 650,
-          quantity: 1,
-        }
-      ],
-      subtotal: 650,
-      tax: 0,
-      discount: 0,
-      deliveryCharge: 0,
-      total: 650,
-      paymentMethod: 'cash',
-      paymentStatus: 'paid',
-      serverName: 'Bilal (Cashier)',
-      createdAt: new Date(now - 5 * 60 * 1000).toISOString(), // 5 mins ago
-      updatedAt: new Date(now - 2 * 60 * 1000).toISOString(),
     }
   ];
   await db.orders.bulkPut(demoOrders);

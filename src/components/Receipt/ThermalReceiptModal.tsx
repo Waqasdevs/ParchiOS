@@ -97,16 +97,20 @@ export const ThermalReceiptModal: React.FC<ThermalReceiptModalProps> = ({
                 <span>Cashier:</span>
                 <span>{order.serverName}</span>
               </div>
-              {order.customer && (
+              {order.customer && (order.customer.name || order.customer.phone || order.customer.address) && (
                 <>
-                  <div className="flex justify-between font-bold">
-                    <span>Customer:</span>
-                    <span>{order.customer.name}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Phone:</span>
-                    <span>{order.customer.phone}</span>
-                  </div>
+                  {order.customer.name && (
+                    <div className="flex justify-between font-bold">
+                      <span>Customer:</span>
+                      <span>{order.customer.name}</span>
+                    </div>
+                  )}
+                  {order.customer.phone && (
+                    <div className="flex justify-between">
+                      <span>Phone:</span>
+                      <span>{order.customer.phone}</span>
+                    </div>
+                  )}
                   {order.customer.address && (
                     <div className="text-[10px] text-left mt-1 pt-1 border-t border-dotted border-neutral-300">
                       <span className="font-bold">Address: </span>
@@ -195,12 +199,13 @@ export const ThermalReceiptModal: React.FC<ThermalReceiptModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 border-t border-black/5 dark:border-white/10 bg-white dark:bg-[#27231D] flex items-center gap-3">
+        <div className="px-4 py-3 border-t border-black/5 dark:border-white/10 bg-white dark:bg-[#27231D] flex items-center gap-2.5">
           <button
+            type="button"
             onClick={handleCopyTextReceipt}
-            className="apple-button px-4 py-2.5 rounded-2xl border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+            className="apple-button inline-flex items-center justify-center gap-1.5 h-10 px-3.5 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all whitespace-nowrap shrink-0"
           >
-            <Copy className="w-4 h-4 mr-1.5" />
+            <Copy className="w-3.5 h-3.5 shrink-0" />
             <span>Copy Text</span>
           </button>
 
@@ -210,16 +215,17 @@ export const ThermalReceiptModal: React.FC<ThermalReceiptModalProps> = ({
               sound.playTap();
               onClose();
             }}
-            className="apple-button px-4 py-2.5 rounded-2xl bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 text-xs font-bold transition-all"
+            className="apple-button inline-flex items-center justify-center h-10 px-4 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 text-xs font-bold transition-all whitespace-nowrap shrink-0"
           >
             Done
           </button>
 
           <button
+            type="button"
             onClick={handlePrint}
-            className="flex-1 apple-button py-3 px-6 rounded-2xl bg-apple-blue hover:bg-apple-blue-hover text-white font-bold text-sm shadow-apple-md transition-all active:scale-[0.98]"
+            className="flex-1 apple-button inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl bg-apple-blue hover:bg-apple-blue-hover text-white font-bold text-xs sm:text-sm shadow-apple-sm transition-all active:scale-[0.98] whitespace-nowrap"
           >
-            <Printer className="w-4 h-4 mr-2" />
+            <Printer className="w-4 h-4 shrink-0" />
             <span>Print Receipt</span>
           </button>
         </div>

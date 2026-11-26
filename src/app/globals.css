@@ -344,6 +344,9 @@
   .apple-btn {
     @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none select-none;
   }
+  .apple-button {
+    @apply inline-flex items-center justify-center transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none select-none;
+  }
   .balance-heading {
     text-wrap: balance;
   }

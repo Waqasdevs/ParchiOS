@@ -516,6 +516,21 @@ export const LiveOrdersList: React.FC<LiveOrdersListProps> = ({
                       </button>
                     )}
 
+                    {/* 2b. Takeaway Ready & Already Paid: Handover / Complete */}
+                    {order.type === 'takeaway' && order.status === 'ready' && order.paymentStatus === 'paid' && !isCompleted && (
+                      <button
+                        onClick={() => {
+                          sound.playSuccess();
+                          onUpdateStatus(order.id, 'delivered');
+                        }}
+                        className="apple-button px-3 py-1.5 rounded-xl bg-apple-green hover:bg-apple-green-hover text-white text-xs font-bold shadow-apple-sm transition-all flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                        title="Hand over paid takeaway order to customer and move to Completed"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Handed Over</span>
+                      </button>
+                    )}
+
                     {/* 3. Print Kitchen Slip (KOT) */}
                     {!isCompleted && (
                       <button

@@ -106,12 +106,14 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
                         {order.status === 'ready' ? 'Packed & Ready' : 'Kitchen Preparing'}
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-neutral-800 dark:text-neutral-200 mt-1">
-                      {order.customer?.name} • {order.customer?.phone}
+                    <div className="text-xs font-semibold text-neutral-600 dark:text-neutral-300 mt-1">
+                      {order.customer?.name || order.customer?.phone
+                        ? [order.customer?.name, order.customer?.phone].filter(Boolean).join(' • ')
+                        : 'Delivery Customer'}
                     </div>
                   </div>
 
-                  <div className="text-right">
+                  <div className="text-right shrink-0">
                     <div className="text-sm font-extrabold text-apple-blue">
                       {currency} {order.total.toLocaleString()}
                     </div>
@@ -124,8 +126,8 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
                 {/* Delivery Address Box */}
                 <div className="p-3 bg-neutral-50 dark:bg-neutral-800/60 rounded-2xl flex items-start gap-2.5 text-xs text-neutral-600 dark:text-neutral-300">
                   <MapPin className="w-4 h-4 text-apple-red shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-neutral-900 dark:text-neutral-100">
+                  <div className="min-w-0">
+                    <p className="font-semibold text-neutral-900 dark:text-neutral-100 break-words">
                       {order.customer?.address || 'No address specified'}
                     </p>
                     {order.customer?.landmark && (
@@ -136,15 +138,15 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
 
                 {/* Rider Assign & Dispatch Controls */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 pt-2 border-t border-black/5 dark:border-white/5">
-                  <div className="flex-1 flex items-center gap-2">
-                    <UserCheck className="w-4 h-4 text-neutral-400" />
+                  <div className="flex-1 flex items-center gap-2 min-w-0">
+                    <UserCheck className="w-4 h-4 text-neutral-400 shrink-0" />
                     <select
                       value={order.assignedRiderId || ''}
                       onChange={(e) => {
                         const r = riders.find(rd => rd.id === e.target.value);
                         if (r) onAssignRider(order.id, r.id, r.name);
                       }}
-                      className="w-full text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-700"
+                      className="w-full h-10 text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 px-3 rounded-xl border border-neutral-200 dark:border-neutral-700"
                     >
                       <option value="">-- Assign Rider --</option>
                       {riders.map(r => (
@@ -163,10 +165,10 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
                       sound.playSuccess();
                       onUpdateStatus(order.id, 'out_for_delivery');
                     }}
-                    className="apple-button px-4 py-2 bg-apple-indigo hover:bg-indigo-600 text-white font-bold text-xs rounded-xl shadow-apple-sm transition-all"
+                    className="apple-button inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 h-10 px-4 bg-apple-indigo hover:bg-indigo-600 text-white font-bold text-xs rounded-xl shadow-apple-sm transition-all"
                   >
-                    <Navigation className="w-3.5 h-3.5 mr-1.5" />
-                    Dispatch on Road
+                    <Navigation className="w-3.5 h-3.5 shrink-0" />
+                    <span>Dispatch on Road</span>
                   </button>
                 </div>
               </div>
@@ -216,20 +218,23 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
                 </div>
 
                 {/* Customer Details */}
-                <div className="p-3 bg-neutral-50 dark:bg-neutral-800/60 rounded-2xl space-y-1 text-xs">
-                  <div className="flex items-center justify-between font-bold text-neutral-800 dark:text-neutral-200">
-                    <span>{order.customer?.name}</span>
-                    <a 
-                      href={`tel:${order.customer?.phone}`}
-                      className="text-apple-blue flex items-center gap-1 text-[11px] hover:underline"
-                    >
-                      <Phone className="w-3 h-3" />
-                      {order.customer?.phone}
-                    </a>
+                <div className="p-3 bg-neutral-50 dark:bg-neutral-800/60 rounded-2xl space-y-1.5 text-xs">
+                  <div className="flex items-center justify-between gap-2 font-bold text-neutral-800 dark:text-neutral-200">
+                    <span className="truncate">{order.customer?.name || 'Delivery Customer'}</span>
+                    {order.customer?.phone && (
+                      <a 
+                        href={`tel:${order.customer.phone}`}
+                        className="text-apple-blue inline-flex items-center gap-1 text-[11px] hover:underline shrink-0"
+                      >
+                        <Phone className="w-3 h-3 shrink-0" />
+                        <span>{order.customer.phone}</span>
+                      </a>
+                    )}
                   </div>
-                  <p className="text-neutral-600 dark:text-neutral-400 text-[11px]">
-                    {order.customer?.address}
-                  </p>
+                  <div className="flex items-start gap-1.5 text-neutral-600 dark:text-neutral-400 text-[11px]">
+                    <MapPin className="w-3.5 h-3.5 text-apple-red shrink-0 mt-0.5" />
+                    <span className="break-words">{order.customer?.address || 'No address specified'}</span>
+                  </div>
                 </div>
 
                 {/* Mark Completed Button */}
@@ -238,10 +243,10 @@ export const DeliveryManager: React.FC<DeliveryManagerProps> = ({
                     sound.playSuccess();
                     onUpdateStatus(order.id, 'delivered');
                   }}
-                  className="w-full apple-button py-2.5 rounded-2xl bg-apple-green hover:bg-apple-green-hover text-white font-bold text-xs shadow-apple-sm transition-all"
+                  className="w-full apple-button flex items-center justify-center gap-2 h-10 px-4 rounded-xl bg-apple-green hover:bg-apple-green-hover text-white font-bold text-xs shadow-apple-sm transition-all whitespace-nowrap"
                 >
-                  <CheckCircle2 className="w-4 h-4 mr-1.5" />
-                  Confirm Delivered &amp; Cash Received
+                  <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  <span>Confirm Delivered &amp; Cash Received</span>
                 </button>
               </div>
             ))
