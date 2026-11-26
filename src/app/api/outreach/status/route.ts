@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
-import { BlobPreconditionFailedError, get, put } from '@vercel/blob';
+import { get, put } from '@vercel/blob';
 
 export const dynamic = 'force-dynamic';
 
@@ -149,110 +149,107 @@ export async function POST(request: Request) {
     }
   }
 
-  const maxAttempts = 4;
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    try {
-      const { data, etag } = await readStatusStore();
-      const nextStatuses: Record<string, LeadStatusRecord> = { ...data.statuses };
-      const nextHistory: Record<string, LeadHistoryEvent[]> = { ...data.history };
-      const now = new Date().toISOString();
+  try {
+    const { data } = await readStatusStore();
+    const nextStatuses: Record<string, LeadStatusRecord> = { ...data.statuses };
+    const nextHistory: Record<string, LeadHistoryEvent[]> = { ...data.history };
+    const now = new Date().toISOString();
 
-      if (isSeedRequest) {
-        if (Object.keys(nextStatuses).length > 0 || Object.keys(nextHistory).length > 0) {
-          return NextResponse.json(
-            { ok: true, statuses: data.statuses, history: data.history, updatedAt: data.updatedAt },
-            { headers: { 'Cache-Control': 'no-store, max-age=0' } }
-          );
-        }
-        let seededCount = 0;
-        for (const [id, st] of Object.entries(seedStatuses as Record<string, unknown>)) {
-          if (typeof st === 'string' && st !== 'pending' && VALID_STATUSES.has(st)) {
-            const typedStatus = st as LeadStatusRecord['status'];
-            nextStatuses[id] = {
-              status: typedStatus,
-              updatedBy,
-              updatedAt: now,
-            };
-            nextHistory[id] = [{ status: typedStatus, by: updatedBy, at: now }];
-            seededCount++;
-          }
-        }
-        if (seededCount === 0) {
-          return NextResponse.json(
-            { ok: true, statuses: data.statuses, history: data.history, updatedAt: data.updatedAt },
-            { headers: { 'Cache-Control': 'no-store, max-age=0' } }
-          );
-        }
-      } else {
-        const key = String(leadIdRaw).trim();
-        const existingLog = Array.isArray(nextHistory[key]) ? nextHistory[key] : [];
-
-        if (statusRaw === 'note') {
-          const entry: LeadHistoryEvent = {
-            status: 'note',
-            note: cleanNote,
-            by: updatedBy,
-            at: now,
-          };
-          nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
-        } else if (statusRaw === 'pending') {
-          delete nextStatuses[key];
-          const entry: LeadHistoryEvent = {
-            status: 'pending',
-            note: cleanNote || 'Status reset to To Call',
-            by: updatedBy,
-            at: now,
-          };
-          nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
-        } else {
-          const typedStatus = statusRaw as LeadStatusRecord['status'];
-          nextStatuses[key] = {
+    if (isSeedRequest) {
+      if (Object.keys(nextStatuses).length > 0 || Object.keys(nextHistory).length > 0) {
+        return NextResponse.json(
+          { ok: true, statuses: data.statuses, history: data.history, updatedAt: data.updatedAt },
+          { headers: { 'Cache-Control': 'no-store, max-age=0' } }
+        );
+      }
+      let seededCount = 0;
+      for (const [id, st] of Object.entries(seedStatuses as Record<string, unknown>)) {
+        if (typeof st === 'string' && st !== 'pending' && VALID_STATUSES.has(st)) {
+          const typedStatus = st as LeadStatusRecord['status'];
+          nextStatuses[id] = {
             status: typedStatus,
             updatedBy,
             updatedAt: now,
           };
-          const entry: LeadHistoryEvent = {
-            status: typedStatus,
-            ...(cleanNote ? { note: cleanNote } : {}),
-            by: updatedBy,
-            at: now,
-          };
-          nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
+          nextHistory[id] = [{ status: typedStatus, by: updatedBy, at: now }];
+          seededCount++;
         }
       }
-
-      const nextStore: OutreachStoreData = {
-        statuses: nextStatuses,
-        history: nextHistory,
-        updatedAt: now,
-      };
-
-      await put(STATUS_BLOB_PATH, JSON.stringify(nextStore), {
-        access: 'private',
-        addRandomSuffix: false,
-        allowOverwrite: true,
-        contentType: 'application/json',
-        cacheControlMaxAge: 60,
-        ...(etag ? { ifMatch: etag } : {}),
-      });
-
-      return NextResponse.json(
-        {
-          ok: true,
-          statuses: nextStore.statuses,
-          history: nextStore.history,
-          updatedAt: nextStore.updatedAt,
-        },
-        { headers: { 'Cache-Control': 'no-store, max-age=0' } }
-      );
-    } catch (error) {
-      if (error instanceof BlobPreconditionFailedError && attempt < maxAttempts) {
-        continue;
+      if (seededCount === 0) {
+        return NextResponse.json(
+          { ok: true, statuses: data.statuses, history: data.history, updatedAt: data.updatedAt },
+          { headers: { 'Cache-Control': 'no-store, max-age=0' } }
+        );
       }
-      console.error('[Outreach Status POST Error]:', error);
-      return NextResponse.json({ error: 'Failed to save status' }, { status: 500 });
-    }
-  }
+    } else {
+      const key = String(leadIdRaw).trim();
+      const existingLog = Array.isArray(nextHistory[key]) ? nextHistory[key] : [];
 
-  return NextResponse.json({ error: 'Concurrent write conflict, please retry' }, { status: 409 });
+      if (statusRaw === 'note') {
+        const entry: LeadHistoryEvent = {
+          status: 'note',
+          note: cleanNote,
+          by: updatedBy,
+          at: now,
+        };
+        nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
+      } else if (statusRaw === 'pending') {
+        delete nextStatuses[key];
+        const entry: LeadHistoryEvent = {
+          status: 'pending',
+          note: cleanNote || 'Status reset to To Call',
+          by: updatedBy,
+          at: now,
+        };
+        nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
+      } else {
+        const typedStatus = statusRaw as LeadStatusRecord['status'];
+        nextStatuses[key] = {
+          status: typedStatus,
+          updatedBy,
+          updatedAt: now,
+        };
+        const entry: LeadHistoryEvent = {
+          status: typedStatus,
+          ...(cleanNote ? { note: cleanNote } : {}),
+          by: updatedBy,
+          at: now,
+        };
+        nextHistory[key] = [entry, ...existingLog].slice(0, MAX_HISTORY_PER_LEAD);
+      }
+    }
+
+    const nextStore: OutreachStoreData = {
+      statuses: nextStatuses,
+      history: nextHistory,
+      updatedAt: now,
+    };
+
+    await put(STATUS_BLOB_PATH, JSON.stringify(nextStore), {
+      access: 'private',
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      contentType: 'application/json',
+      cacheControlMaxAge: 60,
+    });
+
+    return NextResponse.json(
+      {
+        ok: true,
+        statuses: nextStore.statuses,
+        history: nextStore.history,
+        updatedAt: nextStore.updatedAt,
+      },
+      { headers: { 'Cache-Control': 'no-store, max-age=0' } }
+    );
+  } catch (error) {
+    console.error('[Outreach Status POST Error]:', error);
+    return NextResponse.json(
+      {
+        error: 'Failed to save status',
+        detail: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
+  }
 }
